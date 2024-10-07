@@ -95,7 +95,7 @@ jobs:
         # Dart-Sass
         sudo snap install dart-sass
     # cache hugo modules
-    - uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319
+    - uses: actions/cache@2cdf405574d6ef1f33a1d12acccd3ae82f47b3f2
       with:
         path: /tmp/hugo_cache
         key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}

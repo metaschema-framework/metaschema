@@ -40,7 +40,7 @@ jobs:
         path: ${{ inputs.site_git_ref_path }}
     - name: Check website HTML content links
       id: linkchecker
-      uses: lycheeverse/lychee-action@c053181aa0c3d17606addfe97a9075a32723548a
+      uses: lycheeverse/lychee-action@7da8ec1fc4e01b5a12062ac6c589c10a4ce70d67
       with:
         args: --exclude-file .github/workflows/config/.lycheeignore --verbose --no-progress --accept 200,206,429 './${{ inputs.site_git_ref_path }}/**/*.html' --exclude-mail
         fail: true

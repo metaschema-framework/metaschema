@@ -43,7 +43,7 @@ The main branches of this repository are:
 - **[develop](../../tree/develop)** contains the current set of development changes for the next release. New features can be [contributed](./CONTRIBUTING.md#contributing-to-the-repository) to this branch.
   - This branch is an integration branch where development code can be tested prior to promoting the code to a release.
   - This branch will be used to create a release-*major*.*minor* branch when the developed code is ready to be staged for release.
-- **[nist-pages](../../tree/nist-pages)** contains the currently deployed website content, which is managed by the CI/CD process.
+- **[github-pages](../../tree/github-pages)** contains the currently deployed website content, which is managed by the CI/CD process.
 - **release-\*** branches, where `*` matches a MAJOR.MINOR version number, are used to support patch releases for a major or minor version of a release. You should provide changes only to the highest numbered *minor* release for a given *major* release.
 
 ## Git Setup
@@ -53,7 +53,7 @@ To use this strategy, the following Git configuration is needed:
 You must do all work in a personal fork of this repository.
 
 ```
-git remote add upstream git@github.com:usnistgov/metaschema.git
+git remote add upstream git@github.com:metaschema-framework/metaschema.git
 ```
 
 # Branching for contributors

@@ -841,7 +841,7 @@ Given these new requirements we will add a new field, `size`. We will amend the 
 
 ```xml {linenos=table,hl_lines=["152-207","216-218","259-263"]}
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/usnistgov/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="https://raw.githubusercontent.com/metaschema-framework/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
   <schema-name>Computer Model</schema-name>
   <schema-version>0.0.9</schema-version>

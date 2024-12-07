@@ -17,9 +17,9 @@ We are excited that you want to contribute to the Metaschema project. We are str
 
 We use GitHub as a collaboration platform for the development of the Metaschema framework. Within the project's GitHub repository you will find:
 
-- A [set of issues](https://github.com/usnistgov/metaschema/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) for which we need your help. Feel free to pick from this list, or [reach out to us](contact/) about any other ideas you might have.
-- [Guidelines](https://github.com/usnistgov/metaschema/blob/master/CONTRIBUTING.md) on contributing to this project.
-- A [project board](https://github.com/usnistgov/metaschema/projects) that shows the issues the team is currently working on.
+- A [set of issues](https://github.com/metaschema-framework/metaschema/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) for which we need your help. Feel free to pick from this list, or [reach out to us](contact/) about any other ideas you might have.
+- [Guidelines](https://github.com/metaschema-framework/metaschema/blob/master/CONTRIBUTING.md) on contributing to this project.
+- A [project board](https://github.com/metaschema-framework/metaschema/projects) that shows the issues the team is currently working on.
 
 ## Contact
 

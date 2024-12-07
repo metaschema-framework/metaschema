@@ -29,20 +29,17 @@ Metaschema achieves this with:
 
 ## Resources
 
-- [Metaschema Specification](https://pages.nist.gov/metaschema/specification/)
-- [Getting Started with Metaschema](https://pages.nist.gov/metaschema/tutorials/)
-- [Metaschema Use Cases](https://pages.nist.gov/metaschema/use/)
-- [Metaschema XML Schema and XML and JSON Data Type Schemas](https://github.com/usnistgov/metaschema/tree/main/schema)
+- [Metaschema Specification](https://framework.metaschema.dev/specification/)
+- [Getting Started with Metaschema](https://framework.metaschema.dev/tutorials/)
+- [Metaschema Use Cases](https://framework.metaschema.dev/use/)
+- [Metaschema XML Schema and XML and JSON Data Type Schemas](https://github.com/metaschema-framework/metaschema/tree/main/schema)
 
 ## Related work
 
-- A [Java implementation](https://github.com/usnistgov/metaschema-java) provides Metaschema parsing, data instance validation and parsing, content conversion, Java code generation, and XSD and JSON schema generation capabilities.
-- An [XSLT implementation](https://github.com/usnistgov/metaschema-java) provides data instance validation, content conversion, documentation generation, and XSD and JSON schema generation capabilities.
+- A [Java implementation](https://github.com/metaschema-framework/metaschema-java) provides Metaschema parsing, data instance validation and parsing, content conversion, Java code generation, and XSD and JSON schema generation capabilities.
 
-## Contact us
+## Relationship to prior work
 
-Maintainer: [David Waltermire](https://www.nist.gov/people/david-waltermire) - [@david-waltermire](https://github.com/david-waltermire), [NIST](https://www.nist.gov/) [Information Technology Labratory](https://www.nist.gov/itl), [Computer Security Division](https://www.nist.gov/itl/csd), [Security Components and Mechanisms Group](https://www.nist.gov/itl/csd/security-components-and-mechanisms)
+The contents of this repository is based on work from the [Metaschema repository](https://github.com/usnistgov/metaschema/) maintained by the National Institute of Standards and Technology (NIST), the [contents of which have been dedicated in the worldwide public domain](https://github.com/metaschema-framework/metaschema/blob/0954786fb628039cb7dc008ccb7fa029ba251f16/LICENSE.md) using the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) public domain dedication. This repository builds on this prior work, maintaining the [CCO license](https://github.com/metaschema-framework/metaschema/blob/main/LICENSE.md) on any new works in this repository.
 
-Email us: [metaschema@nist.gov](mailto:metaschema@nist.gov)
-
-Chat with us: [Gitter OSCAL/metaschema](https://gitter.im/usnistgov-OSCAL/metaschema)
+This work is focused on adding general use features needed by the Metaschema user community, to include new Module capabilities, greater support for external constraints, support for additional formats, and improved documentation. This work is intended to backwards compatible with the prior NIST work, allowing Metaschema modules produced under earlier versions of Metaschema to continue to work as intended.

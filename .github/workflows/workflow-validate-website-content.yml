@@ -5,7 +5,7 @@ on:
       site_git_ref:
         description: 'git ref, a SHA commit or branch or tag, for the published HTML content'
         required: true
-        default: 'nist-pages'
+        default: 'github-pages'
         type: string
       site_git_ref_path:
         description: 'the subdirectory to check out git ref and check links in website content'
@@ -42,7 +42,7 @@ jobs:
       id: linkchecker
       uses: lycheeverse/lychee-action@c053181aa0c3d17606addfe97a9075a32723548a
       with:
-        args: --exclude-file .github/workflows/config/.lycheeignore --verbose --no-progress --accept 200,206,429 './${{ inputs.site_git_ref_path }}/**/*.html' --exclude-mail
+        args: --exclude-file .github/workflows/config/.lycheeignore --verbose --no-progress --accept 200,206,429 './${{ inputs.site_git_ref_path }}/**/*.html'
         fail: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

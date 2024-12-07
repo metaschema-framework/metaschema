@@ -121,7 +121,7 @@ jobs:
       name: Link Checker
       uses: lycheeverse/lychee-action@c053181aa0c3d17606addfe97a9075a32723548a
       with:
-        args: --exclude-file .github/workflows/config/.lycheeignore --verbose --no-progress --accept 200,206,429 './website/public/**/*.html' --remap "https://pages.nist.gov/metaschema/ file://${GITHUB_WORKSPACE}/website/public/" --exclude-mail
+        args: --exclude-file .github/workflows/config/.lycheeignore --verbose --no-progress --accept 200,206,429 './website/public/**/*.html' --remap "https://framework.metaschema.dev/ file://${GITHUB_WORKSPACE}/website/public/"
         format: markdown
         output: html-link-report.md
         debug: true
@@ -157,7 +157,7 @@ jobs:
         personal_token: ${{ secrets.COMMIT_TOKEN }}
         enable_jekyll: false
         publish_dir: ./website/public
-        publish_branch: nist-pages
+        publish_branch: github-pages
         user_name: GitHub Actions Bot
-        user_email: metaschema@nist.gov
+        user_email: maintainers@metaschema.dev
         commit_message: Deploying website [ci deploy skip]

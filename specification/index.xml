@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Metaschema Specification on Metaschema</title>
+    <link>https://framework.metaschema.dev/specification/</link>
+    <description>Recent content in Metaschema Specification on Metaschema</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://framework.metaschema.dev/specification/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>https://framework.metaschema.dev/specification/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://framework.metaschema.dev/specification/overview/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;&lt;a href=&#34;#overview&#34;&gt;Overview&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The &lt;em&gt;Metaschema Information Modeling Framework&lt;/em&gt; provides a means to represent an &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#information-model&#34;&gt;&lt;em&gt;information model&lt;/em&gt;&lt;/a&gt; for a given &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#domain&#34;&gt;&lt;em&gt;information domain&lt;/em&gt;&lt;/a&gt;, consisting of many related &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#information-element&#34;&gt;&lt;em&gt;information elements&lt;/em&gt;&lt;/a&gt;, in a &lt;em&gt;data format&lt;/em&gt; neutral form. By abstracting information modeling away from &lt;em&gt;data format&lt;/em&gt; specific forms, the Metaschema Information Modeling Framework provides a means to consistently and sustainably maintain an &lt;em&gt;information model&lt;/em&gt;, while avoiding the need to maintain each derivative &lt;em&gt;data format&lt;/em&gt; individually. By consolidating &lt;em&gt;information model&lt;/em&gt; maintenance into a single representation, significant time can be saved over other approaches that require each &lt;em&gt;data format&lt;/em&gt; to be maintained individually.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Information Modeling</title>
+      <link>https://framework.metaschema.dev/specification/information-modeling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://framework.metaschema.dev/specification/information-modeling/</guid>
+      <description>&lt;h1 id=&#34;information-modeling&#34;&gt;&lt;a href=&#34;#information-modeling&#34;&gt;Information Modeling&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The following diagram illustrates the relationships between information modeling concepts and the core structures provided by the Metaschema Framework.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Information model / Metaschema module relationship&#34; id=&#34;h-rh-i-0&#34; src=&#34;../im-model.svg&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;An &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#information-model&#34;&gt;&lt;em&gt;information model&lt;/em&gt;&lt;/a&gt; is an abstract representation of information from a given information &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#domain&#34;&gt;&lt;em&gt;domain&lt;/em&gt;&lt;/a&gt;. An &lt;em&gt;information model&lt;/em&gt; is composed of a set of semantically well-defined information structures that each represent an &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#information-element&#34;&gt;&lt;em&gt;information element&lt;/em&gt;&lt;/a&gt; in the information domain.&lt;/p&gt;&#xA;&lt;p&gt;The primary purpose of the Metaschema Framework is to support the structured expression of an information model, which is represented as a &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#metaschema-module&#34;&gt;&lt;em&gt;Metaschema module&lt;/em&gt;&lt;/a&gt;. A Metaschema module is used to represent the whole or a part of an information model for a given information domain in an information-centric, format-neutral form.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Binding to XML, JSON, and YAML</title>
+      <link>https://framework.metaschema.dev/specification/mapping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://framework.metaschema.dev/specification/mapping/</guid>
+      <description>&lt;h1 id=&#34;binding-to-xml-json-and-yaml&#34;&gt;&lt;a href=&#34;#binding-to-xml-json-and-yaml&#34;&gt;Binding to XML, JSON, and YAML&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note: This section of the specification is still a work in progress.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;XML, JSON, and YAML each use specialized terminology and format primitives. As a notation for an object-based data, YAML is fairly similar to JSON, while XML is quite different to the other two. While all data format describe tree structures (directed graphs), each format (with its implicit data model) has its particular design, which requires specification in detail.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Metaschema Data Types</title>
+      <link>https://framework.metaschema.dev/specification/datatypes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://framework.metaschema.dev/specification/datatypes/</guid>
+      <description>&lt;h1 id=&#34;data-types-used-in-metaschema&#34;&gt;&lt;a href=&#34;#data-types-used-in-metaschema&#34;&gt;Data Types Used in Metaschema&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Metaschema is a strongly typed modeling language, that uses a collection of built in data types to represent data elements within a Metaschema-based model.&lt;/p&gt;&#xA;&lt;p&gt;Metaschema&amp;rsquo;s data types represent a data-oriented, leaf nodes in a Metaschema-based model. These data types provide the basis for data elements that have clearly defined syntax and semantics.&lt;/p&gt;&#xA;&lt;p&gt;There are 2 kinds of data types.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://framework.metaschema.dev/specification/datatypes/#simple-data-types&#34;&gt;simple data types:&lt;/a&gt;&lt;/strong&gt; that represent basic data value primitives with a specific syntax and semantics.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://framework.metaschema.dev/specification/datatypes/#markup-data-types&#34;&gt;markup data types:&lt;/a&gt;&lt;/strong&gt; that represent semantically formatted text that is intended for presentation.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;A data type can be referenced in a metaschema definition within a &lt;code&gt;define-field&lt;/code&gt;, &lt;code&gt;field&lt;/code&gt;, &lt;code&gt;define-flag&lt;/code&gt;, or &lt;code&gt;flag&lt;/code&gt; component definition using the &lt;code&gt;@as-type&lt;/code&gt; attribute. The following are the allowed data types.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Metaschema Framework Specification Glossary</title>
+      <link>https://framework.metaschema.dev/specification/glossary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://framework.metaschema.dev/specification/glossary/</guid>
+      <description>&lt;h1 id=&#34;glossary&#34;&gt;&lt;a href=&#34;#glossary&#34;&gt;Glossary&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;The following terminology is used in this specification:&lt;/p&gt;&#xA;&lt;h2 id=&#34;assembly&#34;&gt;&lt;a href=&#34;#assembly&#34;&gt;Assembly&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;An &lt;em&gt;assembly&lt;/em&gt; is defined as follows:&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;callout&#34;&gt;&#xA;    A complex named data element consisting of an optional set of &lt;a href=&#34;https://framework.metaschema.dev/#flag&#34;&gt;&lt;em&gt;flags&lt;/em&gt;&lt;/a&gt; and an optional sequence of model instances.&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;An assembly does not have an associated value.&lt;/p&gt;&#xA;&lt;p&gt;An assembly may reference or directly define zero or more &lt;a href=&#34;https://framework.metaschema.dev/specification/glossary/#flag&#34;&gt;&lt;em&gt;flags&lt;/em&gt;&lt;/a&gt;. Flag instances associated with an assembly definition typically provide additional metadata used to identify or characterize the object represented by the assembly.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

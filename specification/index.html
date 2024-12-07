@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script type="text/javascript" src="/module/hugo-uswds/js/uswds-init.min.js"></script>
+  <link rel="preload" href="/module/hugo-uswds/js/uswds.min.js" as="script">
+
+  <link rel="stylesheet" href="/module/hugo-uswds/css/styles.css">
+
+  
+    <link rel="alternate" type="application/rss+xml" href="/specification/index.xml" title="Metaschema" />
+  <title>Metaschema Specification</title>
+
+<script type="text/javascript" src="/module/hugo-uswds/js/jquery.min.js"></script>
+<script type="text/javascript" defer src="/module/hugo-uswds/js/hugo-uswds.min.js"></script>
+
+
+  
+</head>
+<body>
+<div class="usa-overlay"></div>
+<header class="usa-header usa-header--extended site-header">
+  <div class="usa-navbar site-header__navbar">
+    <div id="extended-logo" class="usa-logo site-logo">
+      <a class="usa-logo__text site-logo__text" href="/" title="Metaschema Information Modeling Framework" aria-label="Home">
+  <em>
+    <span class="site-title--short">Metaschema</span>
+    <span class="site-title--long">Metaschema Information Modeling Framework</span>
+  </em>
+</a>
+
+    </div>
+    <div class="site-nav-secondary usa-nav__secondary">
+      
+      <ul class="usa-nav__secondary-links">
+        
+        <li class="usa-nav__secondary-item"><a href="/contribute/contact/">Contact Us</a></li>
+        
+        <li class="usa-nav__secondary-item"><a href="/contribute/">Get involved</a></li>
+        
+        <li class="usa-nav__secondary-item"><a href="https://github.com/metaschema-framework/metaschema">Github</a></li>
+        
+      </ul>
+      
+      <section aria-label="Search component">
+  <form class="usa-search usa-search--small" role="search" action="https://search.usa.gov/search">
+    <input id="affiliate" name="affiliate" type="hidden" value="" />
+    <input name="utf8" type="hidden" value="&#x2713;" />
+    <label class="usa-sr-only" for="search-field-en-small">Search</label>
+    <input class="usa-input" id="search-field-en-small" type="search" name="query">
+    <button class="usa-button" type="submit"><img
+      src="/module/hugo-uswds/img/usa-icons-bg/search--white.svg"
+      class="usa-search__submit-icon"
+      alt="Search"
+    /></button>
+  </form>
+</section>
+
+    </div>
+    <button class="usa-menu-btn">Menu</button>
+  </div>
+</header>
+<nav class="site-nav usa-nav sticky" aria-label="Primary navigation">
+  <div class="usa-nav__inner site-nav__inner">
+    <button class="usa-nav__close"><img src="/module/hugo-uswds/img/usa-icons/close.svg" role="img" alt="close"></button>
+    <ul class="usa-nav__primary usa-accordion">
+  
+  
+    
+      <li class="usa-nav__primary-item">
+        <a class="usa-nav__link" href="/specification/"><span>Specification</span></a>
+      </li>
+    
+  
+    
+      <li class="usa-nav__primary-item">
+        <a class="usa-nav__link" href="/tutorials/"><span>Tutorials</span></a>
+      </li>
+    
+  
+    
+      <li class="usa-nav__primary-item">
+        <a class="usa-nav__link" href="/use/"><span>Using</span></a>
+      </li>
+    
+  
+    
+      <li class="usa-nav__primary-item">
+        <a class="usa-nav__link" href="/contribute/"><span>Contribute</span></a>
+      </li>
+    
+  
+</ul>
+
+  </div>
+</nav>
+<div class="site-content-container"><aside id="page-side-navigation" class="sidenav site-sidenav" aria-label="Section navigation">
+    
+
+
+<nav aria-label="Secondary navigation">
+<ul class="usa-sidenav"><li class="usa-sidenav__item section usa-subnav__top-level"><a class="usa-current" href="/specification/">Metaschema Specification</a><ul class="usa-sidenav__sublist"><li class="usa-sidenav__item page"><a href="/specification/overview/">Overview</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/information-modeling/">Information Modeling</a>
+  </li><li class="usa-sidenav__item section"><a href="/specification/syntax/">Syntax</a><ul class="usa-sidenav__sublist"><li class="usa-sidenav__item page"><a href="/specification/syntax/module/">Module</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/definitions/">Definitions</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/instances/">Instances</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/inline-definitions/">Inline Definitions</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/constraints/">Constraints</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/datatypes/">Data Types</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/syntax/metapath/">Metapath Expression Language</a>
+  </li>
+    </ul>
+  </li><li class="usa-sidenav__item page"><a href="/specification/mapping/">Format Bindings</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/datatypes/">Data Types</a>
+  </li><li class="usa-sidenav__item page"><a href="/specification/glossary/">Glossary</a>
+  </li>
+    </ul>
+  </li></ul>
+</nav>
+  </aside><div class="usa-in-page-nav-container"><aside class="site-in-page-nav" aria-label="On this page" data-heading-selectors="h2, h3, h4, h5, h6" data-scroll-offset="-120" data-root-margin="48px 0px -90% 0px" data-threshold="1">
+  <nav class="usa-in-page-nav__nav" aria-label="On this page">
+    <h4 class="usa-in-page-nav__heading" tabindex="0">On this page</h4><ul class="usa-in-page-nav__list"><li class="usa-in-page-nav__item"><a href="#conventions-used-in-this-document" class="site-in-page-nav__link h2">Conventions Used in this Document</a></li></ul></nav>
+</aside><main id="main-content" class="main-content usa-prose">
+  <header>
+    <nav class="usa-breadcrumb" aria-label="Breadcrumbs">
+  <ol class="usa-breadcrumb__list"><li class="usa-breadcrumb__list-item usa-current">
+    <a href="/specification/" class="usa-breadcrumb__link" aria-current="page"><span>Metaschema Specification</span></a>
+  </li></ol>
+</nav>
+
+  </header>
+  <h1 id="metaschema-specification"><a href="#metaschema-specification">Metaschema Specification</a></h1>
+<p>The Metaschema Information Modeling Framework provides a standardized, format-agnostic information modeling approach supporting schema, code, and documentation generation <em>all in one</em>.</p>
+<p>This specification defines the core concepts, syntax and semantics of the Metaschema Information Modeling Framework.</p>
+<p>The specification is divided into the following sections.</p>
+<ul>
+<li><a href="/specification/overview/"><strong>Overview:</strong></a> Provides a high-level description of the framework&rsquo;s design goals and overall approach to defining an <a href="/specification/glossary/#information-model">information model</a>.</li>
+<li><a href="/specification/information-modeling/"><strong>Information Modeling:</strong></a> Describes the information modeling approach used in the framework, with a focus on the core graph and object-oriented concepts supported by the framework.</li>
+<li><a href="/specification/syntax/"><strong>Syntax</strong>:</a> Documents the model used to describe a <a href="/specification/glossary/#metaschema-module">Metaschema module</a>.</li>
+<li><a href="/specification/datatypes/"><strong>Data Types:</strong></a> Lists the built-in data types provided by the framework.</li>
+<li><a href="/specification/glossary/"><strong>Glossary</strong>:</a> Provides definitions for commonly used technical terms used in this documentation.</li>
+</ul>
+<h2 id="conventions-used-in-this-document"><a href="#conventions-used-in-this-document">Conventions Used in this Document</a></h2>
+<p>The key words &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;NOT RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, and &ldquo;OPTIONAL&rdquo; in this document are to be interpreted as described in <a href="https://www.rfc-editor.org/info/bcp14" rel="external">BCP 14</a> <a href="https://www.rfc-editor.org/rfc/rfc2119.html" rel="external">RFC2119</a> <a href="https://www.rfc-editor.org/rfc/rfc8174.html" rel="external">RFC8174</a> when, and only when, they appear in all capitals, as shown here.</p>
+
+</main>
+</div></div>
+  <p class="font-sans-sm text-center" style="margin: 1.5rem auto; clear: both;">This page was last updated on June 2, 2023. <a href="https://github.com/metaschema-framework/metaschema/tree/master/website/content/specification/_index.md">Improve this Page.</a></p>
+
+
+  <script type="text/javascript" src="/module/hugo-uswds/js/uswds.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+  $('a[href*="//"]:not([href*="https:\/\/framework.metaschema.dev\/"]):not([href^="#"]):not([href^="/"])').addClass('usa-link usa-link--external');
+});
+</script>
+
+
+
+
+
+</body>
+</html>

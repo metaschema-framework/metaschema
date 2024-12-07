@@ -51,7 +51,7 @@ jobs:
           bug
           documentation
     - name: Fail on link check error
-      if: ${{ !cancelled() && env.lychee_exit_code != 0 && (github.event.inputs.linkcheck_fail_on_error == 'true' || inputs.linkcheck_fail_on_error == true) }}
+      if: ${{ !cancelled() && env.lychee_exit_code != 0 }}
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
       with:
         script: |

@@ -7,7 +7,7 @@ cascade:
   sidenav:
     collapsedepth: 4
 ---
-{{% usa-hero image="automation-hero.png" calloutAltText="Efficient" calloutText="Information Modeling" buttonURL="/specification/" buttonText="Learn More" %}}
+{{% usa-hero image="/img/hero.png" calloutAltText="Efficient" calloutText="Information Modeling" buttonURL="/specification/" buttonText="Learn More" %}}
 Modeling information<br/>
 Quickly and Easily<br/>
 in Multiple Formats

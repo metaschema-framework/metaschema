@@ -1,9 +1,9 @@
 title: "Metaschema"
-baseURL: https://pages.nist.gov/metaschema/
+baseURL: https://framework.metaschema.dev/
 defaultContentLanguage: en
 languageCode: "en-us"
 MetaDataFormat: "yaml"
-googleAnalytics: UA-66610693-1
+googleAnalytics: 
 enableGitInfo: true
 enableRobotsTXT: true
 menu:
@@ -13,9 +13,9 @@ menu:
     - name: Contact Us
       url: /contribute/contact/
     - name: Github
-      url: https://github.com/usnistgov/metaschema
+      url: https://github.com/metaschema-framework/metaschema
 #
-# Configuration for hugo-uswds
+# Configuration for uswds-hugo
 #
 module:
   mounts:
@@ -26,8 +26,7 @@ module:
   - source: ../examples
     target: static/examples
   imports:
-  - path: github.com/usnistgov/hugo-uswds
-  - path: github.com/usnistgov/hugo-uswds-nist
+    - path: "github.com/GSA/uswds-hugo"
 enableGitInfo: true # enable to get page modification dates for a site stored in Git
 params:
   header:
@@ -35,7 +34,7 @@ params:
     project_name: "Metaschema Information Modeling Framework"
   contentRepoPath: https://github.com/usnistgov/metaschema/tree/master/website/content
   searchAffiliate: metaschema
-  usabanner: true
+  usabanner: false
 markup:
   goldmark: # Markdown Rendering
     renderer:

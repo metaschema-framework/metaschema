@@ -25,7 +25,7 @@ JSON and XML Schema instances are provided for the built in data types.
 
 ### JSON Schema
 
-A single JSON schema is [provided](https://github.com/usnistgov/metaschema/blob/develop/schema/json/metaschema-datatypes.json) for all built in data types supporting JSON and YAML validation. This schema is based on JSON Schema draft-07 ([JSON Schema](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-01) and [JSON Schema Validation 01](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01)).
+A single JSON schema is [provided](https://github.com/metaschema-framework/metaschema/blob/develop/schema/json/metaschema-datatypes.json) for all built in data types supporting JSON and YAML validation. This schema is based on JSON Schema draft-07 ([JSON Schema](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-01) and [JSON Schema Validation 01](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01)).
 
 The data type JSON schema uses regular expression patterns to enforce the syntax of specific data types. The regular expressions supported in JSON schema using the [`pattern`](https://datatracker.ietf.org/doc/html/draft-handrews-json-schema-validation-01#section-6.3.3) keyword are based on the [ECMA 262 regular expression dialect](https://262.ecma-international.org/#sec-regexp-regular-expression-objects).
 
@@ -33,17 +33,17 @@ The data type JSON schema uses regular expression patterns to enforce the syntax
 
 Multiple XML Schemas are provided that support different groups of data types.
 
-The [Simple data types](#simple-data-types) are defined in [a single XML Schema](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema-datatypes.xsd).
+The [Simple data types](#simple-data-types) are defined in [a single XML Schema](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema-datatypes.xsd).
 
 The [markup data types](#markup-data-types) are supported by multiple schemas.
 
-The [`markup-line`](#markup-line) data type is implemented in XML Schema within the [metaschema-markup-line.xsd](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema-markup-line.xsd) schema.
+The [`markup-line`](#markup-line) data type is implemented in XML Schema within the [metaschema-markup-line.xsd](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema-markup-line.xsd) schema.
 
-The [`markup-multiline`](#markup-multiline) data type is implemented in XML Schema within the [metaschema-markup-multiline.xsd](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema-markup-multiline.xsd) schema.
+The [`markup-multiline`](#markup-multiline) data type is implemented in XML Schema within the [metaschema-markup-multiline.xsd](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema-markup-multiline.xsd) schema.
 
-Both of these schemas use a set of shared XML Schema types from the [metaschema-prose-base.xsd](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema-prose-base.xsd).
+Both of these schemas use a set of shared XML Schema types from the [metaschema-prose-base.xsd](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema-prose-base.xsd).
 
-The [metaschema-prose-module.xsd](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema-prose-module.xsd) XML schema is provided as a convenience to support use of both the `markup-line` and `markup-multiline` data types.
+The [metaschema-prose-module.xsd](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema-prose-module.xsd) XML schema is provided as a convenience to support use of both the `markup-line` and `markup-multiline` data types.
 
 XML Schema uses its [own dialect](https://www.w3.org/TR/xmlschema-2/#regexs) of regular expressions.
 

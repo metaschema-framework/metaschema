@@ -4,21 +4,21 @@ This page is for potential contributors to this project. It provides basic infor
 
 ## Project approach
 
-This project uses an agile approach for development. We’re trying to focus on the core capabilities that are needed to provide the greatest amount of benefit. Because we’re working on a small set of capabilities, this allows us to make very fast progress. We’re building the features that we believe solve the biggest problems to provide the most value to the most people. We provide extension points that allow uncovered cases to be supported by others.
+This project uses an agile approach for development, where we focus on implementing the 20% of the functionality that solves 80% of the problem. We’re trying to focus on the core capabilities that are needed to provide the greatest amount of benefit. Because we’re working on a small set of capabilities, this allows us to make very fast progress. We’re building the features that we believe solve the biggest problems to provide the most value. We provide extension points that allow uncovered cases to be supported by others.
 
-We track our current work items using GitHub [project cards](https://github.com/orgs/usnistgov/projects/44).
+We track our current work items using GitHub [project cards](https://github.com/metaschema-framework/metaschema/projects).
 
 ## Making Contributions
 
-Contributions are welcome to this project repository. For information on the project's current needs and priorities, see the project's GitHub issue tracker (discussed below). Please refer to the [guide on how to contribute to open source](https://opensource.guide/how-to-contribute/) for general information on contributing to an open source project.
+Contributions are welcome to this project repository.
+
+For more information on the project's current needs and priorities, see the project's GitHub issue tracker (discussed below). Please refer to the [guide on how to contribute to open source](https://opensource.guide/how-to-contribute/) for general information on contributing to an open source project.
 
 ## Issue reporting and handling
 
-All requests for changes and enhancements to the repository are initiated through the project's [GitHub issue tracker](../../issues). To initiate a request, please [create a new issue](https://help.github.com/articles/creating-an-issue/). The following issue templates exist for creating a new issue:
-
-* [User Story](../../issues/new?template=feature_request.md&labels=enhancement%2C+User+Story): Use to describe a new feature or capability to be added to the project.
-* [Defect Report](../../issues/new?template=bug_report.md&labels=bug): Use to report a problem with an existing feature or capability.
-* [Question](../../issues/new?labels=question&template=question.md): Use to ask a question about the project or the contents of the repository.
+All requests for changes and enhancements to the repository are initiated through the project's [GitHub issue tracker](https://github.com/metaschema-framework/metaschema/issues). To initiate a request, please [create a new issue](https://help.github.com/articles/creating-an-issue/). The following issue templates exist for creating a new issue:
+* [User Story](https://github.com/metaschema-framework/metaschema/issues/new?assignees=&labels=User+Story%2Cenhancement&projects=&template=1-feature_request.yml): Use to describe a new feature or capability to be added to the project.
+* [Defect Report](https://github.com/metaschema-framework/metaschema/issues/new?assignees=&labels=bug&projects=&template=2-bug_report.yml): Use to report a problem with an existing feature or capability.
 
 The project team regularly reviews the open issues, prioritizes their handling, and updates the issue statuses, proving comments on the current status as needed.
 
@@ -27,7 +27,7 @@ The project team regularly reviews the open issues, prioritizes their handling, 
 This project uses a typical GitHub fork and pull request [workflow](https://guides.github.com/introduction/flow/). To establish a development environment for contributing to the project, you must do the following:
 
 1. Fork the repository to your personal workspace. Please refer to the Github [guide on forking a repository](https://help.github.com/articles/fork-a-repo/) for more details.
-1. Create a feature branch from the master branch for making changes. You can [create a branch in your personal repository](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) directly on GitHub or create the branch using a Git client. For example, the ```git branch working``` command can be used to create a branch named *working*.
+1. Create a feature branch from the main branch for making changes. You can [create a branch in your personal repository](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) directly on GitHub or create the branch using a Git client. For example, the ```git branch working``` command can be used to create a branch named *working*.
 1. You will need to make your modifications by adding, removing, and changing the content in the branch, then staging your changes using the ```git add``` and ```git rm``` commands.
 1. Once you have staged your changes, you will need to commit them. When committing, you will need to include a commit message. The commit message should describe the nature of your changes (e.g., added new feature X which supports Y). You can also reference an issue from the project repository by using the hash symbol. For example, to reference issue #34, you would include the text "#34". The full command would be: ```git commit -m "added new feature X which supports Y addressing issue #34"```.
 1. Next, you must push your changes to your personal repo. You can do this with the command: ```git push```.
@@ -37,56 +37,71 @@ This project uses a typical GitHub fork and pull request [workflow](https://guid
 
 This repository consists of the following directories and files pertaining to the project:
 
-* [.github](.github): Contains GitHub issue and pull request templates for the project.
-* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): This file contains a code of conduct for all project contributors.
-* [CONTRIBUTING.md](CONTRIBUTING.md): This file is for potential contributors to the project. It provides basic information on the project, describes the main ways people can make contributions, explains how to report issues, and lists pointers to additional sources of information. It also has instructions on establishing a development environment for contributing to the project and using GitHub project cards to track development sprints.
-* [LICENSE.md](LICENSE.md): This file contains license information for the files in this GitHub repository.
-* [USERS.md](USERS.md): This file explains which types of users are most likely to benefit from use of this project and its artifacts.
+- [.github](.github): Contains GitHub issue and pull request templates for the project.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): This file contains a code of conduct for all project contributors.
+- [CONTRIBUTING.md](CONTRIBUTING.md): This file is for potential contributors to the project. It provides basic information on the project, describes the main ways people can make contributions, explains how to report issues, and lists pointers to additional sources of information. It also has instructions on establishing a development environment for contributing to the project and using GitHub project cards to track development sprints.
+- [LICENSE.md](LICENSE.md): This file contains license information for the files in this GitHub repository.
+- [USERS.md](USERS.md): This file explains which types of users are most likely to benefit from use of this project and its artifacts.
 
-## Contributing as a Developer
+## Contributing to ongoing Development
 
-This project is using the GitHub [project cards](https://github.com/orgs/usnistgov/projects/44) feature to track development activities as part of the core project work stream.
+This project is using the GitHub [project cards](https://github.com/metaschema-framework/metaschema/projects) feature to track development using a [Kanban](https://en.wikipedia.org/wiki/Kanban_\(development\)) approach.
 
 ### User Stories
 
-Each development activity uses a set of [user stories](../../issues?q=is%3Aopen+is%3Aissue+label%3A%22User+Story%22), that represent features, actions, or enhancements that are intended to be developed. Each user story is based on a [template](../../issues/new?template=feature_request.md&labels=enhancement%2C+User+Story) and describes the basic problem or need to be addressed, a set of detailed goals to accomplish, any dependencies that must be addressed to start or complete the user story, and the criteria for acceptance of the contribution.
+Project cards are used to represent a set of [user stories](https://github.com/metaschema-framework/metaschema/issues?q=is%3Aopen+is%3Aissue+label%3A%22User+Story%22), that describe features, actions, or enhancements that are intended to be developed. Each user story is based on a [template](https://github.com/metaschema-framework/metaschema/issues/new?template=feature_request.md&labels=enhancement%2C+User+Story) and describes the basic problem or need to be addressed, a set of detailed goals to accomplish, any dependencies that must be addressed to start or complete the user story, and the criteria for acceptance of the contribution.
 
 The goals in a user story will be bulleted, indicating that each goal can be worked on in parallel, or numbered, indicating that each goal must be worked on sequentially. Each goal will be assigned to one or more individuals to accomplish.
 
-Any user story can be worked on at any time by any project contributor. When a user story is not assigned to a developer, its status will not be tracked as part of our project management efforts, but when completed will still be considered as a possible contribution to the project.
+The user story issue discussion will be used for periodic updates, questions, and comments related to designs and requirements.
 
-### Reporting User Story Status
-
-When working on a goal that is part of a user story you will want to provide a periodic report on any progress that has been made until that goal has been completed. This status may be reported as a comment to the associated user story issue.
-
-When describing any open issues encountered use an "\@mention" of the individual who needs to respond to the issue. This will ensure that the individual is updated with this status.
+Note: A user story that is not selected as an active work item can still be worked on at any time by any project contributor and will still be considered as a possible contribution to the project.
 
 ### Project Status
 
-The project cards will be in one of the following states:
+Each project card will be in one of the following states:
 
-* **New Issue** - The issue has been newly created and has not been triaged.
-* **Discussion Needed** - The issue has been triaged, but does not sufficiently describe the problem to be addressed or does not indicate sufficient details to start development. More discussion is needed to work out these details.
-* **Backlog** - The issue has been triaged as a lower priority and is saved for development in the future.
-* **Assigned to Developer** - The issue has been triaged and assigned to a developer to work on.
-* **In Progress** - The assigned developer(s) has started development work on the issue.
-* **Under Review** - The development work indicated by the issue has been completed and this work is ready for code review.
-* **Review Approved** - The development work has been reviewed and the code is ready to be merged.
-* **Complete** - The development work has been merged and the issue is resolved.
+- "To do" - The user story has been queued for work, but the work has not started.
+- "In progress" - Work has started on the user story, but development has not been completed.
+- "Review in Progress" - All goals for the user story have been completed and one or more pull requests have been submitted for all associated work. Associated PRs require review by code owners and community reviewers to ensure that all goals and acceptance criteria have been met and that any identified concerns have been addressed.
+- "Reviewer Approved" - All required reviews of a pull request related to a user story have been completed. The pull request still needs to be merged.
+- "Done" - Once the contributed work has been reviewed and the pull request has been merged, the user story will be marked as "Done".
 
-Note: A pull request must be submitted for all issue goals before an issue will be moved to the "under review" status. If any goals or acceptance criteria have not been met, then the user story will be commented on to provide feedback, and the issue will be returned to the "In progress" state.
+Note: One or more pull requests must be submitted addressing all user story goals before the issue will be moved to the "under review" status. If any goals or acceptance criteria have not been met, then the user story will be commented on to provide feedback, and the issue will be returned to the "In progress" state.
 
-## Licenses and attribution
+## Code Review
 
-For complete attribution and licensing information for parts of the project that are not in the public domain, see the [LICENSE](LICENSE.md).
+Contributors are encouraged to [review PRs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews).
 
-## Contributions will be released into the public domain
+The following are some guidelines to consider when performing code reviews.
 
-All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
+- Tone
+  - Do ask open-ended questions and avoid making opinionated statements.
+  - Do keep feedback positive. Consider the effort the author spent writing the PR. Celebrate good work.
+  - Do differentiate between nits and suggestions vs blocking feedback. Limit nits. Use [Conventional Comments](https://conventionalcomments.org) to the greatest extent possible.
+  - Do consider how your feedback could be addressed by follow-on work. Consider opening new issues for less significant concerns.
+- Unit Testing
+  - Do consider the coverage of test cases. Do the unit tests cover major code paths and error conditions?
+- Approving or Requesting changes
+  - Do not approve or request changes to a PR if you have open questions. Seek question resolution before taking a position.
+  - Do not request changes for a nit or suggestion.
+  - Do not strive for perfect. Does the PR improve the code health overall?
+- Resolving Conversations
+  - Do mark your feedback as resolved when it has been addressed.
 
-## Git Client Setup
+## Communications mechanisms
 
-### Initializing Git submodules
+You can contact the maintainers of this project at [maintainers@metaschema.dev](mailto:maintainers@metaschema.dev) if you are interested in contributing to the development of this project or exchanging ideas.
+
+## Developer information
+
+### Core Metaschema functions
+
+The Metaschema [specification](https://framework.metaschema.dev/specification/syntax/metapath/) and [this conformant library](https://github.com/metaschema-framework/metaschema-java) library implement the Metapath functions required by the specification. See the library's [registry class with an inventory listing of the functions](https://github.com/metaschema-framework/metaschema-java/blob/main/core/src/main/java/gov/nist/secauto/metaschema/core/metapath/function/library/DefaultFunctionLibrary.java) supported in the most current release.
+
+### Git Client Setup
+
+#### Initializing Git submodules
 
 This GitHub repository makes use of Git submodules to mount other repositories as subdirectories.
 
@@ -99,10 +114,10 @@ git submodule update --init
 You can perform the clone and submodule initialization in a single step by using the following command:
 
 ```
-git clone --recurse-submodules https://github.com/usnistgov/metaschema.git
+git clone --recurse-submodules https://github.com/metaschema-framework/metaschema.git
 ```
 
-### Configuring Submodules to Use SSH
+#### Configuring Submodules to Use SSH
 
 Some clients will make use of Git over SSH with a private SSH key for GitHub projects. For convenience, the submodules are configured to use HTTP instead of SSH. To override this default behavior, you will need to configure your Git client to use SSH instead of HTTP using the following command:
 
@@ -112,10 +127,22 @@ git config --global url."git@github.com:".insteadOf https://github.com/
 
 This instructs your Git client to dynamically replace the HTTP-based URLs with the proper SSH URL when using GitHub.
 
-### Updating submodules
+#### Updating submodules
 
 Submodule contents will be periodically updated. To ensure you have the latest commits for a configured submodule, you will need to run the following command:
 
 ```
 git submodule update --init --recursive
 ```
+
+# Licenses and attribution
+
+## This project is in the public domain
+
+This project is in the worldwide public domain.
+
+This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain](https://creativecommons.org/publicdomain/zero/1.0/) dedication.
+
+## Contributions will be released into the public domain
+
+All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.

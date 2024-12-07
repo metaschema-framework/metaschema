@@ -11,4 +11,4 @@ Current modeling technologies (i.e. XML Schema, JSON Schema, Schematron) are:
 
 This project supports users who are interested in modeling data in a format-agnostic way, and tool developers authoring tools to support such users.
 
-More information about the Metaschema approach can be found on the [project's website](https://pages.nist.gov/metaschema/).
+More information about the Metaschema approach can be found on the [project's website](https://framework.metaschema.dev/).

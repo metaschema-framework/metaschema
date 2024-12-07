@@ -1,5 +1,5 @@
 {
-    "name": "metaschema-website",
+    "name": "metaschema-framework-website",
     "version": "1.0.0",
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^5.0.0",

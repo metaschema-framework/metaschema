@@ -20,7 +20,7 @@ This guide provides information on how [release versions](#versioning) and [bran
 
 ## Versioning
 
-This repository uses [semantic versioning](https://semver.org/spec/v2.0.0.html) to version [releases](../../releases).
+This repository uses [semantic versioning](https://semver.org/spec/v2.0.0.html) to version [releases](https://github.com/metaschema-framework/metaschema/releases).
 
 Semantic versions are in the form of `MAJOR.MINOR.PATCH`. Given a version number, increment the:
 
@@ -39,12 +39,12 @@ A PATCH release will be made more frequenly than *MAJOR* or *MINOR* releases.
 ## Branching
 
 The main branches of this repository are:
-- **[main](../../tree/main)** contains the current supported, production-ready release.
-- **[develop](../../tree/develop)** contains the current set of development changes for the next release. New features can be [contributed](./CONTRIBUTING.md#contributing-to-the-repository) to this branch.
+- **[main](https://github.com/metaschema-framework/metaschema/tree/main)** contains the current supported, production-ready release.
+- **[develop](https://github.com/metaschema-framework/metaschema/tree/develop)** contains the current set of development changes for the next release. New features can be [contributed](./CONTRIBUTING.md#contributing-to-the-repository) to this branch.
   - This branch is an integration branch where development code can be tested prior to promoting the code to a release.
   - This branch will be used to create a release-*major*.*minor* branch when the developed code is ready to be staged for release.
-- **[nist-pages](../../tree/nist-pages)** contains the currently deployed website content, which is managed by the CI/CD process.
-- **release-\*** branches, where `*` matches a MAJOR.MINOR version number, are used to support patch releases for a major or minor version of a release. You should provide changes only to the highest numbered *minor* release for a given *major* release.
+- **[github-pages](https://github.com/metaschema-framework/metaschema/tree/github-pages)** contains the currently deployed website content, which is managed by the CI/CD process.
+- **release/ma.mi** branches, where `ma.mi` matches a MAJOR.MINOR version number, are used to support patch releases for a major or minor version of a release. You should provide changes only to the highest numbered *minor* release for a given *major* release.
 
 ## Git Setup
 
@@ -53,7 +53,7 @@ To use this strategy, the following Git configuration is needed:
 You must do all work in a personal fork of this repository.
 
 ```
-git remote add upstream git@github.com:usnistgov/metaschema.git
+git remote add upstream git@github.com:metaschema-framework/metaschema.git
 ```
 
 # Branching for contributors
@@ -66,7 +66,7 @@ Personal branches should be named using the convention `<issue #>-brief-dashed-n
 
 Once work is complete on a personal branch, the branch should be interactively rebased to tidy any commits. Then a PR should be opened against the target `feature-*` branch or the `develop` branch if the changes are to be included in the next release.
 
-For more information on how to do this, please refer to [our contribution guide](./CONTRIBUTING.md#contributing-to-the-repository).
+For more information on how to do this, please refer to [our contribution guide](CONTRIBUTING.md#contributing-to-the-repository).
 
 # Branching for repository maintainers
 
@@ -78,17 +78,17 @@ Release branches represent production-ready code that is near-ready for release.
 - Branched off of `develop`.
 - Must be merged back into `develop` as releases are made.
 - Must be merged back into `main` to reflect the latest release
-- Release branches will be named `release-MAJOR.MINOR`, e.g. release 1.0, release 1.1, release 2.0
+- Release branches will be named `release/MAJOR.MINOR`, e.g. release 1.0, release 1.1, release 2.0
 
 ### Creating a Release Branch
 
 A release branch can be created by issuing the following Git commands:
 
 ```
-git checkout -b release-1.2 develop
+git checkout -b release/1.2 develop
 # TODO: need a method to bump version numbers in metaschemas and content
 git commit -a -m "Bumped version number to 1.2"
-git push --set-upstream upstream release-1.2
+git push --set-upstream upstream release/1.2
 ```
 
 ### Releasing a Release Branch
@@ -97,7 +97,7 @@ Once the release is ready, the release can be made using the following Git comma
 
 ```
 git checkout main
-git merge --no-ff release-1.2
+git merge --ff-only release/1.2
 git tag -a 1.2.0
 git push --follow-tags
 ```
@@ -110,7 +110,7 @@ Once a patch release is ready, the release can be made using the following Git c
 
 ```
 git checkout main
-git merge --no-ff release-1.2
+git merge --ff-only release/1.2
 git tag -a 1.2.1
 git push --follow-tags
 ```
@@ -122,7 +122,7 @@ A *feature branch* provides means to integrate a set of features that are a work
 Feature branches represent major development topics.
 - Branched off of `develop`.
 - Merged back into `develop` when the feature work is completed.
-- Feature branches will be named `feature-*`, where the `*` is a brief dash-separated label describing the feature.
+- Feature branches will be named `feature/*`, where the `*` is a brief dash-separated label describing the feature.
 
 If multiple committers are working on a feature, then each committer must work in a personal branch and submit a PR to the feature branch when their work is complete.
 
@@ -131,11 +131,11 @@ If multiple committers are working on a feature, then each committer must work i
 A feature branch can be created by issuing the following Git command:
 
 ```
-git checkout -b feature-NAME develop
-git push --set-upstream upstream feature-NAME
+git checkout -b feature/NAME develop
+git push --set-upstream upstream feature/NAME
 ```
 
-where *feature-NAME* will follow the pattern `feature-*`.
+where *feature-NAME* will follow the pattern `feature/*`.
 
 ### Syncing a Feature Branch with `develop`
 
@@ -143,12 +143,12 @@ It may be necessary to periodically sync a feature branch with the latest in `de
 
 ```
 # switch to the feature branch
-git checkout feature-NAME
+git checkout feature/NAME
 # get the latest from upstream
-git pull --ff-only upstream feature-NAME
+git pull --ff-only upstream feature/NAME
 # get the latest from develop
 git pull -r upstream develop
-git push --force-with-lease upstream feature-NAME
+git push --force-with-lease upstream feature/NAME
 ```
 
 ### Merging a Feature Branch
@@ -159,9 +159,9 @@ The following Git commands will be used to merge a feature branch into `develop`
 # switch to the develop branch
 git checkout develop
 # merge the feature branch
-git merge --no-ff feature-myfeature
+git merge --ff-only feature/myfeature
 # delete the feature branch once it is merged
-git branch -d feature-myfeature
+git branch -d feature/myfeature
 # push the branch to the upstream repository
 git push upstream develop
 ```

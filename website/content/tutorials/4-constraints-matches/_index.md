@@ -13,7 +13,7 @@ We will begin where we left off in the previous tutorial, with the model and con
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/usnistgov/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="https://raw.githubusercontent.com/metaschema-framework/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
   <schema-name>Computer Model</schema-name>
   <schema-version>0.0.9</schema-version>
@@ -492,7 +492,7 @@ To meet these requirements, we will add a `property` assembly to our model. Each
 
 ```xml {linenos=table,hl_lines=["9-25","61-63"]}
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/usnistgov/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="https://raw.githubusercontent.com/metaschema-framework/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
   <schema-name>Computer Model</schema-name>
   <schema-version>0.0.10</schema-version>
@@ -1246,7 +1246,7 @@ We know we can easily meet these requirements with a `matches` constraint by usi
 
 ```xml {linenos=table,hl_lines=["52-79","108"]}
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/usnistgov/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="https://raw.githubusercontent.com/metaschema-framework/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
   <schema-name>Computer Model</schema-name>
   <schema-version>0.0.11</schema-version>

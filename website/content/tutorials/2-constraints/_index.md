@@ -327,7 +327,7 @@ To implement such a requirement, we cannot rely on type system alone. We must us
 
 ```xml {linenos=table,hl_lines=["59-70"]}
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/usnistgov/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="https://raw.githubusercontent.com/metaschema-framework/metaschema/develop/schema/xml/metaschema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <METASCHEMA xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
   <schema-name>Computer Model</schema-name>
   <schema-version>0.0.6</schema-version>

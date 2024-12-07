@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<choice-parent xmlns="http://csrc.nist.gov/ns/metaschema/unit-test/choice-multiple">
+	<child>
+		<non-choice>1-1 and 2-1</non-choice>
+		<choice-1-1/>
+		<choice-2-1/>
+		<choice-3-1/>
+	</child>
+	<child>
+		<non-choice>1-1 and 2-2</non-choice>
+		<choice-1-1/>
+		<choice-2-2/>
+		<choice-3-2/>
+	</child>
+	<child>
+		<non-choice>1-2 and 2-1</non-choice>
+		<choice-2-1/>
+		<choice-3-2/>
+	</child>
+	<child>
+		<non-choice>1-2 and 2-2</non-choice>
+		<choice-1-2/>
+		<choice-2-2/>
+		<choice-3-2/>
+	</child>
+	<child>
+		<non-choice>something</non-choice>
+		<non-choice>something else</non-choice>
+		<choice-3-2/>
+		<choice-3-2/>
+	</child>
+</choice-parent>

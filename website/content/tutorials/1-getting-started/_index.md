@@ -23,7 +23,7 @@ Once we understand the required information structure for a computer, how do we 
 
 ## Metaschema Concepts
 
-Metaschema helps developers to define information models once as a [Metaschema module](../../specification/glossary/#metaschema-module). A Metaschema module specifies the information elements of the information model and how that model is represented in supported machine-readable data formats (i.e. JSON, YAML, XML), which we call a [data model](/specification/glossary/#data-model). A document in such a format is an instance of that module. A schema can be used to check that a document is well-formed and valid against the model represented by the format. Such schemas can be derived deterministically and programmatically from a Metaschema module (or "metaschema").
+Metaschema helps developers to define information models once as a [Metaschema module](/specification/glossary/#metaschema-module). A Metaschema module specifies the information elements of the information model and how that model is represented in supported machine-readable data formats (i.e. JSON, YAML, XML), which we call a [data model](/specification/glossary/#data-model). A document in such a format is an instance of that module. A schema can be used to check that a document is well-formed and valid against the model represented by the format. Such schemas can be derived deterministically and programmatically from a Metaschema module (or "metaschema").
 
 ```mermaid
 erDiagram
@@ -61,7 +61,7 @@ Metaschema modules, like the one above, are expressed in XML. A module begins an
 
 The metadata above provides the useful information needed by us: Metaschema developers and our tools that parse Metaschema modules. The `<schema-name>` is the long-form, descriptive name of the computer model. The `<schema-version>` gives the model itself a version number signifying the iterative instance of the model, for both developers or their tools to use. The `<short-name>` is the shortened form of the `schema-name`, which provides a human-readable identifier for the model. Normally, Metaschema-enabled tools will parse or generate data with this name `computer`, not `Computer Model`. The `namespace` is a URI used to identify the model and its parts as belonging to a single scope for XML data and schemas. Similarly, the `json-base-uri` serves a similar purpose for JSON and YAML data, and JSON schemas.
 
-It is important to note this module is just a starting point. This module is the most minimally viable module possible: it is well-formed and valid against [the XML Schema for the Metaschema syntax itself](https://github.com/usnistgov/metaschema/blob/develop/schema/xml/metaschema.xsd), but Metaschema-enabled tools should consider this an empty module, since we have not yet declared a complete implementation of an information element yet.
+It is important to note this module is just a starting point. This module is the most minimally viable module possible: it is well-formed and valid against [the XML Schema for the Metaschema syntax itself](https://github.com/metaschema-framework/metaschema/blob/develop/schema/xml/metaschema.xsd), but Metaschema-enabled tools should consider this an empty module, since we have not yet declared a complete implementation of an information element yet.
 
 So let's start defining the "computer" information element. We will begin by designing a computer object to have just an identifier. 
 

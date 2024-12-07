@@ -672,28 +672,28 @@
         <use-name>as-type</use-name>
         <constraint>
             <allowed-values allow-other="yes">
-                <enum value="markup-line">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#markup-line">markup-line</a> data type.</enum>
-                <enum value="markup-multiline">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#markup-multiline">markup-multiline</a> data type.</enum>
-                <enum value="base64">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#base64">base64</a> data type.</enum>
-                <enum value="boolean">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#boolean">boolean</a> data type.</enum>
-                <enum value="date">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date">date</a> data type.</enum>
-                <enum value="date-time">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-time">date-time</a> data type.</enum>
-                <enum value="date-time-with-timezone">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-time-with-timezone">date-time-with-timezone</a> data type.</enum>
-                <enum value="date-with-timezone">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-with-timezone">date-with-timezone</a> data type.</enum>
-                <enum value="day-time-duration">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#day-time-duration">day-time-duration</a> data type.</enum>
-                <enum value="decimal">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#decimal">decimal</a> data type.</enum>
-                <enum value="email-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#email-address">email-address</a> data type.</enum>
-                <enum value="hostname">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#hostname">hostname</a> data type.</enum>
-                <enum value="integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#integer">integer</a> data type.</enum>
-                <enum value="ip-v4-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#ip-v4-address">ip-v4-address</a> data type.</enum>
-                <enum value="ip-v6-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#ip-v6-address">ip-v6-address</a> data type.</enum>
-                <enum value="non-negative-integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#non-negative-integer">non-negative-integer</a> data type.</enum>
-                <enum value="positive-integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#positive-integer">positive-integer</a> data type.</enum>
-                <enum value="string">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#string">string</a> data type.</enum>
-                <enum value="token">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#token">token</a> data type.</enum>
-                <enum value="uri">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uri">uri</a> data type.</enum>
-                <enum value="uri-reference">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uri-reference">uri-reference</a> data type.</enum>
-                <enum value="uuid">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uuid">uuid</a> data type.</enum>
+                <enum value="markup-line">The <a href="https://framework.metaschema.dev/specification/datatypes/#markup-line">markup-line</a> data type.</enum>
+                <enum value="markup-multiline">The <a href="https://framework.metaschema.dev/specification/datatypes/#markup-multiline">markup-multiline</a> data type.</enum>
+                <enum value="base64">The <a href="https://framework.metaschema.dev/specification/datatypes/#base64">base64</a> data type.</enum>
+                <enum value="boolean">The <a href="https://framework.metaschema.dev/specification/datatypes/#boolean">boolean</a> data type.</enum>
+                <enum value="date">The <a href="https://framework.metaschema.dev/specification/datatypes/#date">date</a> data type.</enum>
+                <enum value="date-time">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-time">date-time</a> data type.</enum>
+                <enum value="date-time-with-timezone">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-time-with-timezone">date-time-with-timezone</a> data type.</enum>
+                <enum value="date-with-timezone">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-with-timezone">date-with-timezone</a> data type.</enum>
+                <enum value="day-time-duration">The <a href="https://framework.metaschema.dev/specification/datatypes/#day-time-duration">day-time-duration</a> data type.</enum>
+                <enum value="decimal">The <a href="https://framework.metaschema.dev/specification/datatypes/#decimal">decimal</a> data type.</enum>
+                <enum value="email-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#email-address">email-address</a> data type.</enum>
+                <enum value="hostname">The <a href="https://framework.metaschema.dev/specification/datatypes/#hostname">hostname</a> data type.</enum>
+                <enum value="integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#integer">integer</a> data type.</enum>
+                <enum value="ip-v4-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#ip-v4-address">ip-v4-address</a> data type.</enum>
+                <enum value="ip-v6-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#ip-v6-address">ip-v6-address</a> data type.</enum>
+                <enum value="non-negative-integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#non-negative-integer">non-negative-integer</a> data type.</enum>
+                <enum value="positive-integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#positive-integer">positive-integer</a> data type.</enum>
+                <enum value="string">The <a href="https://framework.metaschema.dev/specification/datatypes/#string">string</a> data type.</enum>
+                <enum value="token">The <a href="https://framework.metaschema.dev/specification/datatypes/#token">token</a> data type.</enum>
+                <enum value="uri">The <a href="https://framework.metaschema.dev/specification/datatypes/#uri">uri</a> data type.</enum>
+                <enum value="uri-reference">The <a href="https://framework.metaschema.dev/specification/datatypes/#uri-reference">uri-reference</a> data type.</enum>
+                <enum value="uuid">The <a href="https://framework.metaschema.dev/specification/datatypes/#uuid">uuid</a> data type.</enum>
                 <enum value="base64Binary" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'base64' data type.</enum>
                 <enum value="dateTime" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'date-time' data type.</enum>
                 <enum value="dateTime-with-timezone" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'date-time-with-timezone' data type.</enum>
@@ -709,26 +709,26 @@
         <use-name>as-type</use-name>
         <constraint>
             <allowed-values allow-other="yes">
-                <enum value="base64">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#base64">base64</a> data type.</enum>
-                <enum value="boolean">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#boolean">boolean</a> data type.</enum>
-                <enum value="date">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date">date</a> data type.</enum>
-                <enum value="date-time">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-time">date-time</a> data type.</enum>
-                <enum value="date-time-with-timezone">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-time-with-timezone">date-time-with-timezone</a> data type.</enum>
-                <enum value="date-with-timezone">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#date-with-timezone">date-with-timezone</a> data type.</enum>
-                <enum value="day-time-duration">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#day-time-duration">day-time-duration</a> data type.</enum>
-                <enum value="decimal">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#decimal">decimal</a> data type.</enum>
-                <enum value="email-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#email-address">email-address</a> data type.</enum>
-                <enum value="hostname">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#hostname">hostname</a> data type.</enum>
-                <enum value="integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#integer">integer</a> data type.</enum>
-                <enum value="ip-v4-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#ip-v4-address">ip-v4-address</a> data type.</enum>
-                <enum value="ip-v6-address">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#ip-v6-address">ip-v6-address</a> data type.</enum>
-                <enum value="non-negative-integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#non-negative-integer">non-negative-integer</a> data type.</enum>
-                <enum value="positive-integer">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#positive-integer">positive-integer</a> data type.</enum>
-                <enum value="string">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#string">string</a> data type.</enum>
-                <enum value="token">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#token">token</a> data type.</enum>
-                <enum value="uri">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uri">uri</a> data type.</enum>
-                <enum value="uri-reference">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uri-reference">uri-reference</a> data type.</enum>
-                <enum value="uuid">The <a href="https://pages.nist.gov/metaschema/specification/datatypes/#uuid">uuid</a> data type.</enum>
+                <enum value="base64">The <a href="https://framework.metaschema.dev/specification/datatypes/#base64">base64</a> data type.</enum>
+                <enum value="boolean">The <a href="https://framework.metaschema.dev/specification/datatypes/#boolean">boolean</a> data type.</enum>
+                <enum value="date">The <a href="https://framework.metaschema.dev/specification/datatypes/#date">date</a> data type.</enum>
+                <enum value="date-time">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-time">date-time</a> data type.</enum>
+                <enum value="date-time-with-timezone">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-time-with-timezone">date-time-with-timezone</a> data type.</enum>
+                <enum value="date-with-timezone">The <a href="https://framework.metaschema.dev/specification/datatypes/#date-with-timezone">date-with-timezone</a> data type.</enum>
+                <enum value="day-time-duration">The <a href="https://framework.metaschema.dev/specification/datatypes/#day-time-duration">day-time-duration</a> data type.</enum>
+                <enum value="decimal">The <a href="https://framework.metaschema.dev/specification/datatypes/#decimal">decimal</a> data type.</enum>
+                <enum value="email-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#email-address">email-address</a> data type.</enum>
+                <enum value="hostname">The <a href="https://framework.metaschema.dev/specification/datatypes/#hostname">hostname</a> data type.</enum>
+                <enum value="integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#integer">integer</a> data type.</enum>
+                <enum value="ip-v4-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#ip-v4-address">ip-v4-address</a> data type.</enum>
+                <enum value="ip-v6-address">The <a href="https://framework.metaschema.dev/specification/datatypes/#ip-v6-address">ip-v6-address</a> data type.</enum>
+                <enum value="non-negative-integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#non-negative-integer">non-negative-integer</a> data type.</enum>
+                <enum value="positive-integer">The <a href="https://framework.metaschema.dev/specification/datatypes/#positive-integer">positive-integer</a> data type.</enum>
+                <enum value="string">The <a href="https://framework.metaschema.dev/specification/datatypes/#string">string</a> data type.</enum>
+                <enum value="token">The <a href="https://framework.metaschema.dev/specification/datatypes/#token">token</a> data type.</enum>
+                <enum value="uri">The <a href="https://framework.metaschema.dev/specification/datatypes/#uri">uri</a> data type.</enum>
+                <enum value="uri-reference">The <a href="https://framework.metaschema.dev/specification/datatypes/#uri-reference">uri-reference</a> data type.</enum>
+                <enum value="uuid">The <a href="https://framework.metaschema.dev/specification/datatypes/#uuid">uuid</a> data type.</enum>
                 <enum value="base64Binary" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'base64' data type.</enum>
                 <enum value="dateTime" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'date-time' data type.</enum>
                 <enum value="dateTime-with-timezone" deprecated="1.0.0">An old name which is deprecated for use in favor of the 'date-time-with-timezone' data type.</enum>

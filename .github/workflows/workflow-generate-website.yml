@@ -105,6 +105,8 @@ jobs:
       run: |
         hugo mod vendor
         hugo -e production --logLevel debug --minify
+        touch public/.nojekyll
+        echo "framework.metaschema.dev" > public/CNAME
       working-directory: ${{ github.workspace }}/website
     - name: Zip Artifacts for Upload
       run: |

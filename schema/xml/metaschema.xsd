@@ -1143,9 +1143,37 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="ReportConstraintType">
+    <xs:complexContent>
+      <xs:extension base="ConstraintType">
+        <xs:sequence>
+          <xs:element name="message" type="StringDatatype" minOccurs="0"/>
+          <xs:group ref="ConstraintContentsGroup"/>
+        </xs:sequence>
+        <xs:attribute name="test" type="MetaschemaPathType" use="required">
+          <xs:annotation>
+            <xs:documentation>A Metapath test that triggers reporting of context information if the condition is met.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
   <xs:complexType name="TargetedExpectConstraintType">
     <xs:complexContent>
       <xs:extension base="ExpectConstraintType">
+        <xs:attribute name="target" type="MetaschemaPathType" use="required">
+          <xs:annotation>
+            <xs:documentation>Specifies the target of the constraint as a Metaschema Metapath. If the value is "." and the containing Metaschema object is a field or flag, the constraint applies to the value of the field or flag. Otherwise, the scope value "." is not allowed to be used.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="TargetedReportConstraintType">
+    <xs:complexContent>
+      <xs:extension base="ReportConstraintType">
         <xs:attribute name="target" type="MetaschemaPathType" use="required">
           <xs:annotation>
             <xs:documentation>Specifies the target of the constraint as a Metaschema Metapath. If the value is "." and the containing Metaschema object is a field or flag, the constraint applies to the value of the field or flag. Otherwise, the scope value "." is not allowed to be used.</xs:documentation>
@@ -1227,9 +1255,14 @@
         </xs:element>
         <xs:element name="expect" type="ExpectConstraintType">
           <xs:annotation>
-            <xs:documentation>Checks that the specified test returns true in this evaluation context.</xs:documentation>
+            <xs:documentation>Checks that the specified test returns true in this evaluation context. If false, a constraint violation message is returned.</xs:documentation>
           </xs:annotation>
         </xs:element>
+        <xs:element name="report" type="ReportConstraintType">
+          <xs:annotation>
+            <xs:documentation>Checks that the specified test returns true and reports information about this evaluation context.</xs:documentation>
+          </xs:annotation>
+        </xs:element>        
       </xs:choice>
       <xs:element name="remarks" type="RemarksType" minOccurs="0"/>
     </xs:sequence>
@@ -1254,9 +1287,14 @@
       </xs:element>
       <xs:element name="expect" type="TargetedExpectConstraintType">
         <xs:annotation>
-          <xs:documentation>Checks that the specified test returns true in this evaluation context.</xs:documentation>
+          <xs:documentation>Checks that the specified test returns true in this evaluation context. If false, a constraint violation message is returned.</xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name="report" type="TargetedReportConstraintType">
+        <xs:annotation>
+          <xs:documentation>Checks that the specified test returns true and reports information about this evaluation context.</xs:documentation>
+        </xs:annotation>
+      </xs:element> 
     </xs:choice>
   </xs:group>
 

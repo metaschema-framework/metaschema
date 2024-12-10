@@ -46,10 +46,10 @@
                 <description>Ensure each import is a Metaschema module.</description>
                 <message>Unable the resource at '{{ resolve-uri(@href) }}' is not a Metaschema module.</message>
             </expect>
-            <expect id="module-model-group-as-in-json-invalid" target=".//(define-assembly|define-field|assembly|field)[@max-occurs=1]" test=".[not(group-as)]">
-                <formal-name>Group-As Behavior Used with Valid Max-Occurs</formal-name>
-                <description>Given group-as behavior for a parent assembly or field, you cannot have a group-as for multiple values.</description>
-                <message>The group-as for the parent location requires a max-occurs that is greater than 1 to support that feature.</message>
+            <expect id="module-model-group-a-invalid" target=".//(define-assembly|define-field|assembly|field)[@max-occurs=1]" test=".[not(group-as)]">
+                <formal-name>Group-As unneeded with max-occurs='1'</formal-name>
+                <description>A field or assembly instance with a max occurrence of `1` must not have a `group-as` child.</description>
+                <message>Use of `group-as` in the location '{{ path() }}' requires a parent with a max-occurs that is greater than 1; otherwise the `group-as` needs to be removed.</message>
             </expect>
         </constraints>
     </context>

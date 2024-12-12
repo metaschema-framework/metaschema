@@ -867,7 +867,7 @@
                 <assembly ref="targeted-is-unique-constraint"/>
                 <assembly ref="targeted-index-constraint"/>
                 <assembly ref="targeted-has-cardinality-constraint"/>
-                <assembly ref="targeted-report-constraint"></assembly>
+                <assembly ref="targeted-report-constraint"/>
             </choice-group>
         </model>
     </define-assembly>
@@ -903,6 +903,7 @@
                 <assembly ref="flag-expect"/>
                 <assembly ref="flag-index-has-key"/>
                 <assembly ref="flag-matches"/>
+                <assembly ref="flag-report"/>
             </choice-group>
         </model>
     </define-assembly>
@@ -948,6 +949,26 @@
         <flag ref="constraint-severity-level"/>
         <flag ref="constraint-target" required="yes">
             <formal-name>Expect Test Condition</formal-name>
+            <use-name>test</use-name>
+        </flag>
+        <model>
+            <field ref="formal-name"/>
+            <field ref="description"/>
+            <assembly ref="property" max-occurs="unbounded">
+                <group-as name="props" in-json="ARRAY"/>
+            </assembly>
+            <field ref="constraint-message"/>
+            <field ref="remarks"/>
+        </model>
+    </define-assembly>
+
+    <define-assembly name="flag-report">
+        <formal-name>Report Condition Constraint</formal-name>
+        <use-name>report</use-name>
+        <flag ref="constraint-identifier"/>
+        <flag ref="constraint-severity-level"/>
+        <flag ref="constraint-target" required="yes">
+            <formal-name>Report Test Condition</formal-name>
             <use-name>test</use-name>
         </flag>
         <model>
@@ -1338,6 +1359,7 @@
                                     <assembly ref="flag-expect"/>
                                     <assembly ref="flag-index-has-key"/>
                                     <assembly ref="flag-matches"/>
+                                    <assembly ref="flag-report"/>
                                 </choice-group>
                             </model>
                         </define-assembly>

@@ -13,9 +13,14 @@
         "choice-2-2": {},
         "choice-3-2": [ {} ]
       },
+	  {
+	    "non-choices": [ "1-2 and 2-1" ],
+	    "choice-2-1": {},
+	    "choice-3-2": [ {} ]
+	  },
       {
         "non-choices": [ "1-2 and 2-1" ],
-        "choice-1-2": [ ],
+        "choice-1-2": [ {} ],
         "choice-2-1": {},
         "choice-3-2": [ {} ]
       },

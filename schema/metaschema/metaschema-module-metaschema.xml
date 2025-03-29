@@ -53,7 +53,7 @@
                 </define-flag>
             </define-assembly>
             <assembly ref="metapath-namespace" max-occurs="unbounded">
-                <group-as name="namespace-bindings" />
+                <group-as name="namespace-bindings" in-json="ARRAY" />
             </assembly>
             <choice-group max-occurs="unbounded">
                 <group-as name="definitions" in-json="ARRAY"/>
@@ -1308,7 +1308,7 @@
             </define-assembly>
             
             <assembly ref="metapath-namespace" max-occurs="unbounded">
-                <group-as name="namespace-bindings" />
+                <group-as name="namespace-bindings" in-json="ARRAY" />
             </assembly>
             
             <define-assembly name="scope" min-occurs="1" max-occurs="unbounded">
@@ -1388,7 +1388,7 @@
             </define-assembly>
 
             <assembly ref="metapath-namespace" max-occurs="unbounded">
-                <group-as name="namespace-bindings" />
+                <group-as name="namespace-bindings" in-json="ARRAY" />
             </assembly>
 
             <define-assembly name="definition-context">

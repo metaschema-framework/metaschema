@@ -61,10 +61,10 @@
             <let var="deprecated-type-map" expression="map { 'base64Binary':'base64','dateTime':'date-time','dateTime-with-timezone':'date-time-with-timezone','email':'email-address','nonNegativeInteger':'non-negative-integer','positiveInteger':'positive-integer' }"/>
             <expect id="metaschema-deprecated-types" level="WARNING"
               target=".//matches/@datatype|.//(define-field|define-flag)/@as-type"
-              test="not(.=('base64Binary','dateTime','dateTime-with-timezone','email','nonNegativeInteger','positiveInteger'))">
+              test="not(data(.)=('base64Binary','dateTime','dateTime-with-timezone','email','nonNegativeInteger','positiveInteger'))">
                 <formal-name>Avoid Deprecated Data Type Use</formal-name>
                 <description>Ensure that the data type specified is not one of the legacy Metaschema data types which have been deprecated (i.e. base64Binary, dateTime, dateTime-with-timezone, email, nonNegativeInteger, positiveInteger).</description>
-                <message>Use of the type '{ . }' is deprecated. Use '{ $deprecated-type-map(.)}' instead.</message>
+                <message>Use of the type '{ data(.) }' is deprecated. Use '{ $deprecated-type-map(data(.))}' instead.</message>
             </expect>
         </constraints>
     </context>

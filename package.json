@@ -1,6 +1,6 @@
 {
     "name": "metaschema-framework-website",
-    "version": "1.0.0",
+    "version": "1.0.0-rc.1",
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^7.0.2",
         "ajv-cli": "^5.0.x",

@@ -29,11 +29,11 @@ jobs:
       issues: write
     steps:
     - name: Checkout Latest
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       with:
         fetch-depth: 0 # this ensures that the tag and commit history are available
     - name: Checkout git ref of published website content
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       with:
         ref: ${{ inputs.site_git_ref }}
         path: ${{ inputs.site_git_ref_path }}

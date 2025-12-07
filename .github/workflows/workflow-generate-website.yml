@@ -63,17 +63,6 @@ jobs:
       uses: pierotofy/set-swap-space@49819abfb41bd9b44fb781159c033dba90353a7c
       with:
         swap-size-gb: 10
-    # Install Hugo
-    - name: Read .env
-      id: hugo-version
-      run: |
-        . .github/workflows/config/.env
-        echo "HUGO_VERSION=${HUGO_VERSION}" >> "${GITHUB_OUTPUT}"
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f
-      with:
-        hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
-        extended: true
     - name: Set up NodeJS
       uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
       with:
@@ -88,12 +77,13 @@ jobs:
         # at least installed (they will be updated by dependabot):
         # - ajv-cli
         # - ajv-formats
+        # - hugo-bin (Hugo version configured in .npmrc)
         # - markdown-link-check
         # - yaml-convert
         npm install --loglevel verbose
         echo "$PWD/node_modules/.bin/" >> $GITHUB_PATH
-        # Dart-Sass
-        sudo snap install dart-sass
+        # Verify Hugo installation
+        hugo version
     # cache hugo modules
     - uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
       with:

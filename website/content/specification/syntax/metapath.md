@@ -12,6 +12,7 @@ Metapath is a customization of the [XML Path Language (XPath) 3.1](https://www.w
 
 XPath was chosen as a basis for Metapath because it provides for both *selection* of nodes and logical *evaluation* of node values, the latter of which is required for supporting Metaschema module [constraints](/specification/syntax/constraints/). Other path languages (e.g., [JSON Path](https://goessner.net/articles/JsonPath/), [JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901.html)) were not chosen, due to limitations in *evaluation* capabilities and because their syntax was specific to JSON.
 
+<<<<<<< HEAD
 ## Data Model
 
 Metapath operates on the Metaschema data model, which differs from XPath's XML-based data model.
@@ -300,3 +301,5 @@ Metapath expressions are primarily used in [Metaschema constraints](/specificati
 | [Message templates](/specification/syntax/constraints/#constraint-messages) | `<message>` | `Value {.} is invalid` |
 
 For comprehensive constraint documentation, see [Constraints](/specification/syntax/constraints/).
+
+For detailed information about how Metapath differs from XPath 3.1, including supported features, function library, and data model differences, see [Metapath vs. XPath 3.1: Key Differences](../metapath-overview/).

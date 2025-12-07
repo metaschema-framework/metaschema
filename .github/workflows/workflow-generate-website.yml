@@ -77,13 +77,12 @@ jobs:
         # at least installed (they will be updated by dependabot):
         # - ajv-cli
         # - ajv-formats
-        # - hugo-bin (Hugo version configured in .npmrc)
+        # - hugo-bin (Hugo version configured in package.json)
         # - markdown-link-check
         # - yaml-convert
         npm install --loglevel verbose
-        echo "$PWD/node_modules/.bin/" >> $GITHUB_PATH
         # Verify Hugo installation
-        hugo version
+        npx hugo version
     # cache hugo modules
     - uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf
       with:
@@ -93,8 +92,8 @@ jobs:
           ${{ runner.os }}-hugomod-        
     - name: Run Hugo
       run: |
-        hugo mod vendor
-        hugo -e production --logLevel debug --minify
+        npx hugo mod vendor
+        npx hugo -e production --logLevel debug --minify
         touch public/.nojekyll
         echo "framework.metaschema.dev" > public/CNAME
       working-directory: ${{ github.workspace }}/website

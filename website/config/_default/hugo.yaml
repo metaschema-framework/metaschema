@@ -27,7 +27,6 @@ module:
     target: static/examples
   imports:
     - path: "github.com/GSA/uswds-hugo"
-enableGitInfo: true # enable to get page modification dates for a site stored in Git
 params:
   header:
     project_shortname: "Metaschema"

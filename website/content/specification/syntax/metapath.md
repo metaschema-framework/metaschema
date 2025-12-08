@@ -300,3 +300,5 @@ Metapath expressions are primarily used in [Metaschema constraints](/specificati
 | [Message templates](/specification/syntax/constraints/#constraint-messages) | `<message>` | `Value {.} is invalid` |
 
 For comprehensive constraint documentation, see [Constraints](/specification/syntax/constraints/).
+
+For detailed information about how Metapath differs from XPath 3.1, including supported features, function library, and data model differences, see [Metapath vs. XPath 3.1: Key Differences](../metapath-overview/).

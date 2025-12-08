@@ -9,13 +9,33 @@ weight: 61
 
 ## Overview
 
-**Metapath** is an expression language that is part of the Metaschema Information Modeling Framework. While Metapath is explicitly described as "a customization of the [XML Path Language (XPath) 3.1](https://www.w3.org/TR/2017/REC-xpath-31-20170321/), which has been adjusted to work with a Metaschema module based model" ([Metapath Specification](../metapath/)), there are significant differences between the two languages.
+**Metapath** is an expression language that is part of the Metaschema Information Modeling Framework. While Metapath is explicitly described as "a customization of the [XML Path Language (XPath) 3.1](https://www.w3.org/TR/2017/REC-xpath-31-20170321/), which has been adjusted to work with a Metaschema module-based model" ([Metapath Specification](../metapath/)), there are significant differences between the two languages.
 
 The Metapath specification notes: "Not all XPath features are supported by Metapath, the specifics of which will be documented in an updated version of this page in the future" ([Metapath Specification](../metapath/)).
 
 ---
 
-## 1. Fundamental Data Model Differences
+## 1. Format Agnosticism
+
+### XPath 3.1
+
+XPath 3.1 is inherently tied to XML. While implementations may work with JSON through conversion, XPath itself assumes XML document structure.
+
+### Metapath
+
+Metapath is designed to be **format-agnostic** and can query:
+
+- XML
+- JSON
+- YAML
+
+As stated in the specification: "A Metapath can be used to query all Metaschema-supported formats (i.e., JSON, YAML, XML) using a common, Metaschema module-bound syntax. This means a Metapath can be used to query the same data regardless of the underlying format used, as long as that data is bound to a Metaschema module" ([Metapath Specification](../metapath/)).
+
+This format agnosticism was a primary design goal, as other path languages like JSON Path and JSON Pointer "were not chosen, due to limitations in *evaluation* capabilities and because their syntax was specific to JSON" ([Metapath Specification](../metapath/)).
+
+---
+
+## 2. Fundamental Data Model Differences
 
 ### XPath 3.1 Data Model
 
@@ -42,26 +62,6 @@ Metapath replaces the XML Data Model with the **Metaschema data model**, which e
 **Key Distinction**: In Metapath, there is no equivalent to XPath's text nodes, comment nodes, processing instruction nodes, or namespace nodes. The data model is designed around the Metaschema module constructs rather than XML serialization details.
 
 **Reference**: [Information Modeling Specification](/specification/information-modeling/)
-
----
-
-## 2. Format Agnosticism
-
-### XPath 3.1
-
-XPath 3.1 is inherently tied to XML. While implementations may work with JSON through conversion, XPath itself assumes XML document structure.
-
-### Metapath
-
-Metapath is designed to be **format-agnostic** and can query:
-
-- XML
-- JSON
-- YAML
-
-As stated in the specification: "A Metapath can be used to query all Metaschema supported formats (i.e., JSON, YAML, XML) using a common, Metaschema module-bound syntax. This means a Metapath can be used to query the same data regardless of the underlying format used, as long as that data is bound to a Metaschema module" ([Metapath Specification](../metapath/)).
-
-This format agnosticism was a primary design goal, as other path languages like JSON Path and JSON Pointer "were not chosen, due to limitations in *evaluation* capabilities and because their syntax was specific to JSON" ([Metapath Specification](../metapath/)).
 
 ---
 

@@ -53,11 +53,11 @@ All *constraints* share a common syntax composed of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | `.` |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | `.` |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 Each individual constraint allows the following data.
 
@@ -107,11 +107,31 @@ Declaring the `@deprecated` attribute communicates to content creators that all 
 
 The following example illustrates deprecating the flag named `flag-name` starting with the *information model* semantic version `1.1.0`.
 
-```xml {linenos=table,hl_lines=[3]}
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "flag",
+  "name": "flag-name",
+  "deprecated": "1.1.0"
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: flag
+name: flag-name
+deprecated: "1.1.0"
+```
+{{% /tab %}}
+{{% tab %}}
+```xml
 <define-flag
   name="flag-name"
   deprecated="1.1.0"/>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### `@name`
 
@@ -181,6 +201,35 @@ It supports an optional `@class` flag that can be used to identify format specif
 - `XML`: The remark applies to the XML format binding.
 - `JSON`: The remark applies to the JSON or YAML format bindings.
 
+## Metapath Expressions in Constraints
+
+Several constraint attributes accept [Metapath expressions](/specification/syntax/metapath/) as their values. Understanding how these expressions are evaluated is essential for writing effective constraints.
+
+### Metapath-Accepting Attributes
+
+The following attributes accept Metapath expressions:
+
+| Attribute | Constraint Types | Purpose |
+|-----------|-----------------|---------|
+| `@target` | All constraint types | Specifies the node(s) the constraint applies to |
+| `@test` | `expect`, `report` | Boolean condition to evaluate |
+| `@expression` | `let` | Expression whose result binds to a variable |
+
+Additionally, the `<message>` element in all constraint types supports [Metapath expression templates](#constraint-messages) using `{expression}` syntax.
+
+### Evaluation Focus
+
+When a Metapath expression is evaluated, it operates relative to a *focus node* (also called the *evaluation focus*). The focus node varies depending on the context:
+
+| Context | Focus Node |
+|---------|-----------|
+| `@target` expressions | The content node associated with the definition where the constraint is declared |
+| `@test` expressions | Each node selected by the `@target` expression, evaluated in sequence |
+| `@expression` in `<let>` | The current node in the constraint evaluation context |
+| `<message>` templates | The failing target node |
+
+For detailed evaluation semantics, see [Constraint Processing](#constraint-processing).
+
 ## Constraint Types
 
 The following describes the supported constraint constructs.
@@ -192,7 +241,7 @@ The optional `<let>` assembly provides a structure for variable/expression bindi
 | Data | Data Type | Use      | Default Value |
 |:--- |:--- |:--- |:--- |
 | `@var` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
-| `@expression` | [special](/specification/syntax/metapath) | required | *(no default)* |
+| `@expression` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 
 Using the `let` assembly, a variable can be defined, which can be used by reference in a Metapath expression in subsequent constraints.
 
@@ -208,6 +257,56 @@ For example:
 
 Given the following fragment of a Metaschema module.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "assembly",
+  "name": "sibling",
+  "flags": [
+    {
+      "object-type": "flag",
+      "name": "name",
+      "required": "yes"
+    }
+  ],
+  "constraints": {
+    "lets": [
+      { "var": "parent", "expression": ".." },
+      { "var": "sibling-count", "expression": "count($parent/sibling)" }
+    ],
+    "rules": [
+      {
+        "object-type": "expect",
+        "target": ".",
+        "test": "$sibling-count = 3"
+      }
+    ]
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: assembly
+name: sibling
+flags:
+  - object-type: flag
+    name: name
+    required: "yes"
+constraints:
+  lets:
+    - var: parent
+      expression: ".."
+    - var: sibling-count
+      expression: "count($parent/sibling)"
+  rules:
+    - object-type: expect
+      target: "."
+      test: "$sibling-count = 3"
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <define-assembly name="sibling">
   <define-flag name="name" required="yes"/>
@@ -219,9 +318,50 @@ Given the following fragment of a Metaschema module.
   </constraint>
 </define-assembly>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-And the following document.
+And the following document instance.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "parent": [
+    {
+      "name": "p1",
+      "sibling": [
+        { "name": "a" },
+        { "name": "b" },
+        { "name": "c" }
+      ]
+    },
+    {
+      "name": "p2",
+      "sibling": [
+        { "name": "x" },
+        { "name": "y" }
+      ]
+    }
+  ]
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+parent:
+  - name: p1
+    sibling:
+      - name: a
+      - name: b
+      - name: c
+  - name: p2
+    sibling:
+      - name: x
+      - name: y
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <parent name="p1">
   <sibling name="a"/>
@@ -230,11 +370,80 @@ And the following document.
 </parent>
 <parent name="p2">
   <sibling name="x"/>
-  <sibling name="Y"/>
-</parent1>
+  <sibling name="y"/>
+</parent>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 The expect constraint would pass for each `sibling` in the `parent` named "p1", and would fail for each `sibling` in the `parent` named "p2".
+
+### Constraint Messages
+
+All constraint types support an optional `<message>` child element that provides a custom message to be displayed when the constraint fails validation.
+
+#### Message Syntax
+
+The `<message>` element value MUST be a [Metaschema string value](/specification/datatypes#string). The message MAY contain [Metapath](/specification/syntax/metapath) expression templates using the following syntax:
+
+```text
+{metapath-expression}
+```
+
+A template starts with `{`, contains a Metapath expression, and ends with `}`. Multiple templates MAY appear within a single message. Any text outside of template delimiters is treated as literal text.
+
+**Example:**
+
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "expect",
+  "target": ".",
+  "test": "@min le @max",
+  "message": "The minimum value {@min} must be less than or equal to the maximum value {@max}."
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: expect
+target: "."
+test: "@min le @max"
+message: "The minimum value {@min} must be less than or equal to the maximum value {@max}."
+```
+{{% /tab %}}
+{{% tab %}}
+```xml
+<expect target="." test="@min le @max">
+  <message>The minimum value {@min} must be less than or equal to the maximum value {@max}.</message>
+</expect>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Message Evaluation
+
+When a constraint fails, the `<message>` is evaluated to produce the final message text:
+
+1. Each Metapath template expression `{...}` is evaluated
+2. The [evaluation focus](#evaluation-focus) for template expressions is the failing target node
+3. The result of each expression replaces its template in the message
+4. Literal text outside templates is preserved as-is
+
+If no `<message>` is provided, Metaschema processors SHOULD generate a default message describing the constraint failure.
+
+#### Constraint Types Supporting Messages
+
+| Constraint Type | `<message>` Support |
+|----------------|---------------------|
+| [`allowed-values`](#allowed-values-constraints) | Yes |
+| [`expect`](#expect-constraints) | Yes |
+| [`has-cardinality`](#has-cardinality-constraints) | Yes |
+| [`index`](#index-constraints) | Yes |
+| [`index-has-key`](#index-has-key-constraints) | Yes |
+| [`is-unique`](#is-unique-constraints) | Yes |
+| [`matches`](#matches-constraints) | Yes |
 
 ### `allowed-values` Constraints
 
@@ -248,12 +457,13 @@ The syntax of `<allowed-values>` consists of the following:
 | [`@extensible`>](#extensible) | `model`, `external`, or `none` | optional | `no` |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<enum>`](#enum) | special | 1 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<enum>`](#enum) | (structured) | 1 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 Each `allowed-values` constraint has a *source* that will be either:
 
@@ -268,21 +478,74 @@ Within a given `<allowed-values>` constraint, an `<enum>` expresses an individua
 
 A Metaschema processor MAY use the text value of the `enum`'s XML element as documentation for a given allowed value enumeration. Below is an example.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "flag",
+  "name": "form-factor",
+  "formal-name": "Computer Form Factor",
+  "description": "The type of computer in the example application's data model.",
+  "constraints": {
+    "rules": [
+      {
+        "object-type": "allowed-values",
+        "allow-other": "yes",
+        "enums": [
+          {
+            "value": "laptop",
+            "remark": "this text value documents the domain and information model's meaning of a laptop"
+          },
+          {
+            "value": "desktop",
+            "remark": "this text value documents the domain and information model's meaning of a desktop"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: flag
+name: form-factor
+formal-name: Computer Form Factor
+description: The type of computer in the example application's data model.
+constraints:
+  rules:
+    - object-type: allowed-values
+      allow-other: "yes"
+      enums:
+        - value: laptop
+          remark: >-
+            this text value documents the domain and
+            information model's meaning of a laptop
+        - value: desktop
+          remark: >-
+            this text value documents the domain and
+            information model's meaning of a desktop
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <define-flag name="form-factor">
-  <formal>Computer Form Factor</formal-name>
-    <description>The type of computer in the example application's data
-      model.</description>
-    <constraint>
-      <allowed-values allow-other="yes">
-        <enum value="laptop">this text value documents the domain and
-          information model's meaning of a laptop</enum>
-        <enum value="desktop">this text value documents the domain and
-          information model's meaning of a desktop</enum>
-      </allowed-values>
-    </constraint> ...  
+  <formal-name>Computer Form Factor</formal-name>
+  <description>The type of computer in the example application's data
+    model.</description>
+  <constraint>
+    <allowed-values allow-other="yes">
+      <enum value="laptop">this text value documents the domain and
+        information model's meaning of a laptop</enum>
+      <enum value="desktop">this text value documents the domain and
+        information model's meaning of a desktop</enum>
+    </allowed-values>
+  </constraint>
 </define-flag>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 #### `allowed-values` Processing
 
@@ -363,13 +626,13 @@ The syntax of `<expect>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
-| `@test` | special | required | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
+| `@test` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| `<message>` | special | 0 or 1 | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` attribute of an `<expect>` constraint is a [Metapath expression](/specification/syntax/metapath) that specifies the node(s) in a document instance whose value is restricted by the constraint.
 
@@ -381,9 +644,7 @@ When the `@test` expression evaluates to `true` for a target value node, then th
 
 When the `@test` expression evaluates to `false` for a target value node, then the target value node MUST be considered not valid and failing the constraint.
 
-A constraint may have an OPTIONAL [`@level`](#level) attribute and/or an OPTIONAL child `<message>` element to indicate severity and documentation explaining how the target nodes are invalid.
-
-If defined, the `<message>` value MUST be a [Metaschema string value](/specification/datatypes#string). It MAY contain a Metapath expression templates that starts with `{`, contains a Metapath expression, and ends with `}`.  When evaluating a template Metapath expression, the context of the Metapath [evaluation focus](#constraint-processing) MUST be the failing value node.
+A constraint may have an OPTIONAL [`@level`](#level) attribute and/or an OPTIONAL child [`<message>`](#constraint-messages) element to indicate severity and provide documentation explaining how the target nodes are invalid.
 
 ### `has-cardinality` Constraints
 
@@ -395,13 +656,14 @@ The syntax of `<has-cardinality>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | `@min-occurs` | [`non-negative-integer`](/specification/datatypes/#non-negative-integer) | optional | *(no default)* |
 | `@max-occurs` | [`non-negative-integer`](/specification/datatypes/#non-negative-integer) or `unbounded` | optional | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` flag of an `<has-cardinality>` constraint is a [Metapath expression](/specification/syntax/metapath) that defines the node(s) in a document instance to count.
 
@@ -426,20 +688,21 @@ The syntax of `<index>` consists of the following:
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
 | `@name` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
-| [`@target`](#target) | special | required | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| `<key-field>` | special | 1 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| `<key-field>` | (structured) | 1 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The syntax of `<key-field>` consists of the following:
 
 | Data | Data Type | Use      | Default Value |
 |:--- |:--- |:--- |:--- |
-| `@target` | special | required | *(no default)* |
+| `@target` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | `@pattern` | regex | optional | *(no default)* |
-| `<remarks>` | special | 0 or 1 | *(no default)* |
+| `<remarks>` | (structured) | 0 or 1 | *(no default)* |
 
 The `@name` flag of an `<index>` constraint specifies the identity of the index. The constraint MUST define the name.
 
@@ -493,13 +756,14 @@ The syntax of `<matches>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| `@datatype` | special | optional | *(no default)* |
-| `@regex` | special | optional | *(no default)* |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| `@datatype` | [data type name](/specification/datatypes/) | optional | *(no default)* |
+| `@regex` | regex | optional | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 A match can be made by 2 different ways based on `@datatype` and/or based on `@regex`.
 

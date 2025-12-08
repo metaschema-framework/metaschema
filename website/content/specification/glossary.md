@@ -25,6 +25,37 @@ An assembly has an optional model consisting of references to zero or more [*ass
 
 An *assembly definition* is a type of [*definition*](#definition) within a given [*Metaschema module*](#metaschema-module) used to represent the implementation of a complex [*information element*](#information-element) as an assembly.
 
+## Constraint
+
+A *constraint* is defined as follows:
+
+{{<callout>}}A validation rule declared within a [*Metaschema module*](#metaschema-module) that specifies conditions which data instances MUST satisfy to be considered valid.{{</callout>}}
+
+Constraints enable content validation beyond what format-specific schemas (XML Schema, JSON Schema) can express. They are declared within [*definitions*](#definition) and apply to the data instances that conform to those definitions.
+
+Constraints use [*Metapath*](#metapath) expressions extensively for:
+
+- **Target selection** (`@target`): Identifying which nodes the constraint applies to
+- **Condition testing** (`@test`): Evaluating boolean conditions that must be satisfied
+- **Variable binding** (`@expression` in `<let>`): Capturing values for reuse within the constraint
+- **[Message templates](/specification/syntax/constraints/#constraint-messages)** (`{expression}` syntax): Generating dynamic error messages when validation fails
+
+The `<let>` element declares variables using Metapath expressions, making computed values available for reuse across constraints within the same scope.
+
+The following constraint types are supported:
+
+| Constraint Type | Purpose |
+|----------------|---------|
+| `allowed-values` | Restricts a value to an enumerated set of allowed values |
+| `expect` | Asserts that a boolean condition must evaluate to true |
+| `has-cardinality` | Enforces minimum and/or maximum occurrence counts |
+| `index` | Defines a named index for looking up nodes by key |
+| `index-has-key` | Validates that a value exists as a key in a defined index |
+| `is-unique` | Ensures values are unique within a specified scope |
+| `matches` | Validates that a value matches a regular expression or data type pattern |
+
+See [Constraints](/specification/syntax/constraints/) for complete documentation on declaring and using constraints.
+
 ## Data Model
 
 A *data model*, abbreviated as DM, is defined as follows:
@@ -95,6 +126,16 @@ An *information model*, abbreviated as IM, is defined as follows:
 > - Level of abstraction depends on the modeling needs of the designers
 > - Define relationships between managed objects
 > - Should hide all protocol or implementation details, allowing for different implementations
+
+## Metapath
+
+*Metapath* is defined as follows:
+
+{{<callout>}}An expression language for selecting and evaluating nodes within Metaschema-based data, derived from XPath 3.1 but adapted to work with the Metaschema data model.{{</callout>}}
+
+Metapath expressions use a path-based syntax to navigate the hierarchical structure of [*assemblies*](#assembly), [*fields*](#field), and [*flags*](#flag) in a format-independent manner. This allows the same expressions to work across JSON, YAML, and XML representations of the same data.
+
+Metapath expressions are used in [*constraints*](#constraint) to specify target nodes, define test conditions, bind variables, and generate dynamic [constraint messages](/specification/syntax/constraints/#constraint-messages). See [Metapath Expression Language](/specification/syntax/metapath/) for complete documentation.
 
 ## Metaschema Module
 

@@ -32,10 +32,10 @@ Elements:
 |:---       |:---       |:---      |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 |
-| [`<prop>`](#prop) | special | 0 to ∞ |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ |
 | [`<use-name>`](#naming-and-use-name) | [`token`](/specification/datatypes/#token) | 0 or 1 |
-| [`<remarks>`](#remarks) | special | 0 or 1 |
-| [`<example>`](#example) | special | 0 to ∞ |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 |
+| [`<example>`](#example) | (structured) | 0 to ∞ |
 
 These attributes and elements are described in the following subsections.
 
@@ -215,11 +215,11 @@ Elements:
 |:---       |:---       |:---      |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 |
-| [`<prop>`](#prop) | special | 0 to ∞ |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ |
 | [`<use-name>`](#naming-and-use-name) | [`token`](/specification/datatypes/#token) | 0 or 1 |
-| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | special | 0 or 1 |
-| [`<remarks>`](#remarks) | special | 0 or 1 |
-| [`<example>`](#example) | special | 0 to ∞ |
+| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | (structured) | 0 or 1 |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 |
+| [`<example>`](#example) | (structured) | 0 to ∞ |
 
 The attributes and elements specific to the `<define-flag>` are described in the following subsections. The elements and attributes common to all *definitions* are [defined earlier](#common-definition-data) in this specification.
 
@@ -272,14 +272,14 @@ Elements:
 |:---       |:---       |:---      |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 |
-| [`<prop>`](#prop) | special | 0 to ∞ |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ |
 | [`<use-name>`](#naming-and-use-name) | [`token`](/specification/datatypes/#token) | 0 or 1 |
-| [`json-key`](#json-key) | special | 0 or 1 |
-| [`json-value-key`](#json-value-key) or<br/>[`json-value-key-flag`](#json-value-key-flag) | special | 0 or 1 |
-| [`flag`](#flag-instance-children) or<br/>[`define-flag`](#define-flag-inline-definition) | special | 0 or ∞ |
-| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | special | 0 or 1 |
-| [`<remarks>`](#remarks) | special | 0 or 1 |
-| [`<example>`](#example) | special | 0 to ∞ |
+| [`json-key`](#json-key) | (structured) | 0 or 1 |
+| [`json-value-key`](#json-value-key) or<br/>[`json-value-key-flag`](#json-value-key-flag) | (structured) | 0 or 1 |
+| [`flag`](#flag-instance-children) or<br/>[`define-flag`](#define-flag-inline-definition) | (structured) | 0 or ∞ |
+| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | (structured) | 0 or 1 |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 |
+| [`<example>`](#example) | (structured) | 0 to ∞ |
 
 The attributes and elements specific to the `<define-field>` are described in the following subsections. The elements and attributes common to all definitions are [defined earlier](#common-definition-data) in this specification.
 
@@ -511,14 +511,14 @@ Elements:
 |:---       |:---       |:---      |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 |
-| [`<prop>`](#prop) | special | 0 to ∞ |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ |
 | [`<use-name>`](#naming-and-use-name) or<br/>[`<root-name>`](#root-name)  | [`token`](/specification/datatypes/#token) | 0 or 1 |
-| [`json-key`](#json-key) | special | 0 or 1 |
-| [`flag`](#flag-instance-children-1) or<br/>[`define-flag`](#define-flag-inline-definition-1) | special | 0 or ∞ |
-| [`<model>`](#model) | special | 0 or 1 |
-| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | special | 0 or 1 |
-| [`<remarks>`](#remarks) | special | 0 or 1 |
-| [`<example>`](#example) | special | 0 to ∞ |
+| [`json-key`](#json-key) | (structured) | 0 or 1 |
+| [`flag`](#flag-instance-children-1) or<br/>[`define-flag`](#define-flag-inline-definition-1) | (structured) | 0 or ∞ |
+| [`<model>`](#model) | (structured) | 0 or 1 |
+| [`<constraint>`](/specification/syntax/constraints/#define-flag-constraints) | (structured) | 0 or 1 |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 |
+| [`<example>`](#example) | (structured) | 0 to ∞ |
 
 The attributes and elements specific to the `<define-assembly>` are described in the following subsections. The elements and attributes common to all definitions are [defined earlier](#common-definition-data) in this specification.
 

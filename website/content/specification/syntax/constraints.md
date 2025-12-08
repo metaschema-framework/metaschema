@@ -53,11 +53,11 @@ All *constraints* share a common syntax composed of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | `.` |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | `.` |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 Each individual constraint allows the following data.
 
@@ -181,6 +181,35 @@ It supports an optional `@class` flag that can be used to identify format specif
 - `XML`: The remark applies to the XML format binding.
 - `JSON`: The remark applies to the JSON or YAML format bindings.
 
+## Metapath Expressions in Constraints
+
+Several constraint attributes accept [Metapath expressions](/specification/syntax/metapath/) as their values. Understanding how these expressions are evaluated is essential for writing effective constraints.
+
+### Metapath-Accepting Attributes
+
+The following attributes accept Metapath expressions:
+
+| Attribute | Constraint Types | Purpose |
+|-----------|-----------------|---------|
+| `@target` | All constraint types | Specifies the node(s) the constraint applies to |
+| `@test` | `expect`, `report` | Boolean condition to evaluate |
+| `@expression` | `let` | Expression whose result binds to a variable |
+
+Additionally, the `<message>` element in `expect` and `report` constraints supports Metapath expression templates using `{expression}` syntax.
+
+### Evaluation Focus
+
+When a Metapath expression is evaluated, it operates relative to a *focus node* (also called the *evaluation focus*). The focus node varies depending on the context:
+
+| Context | Focus Node |
+|---------|-----------|
+| `@target` expressions | The content node associated with the definition where the constraint is declared |
+| `@test` expressions | Each node selected by the `@target` expression, evaluated in sequence |
+| `@expression` in `<let>` | The current node in the constraint evaluation context |
+| `<message>` templates | The failing target node |
+
+For detailed evaluation semantics, see [Constraint Processing](#constraint-processing).
+
 ## Constraint Types
 
 The following describes the supported constraint constructs.
@@ -192,7 +221,7 @@ The optional `<let>` assembly provides a structure for variable/expression bindi
 | Data | Data Type | Use      | Default Value |
 |:--- |:--- |:--- |:--- |
 | `@var` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
-| `@expression` | [special](/specification/syntax/metapath) | required | *(no default)* |
+| `@expression` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 
 Using the `let` assembly, a variable can be defined, which can be used by reference in a Metapath expression in subsequent constraints.
 
@@ -248,12 +277,12 @@ The syntax of `<allowed-values>` consists of the following:
 | [`@extensible`>](#extensible) | `model`, `external`, or `none` | optional | `no` |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<enum>`](#enum) | special | 1 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<enum>`](#enum) | (structured) | 1 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 Each `allowed-values` constraint has a *source* that will be either:
 
@@ -363,13 +392,13 @@ The syntax of `<expect>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
-| `@test` | special | required | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
+| `@test` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| `<message>` | special | 0 or 1 | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| `<message>` | [template](#expect-constraints) | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` attribute of an `<expect>` constraint is a [Metapath expression](/specification/syntax/metapath) that specifies the node(s) in a document instance whose value is restricted by the constraint.
 
@@ -395,13 +424,13 @@ The syntax of `<has-cardinality>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | `@min-occurs` | [`non-negative-integer`](/specification/datatypes/#non-negative-integer) | optional | *(no default)* |
 | `@max-occurs` | [`non-negative-integer`](/specification/datatypes/#non-negative-integer) or `unbounded` | optional | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` flag of an `<has-cardinality>` constraint is a [Metapath expression](/specification/syntax/metapath) that defines the node(s) in a document instance to count.
 
@@ -426,20 +455,20 @@ The syntax of `<index>` consists of the following:
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
 | `@name` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
-| [`@target`](#target) | special | required | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| `<key-field>` | special | 1 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| `<key-field>` | (structured) | 1 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The syntax of `<key-field>` consists of the following:
 
 | Data | Data Type | Use      | Default Value |
 |:--- |:--- |:--- |:--- |
-| `@target` | special | required | *(no default)* |
+| `@target` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
 | `@pattern` | regex | optional | *(no default)* |
-| `<remarks>` | special | 0 or 1 | *(no default)* |
+| `<remarks>` | (structured) | 0 or 1 | *(no default)* |
 
 The `@name` flag of an `<index>` constraint specifies the identity of the index. The constraint MUST define the name.
 
@@ -493,13 +522,13 @@ The syntax of `<matches>` consists of the following:
 |:--- |:--- |:--- |:--- |
 | [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
 | [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
-| `@datatype` | special | optional | *(no default)* |
-| `@regex` | special | optional | *(no default)* |
-| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| `@datatype` | [data type name](/specification/datatypes/) | optional | *(no default)* |
+| `@regex` | regex | optional | *(no default)* |
+| [`@target`](#target) | [metapath](/specification/syntax/metapath) | *(varies)* | *(no default)* |
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
-| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
-| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 A match can be made by 2 different ways based on `@datatype` and/or based on `@regex`.
 

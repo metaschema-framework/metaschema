@@ -96,6 +96,16 @@ An *information model*, abbreviated as IM, is defined as follows:
 > - Define relationships between managed objects
 > - Should hide all protocol or implementation details, allowing for different implementations
 
+## Metapath
+
+*Metapath* is defined as follows:
+
+{{<callout>}}An expression language for selecting and evaluating nodes within Metaschema-based data, derived from XPath 3.1 but adapted to work with the Metaschema data model.{{</callout>}}
+
+Metapath expressions use a path-based syntax to navigate the hierarchical structure of [*assemblies*](#assembly), [*fields*](#field), and [*flags*](#flag) in a format-independent manner. This allows the same expressions to work across JSON, YAML, and XML representations of the same data.
+
+Metapath expressions are used in [constraints](/specification/syntax/constraints/) to specify target nodes, define test conditions, and bind variables. See [Metapath Expression Language](/specification/syntax/metapath/) for complete documentation.
+
 ## Metaschema Module
 
 A *Metaschema module* is defined as follows:

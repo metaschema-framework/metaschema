@@ -726,7 +726,7 @@ The `index-has-key` constraint has the same flags and assemblies as a [`index`](
 
 The `@target` flag of an `<index-has-key>` constraint defines the node(s) in a document instance to check as a cross-reference. The index MUST define a [`@target`](#target) with a [Metapath expression](/specification/syntax/metapath) to identify the nodes to check. The processor MUST only check the node(s) resulting from evaluating the `@target`.
 
-The similar to an `<index>` constraint, the `<key-field/>` assembly is used to compute the cross-reference's key.
+Similar to an `<index>` constraint, the `<key-field/>` assembly is used to compute the cross-reference's key.
 
 The `@name` flag of an `<index>` constraint MUST specify the name of a previously defined `index` constraint.
 

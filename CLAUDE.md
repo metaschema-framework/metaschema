@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Metaschema is a format-agnostic modeling framework that generates schemas, code, and documentation from a single model definition. It addresses limitations of format-specific technologies (XML Schema, JSON Schema) by providing a unified modeling abstraction.
 
-The specification website is published at https://framework.metaschema.dev/
+The specification website is published at <https://framework.metaschema.dev/>
 
 ## Build Commands
 

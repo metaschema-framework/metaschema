@@ -267,6 +267,6 @@ Metapath expressions are primarily used in [Metaschema constraints](/specificati
 | Target selection | `@target` | `target="./child-field"` |
 | Condition testing | `@test` | `test="count(.) > 0"` |
 | Variable binding | `@expression` | `expression="ancestor::assembly/@id"` |
-| Message templates | `<message>` | `Value {.} is invalid` |
+| [Message templates](/specification/syntax/constraints/#constraint-messages) | `<message>` | `Value {.} is invalid` |
 
 For comprehensive constraint documentation, see [Constraints](/specification/syntax/constraints/).

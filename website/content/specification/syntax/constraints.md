@@ -195,7 +195,7 @@ The following attributes accept Metapath expressions:
 | `@test` | `expect`, `report` | Boolean condition to evaluate |
 | `@expression` | `let` | Expression whose result binds to a variable |
 
-Additionally, the `<message>` element in `expect` and `report` constraints supports Metapath expression templates using `{expression}` syntax.
+Additionally, the `<message>` element in all constraint types supports [Metapath expression templates](#constraint-messages) using `{expression}` syntax.
 
 ### Evaluation Focus
 
@@ -265,6 +265,51 @@ And the following document.
 
 The expect constraint would pass for each `sibling` in the `parent` named "p1", and would fail for each `sibling` in the `parent` named "p2".
 
+### Constraint Messages
+
+All constraint types support an optional `<message>` child element that provides a custom message to be displayed when the constraint fails validation.
+
+#### Message Syntax
+
+The `<message>` element value MUST be a [Metaschema string value](/specification/datatypes#string). The message MAY contain [Metapath](/specification/syntax/metapath) expression templates using the following syntax:
+
+```
+{metapath-expression}
+```
+
+A template starts with `{`, contains a Metapath expression, and ends with `}`. Multiple templates MAY appear within a single message. Any text outside of template delimiters is treated as literal text.
+
+**Example:**
+
+```xml
+<expect target="." test="@min le @max">
+  <message>The minimum value {@min} must be less than or equal to the maximum value {@max}.</message>
+</expect>
+```
+
+#### Message Evaluation
+
+When a constraint fails, the `<message>` is evaluated to produce the final message text:
+
+1. Each Metapath template expression `{...}` is evaluated
+2. The [evaluation focus](#evaluation-focus) for template expressions is the failing target node
+3. The result of each expression replaces its template in the message
+4. Literal text outside templates is preserved as-is
+
+If no `<message>` is provided, Metaschema processors SHOULD generate a default message describing the constraint failure.
+
+#### Constraint Types Supporting Messages
+
+| Constraint Type | `<message>` Support |
+|----------------|---------------------|
+| [`allowed-values`](#allowed-values-constraints) | Yes |
+| [`expect`](#expect-constraints) | Yes |
+| [`has-cardinality`](#has-cardinality-constraints) | Yes |
+| [`index`](#index-constraints) | Yes |
+| [`index-has-key`](#index-has-key-constraints) | Yes |
+| [`is-unique`](#is-unique-constraints) | Yes |
+| [`matches`](#matches-constraints) | Yes |
+
 ### `allowed-values` Constraints
 
 The `allowed-values` constraint is a type of Metaschema constraint that restricts field or flag value(s) based on an enumerated set of permitted values.
@@ -282,6 +327,7 @@ The syntax of `<allowed-values>` consists of the following:
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
 | [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
 | [`<enum>`](#enum) | (structured) | 1 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
 | [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 Each `allowed-values` constraint has a *source* that will be either:
@@ -397,7 +443,7 @@ The syntax of `<expect>` consists of the following:
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
 | [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
-| `<message>` | [template](#expect-constraints) | 0 or 1 | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
 | [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` attribute of an `<expect>` constraint is a [Metapath expression](/specification/syntax/metapath) that specifies the node(s) in a document instance whose value is restricted by the constraint.
@@ -410,9 +456,7 @@ When the `@test` expression evaluates to `true` for a target value node, then th
 
 When the `@test` expression evaluates to `false` for a target value node, then the target value node MUST be considered not valid and failing the constraint.
 
-A constraint may have an OPTIONAL [`@level`](#level) attribute and/or an OPTIONAL child `<message>` element to indicate severity and documentation explaining how the target nodes are invalid.
-
-If defined, the `<message>` value MUST be a [Metaschema string value](/specification/datatypes#string). It MAY contain a Metapath expression templates that starts with `{`, contains a Metapath expression, and ends with `}`.  When evaluating a template Metapath expression, the context of the Metapath [evaluation focus](#constraint-processing) MUST be the failing value node.
+A constraint may have an OPTIONAL [`@level`](#level) attribute and/or an OPTIONAL child [`<message>`](#constraint-messages) element to indicate severity and provide documentation explaining how the target nodes are invalid.
 
 ### `has-cardinality` Constraints
 
@@ -430,6 +474,7 @@ The syntax of `<has-cardinality>` consists of the following:
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
 | [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
 | [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The `@target` flag of an `<has-cardinality>` constraint is a [Metapath expression](/specification/syntax/metapath) that defines the node(s) in a document instance to count.
@@ -460,6 +505,7 @@ The syntax of `<index>` consists of the following:
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
 | [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
 | `<key-field>` | (structured) | 1 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
 | [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 The syntax of `<key-field>` consists of the following:
@@ -528,6 +574,7 @@ The syntax of `<matches>` consists of the following:
 | [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
 | [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
 | [`<prop>`](#prop) | (structured) | 0 to ∞ | *(no default)* |
+| [`<message>`](#constraint-messages) | [template](#constraint-messages) | 0 or 1 | *(no default)* |
 | [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
 
 A match can be made by 2 different ways based on `@datatype` and/or based on `@regex`.

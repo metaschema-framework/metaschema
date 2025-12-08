@@ -38,7 +38,7 @@ Constraints use [*Metapath*](#metapath) expressions extensively for:
 - **Target selection** (`@target`): Identifying which nodes the constraint applies to
 - **Condition testing** (`@test`): Evaluating boolean conditions that must be satisfied
 - **Variable binding** (`@expression` in `<let>`): Capturing values for reuse within the constraint
-- **Message templates** (`{expression}` syntax): Generating dynamic error messages when validation fails
+- **[Message templates](/specification/syntax/constraints/#constraint-messages)** (`{expression}` syntax): Generating dynamic error messages when validation fails
 
 The `<let>` element declares variables using Metapath expressions, making computed values available for reuse across constraints within the same scope.
 
@@ -135,7 +135,7 @@ An *information model*, abbreviated as IM, is defined as follows:
 
 Metapath expressions use a path-based syntax to navigate the hierarchical structure of [*assemblies*](#assembly), [*fields*](#field), and [*flags*](#flag) in a format-independent manner. This allows the same expressions to work across JSON, YAML, and XML representations of the same data.
 
-Metapath expressions are used in [constraints](/specification/syntax/constraints/) to specify target nodes, define test conditions, and bind variables. See [Metapath Expression Language](/specification/syntax/metapath/) for complete documentation.
+Metapath expressions are used in [*constraints*](#constraint) to specify target nodes, define test conditions, bind variables, and generate dynamic [constraint messages](/specification/syntax/constraints/#constraint-messages). See [Metapath Expression Language](/specification/syntax/metapath/) for complete documentation.
 
 ## Metaschema Module
 

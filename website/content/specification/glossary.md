@@ -40,17 +40,19 @@ Constraints use [*Metapath*](#metapath) expressions extensively for:
 - **Variable binding** (`@expression` in `<let>`): Capturing values for reuse within the constraint
 - **Message templates** (`{expression}` syntax): Generating dynamic error messages when validation fails
 
+The `<let>` element declares variables using Metapath expressions, making computed values available for reuse across constraints within the same scope.
+
 The following constraint types are supported:
 
 | Constraint Type | Purpose |
 |----------------|---------|
 | `allowed-values` | Restricts a value to an enumerated set of allowed values |
 | `expect` | Asserts that a boolean condition must evaluate to true |
-| `matches` | Validates that a value matches a regular expression or data type pattern |
 | `has-cardinality` | Enforces minimum and/or maximum occurrence counts |
 | `index` | Defines a named index for looking up nodes by key |
 | `index-has-key` | Validates that a value exists as a key in a defined index |
 | `is-unique` | Ensures values are unique within a specified scope |
+| `matches` | Validates that a value matches a regular expression or data type pattern |
 
 See [Constraints](/specification/syntax/constraints/) for complete documentation on declaring and using constraints.
 

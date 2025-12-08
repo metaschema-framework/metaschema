@@ -107,7 +107,7 @@ XPath 3.1 includes over 200 built-in functions organized in namespaces including
 
 ### Metapath
 
-Metapath implements a substantial subset of XPath 3.1 functions plus custom extensions. Based on [DefaultFunctionLibrary.java](https://github.com/metaschema-framework/metaschema-java/blob/develop/core/src/main/java/gov/nist/secauto/metaschema/core/metapath/function/library/DefaultFunctionLibrary.java):
+Metapath implements a substantial subset of XPath 3.1 functions plus custom extensions. Based on [DefaultFunctionLibrary.java](https://github.com/metaschema-framework/metaschema-java/blob/develop/core/src/main/java/gov/nist/secauto/metaschema/core/metapath/function/library/DefaultFunctionLibrary.java) is the manifest of all implemented and planned to be implemented functions for [the reference implementation](https://github.com/metaschema-framework/metaschema-java). Below is an overview of these functions, categorized thematically into their capabilities.
 
 #### Core Functions (`fn:`)
 
@@ -406,7 +406,7 @@ Uses [Metaschema data types](/specification/datatypes/), which include:
 
 ### Grammar
 
-Metapath uses an ANTLR-based grammar for parsing (`Metapath10.g4`), derived from but distinct from XPath 3.1's grammar.
+The [reference implementation](https://github.com/metaschema-framework/metaschema-java) and the Metapath specification uses an ANTLR-based grammar for parsing (`[Metapath10.g4](https://github.com/metaschema-framework/metaschema-java/blob/develop/core/src/main/antlr4/Metapath10.g4)`), derived from but distinct from XPath 3.1's grammar.
 
 **Reference**: [Metapath10.g4](https://github.com/metaschema-framework/metaschema-java/blob/develop/core/src/main/antlr4/Metapath10.g4)
 

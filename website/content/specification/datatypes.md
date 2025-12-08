@@ -315,14 +315,14 @@ In JSON Schema, this is represented as:
 
 ### decimal
 
-A real number expressed using a whole and optional fractional part separated by a period. No leading '+', no exponential notation, and no leading or trailing whitespace are allowed.
+A real number expressed using a whole and optional fractional part separated by a period, with optional exponential notation. No leading `+` is allowed. Leading zeros are not allowed except for the integer `0` itself or numbers less than 1 (e.g., `0.5`).
 
-In XML Schema this is represented as a restriction on the built-in type [decimal](https://www.w3.org/TR/xmlschema11-2/#decimal) as follows:
+In XML Schema this is represented as a restriction on the built-in type [double](https://www.w3.org/TR/xmlschema11-2/#double) as follows:
 
 ```XML
 <xs:simpleType name="DecimalDatatype">
-  <xs:restriction base="xs:decimal">
-    <xs:pattern value="-?[0-9]+(\.[0-9]+)?"/>
+  <xs:restriction base="xs:double">
+    <xs:pattern value="-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?"/>
   </xs:restriction>
 </xs:simpleType>
 ```

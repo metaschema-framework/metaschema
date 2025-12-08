@@ -264,9 +264,28 @@ Add Constraint definition to glossary.md that:
 
 3. Update `expect` and `report` sections to reference the common "Constraint Messages" section rather than duplicating documentation
 
+**Cross-References to Add/Verify**:
+
+The following cross-references MUST be established to tie documentation together:
+
+| From | To | Link Text/Context |
+|------|-----|-------------------|
+| constraints.md "Constraint Messages" section | metapath.md | Link to Metapath for expression syntax |
+| constraints.md "Constraint Messages" section | #evaluation-focus table | Reference evaluation context for templates |
+| constraints.md each constraint type table | #constraint-messages | `<message>` data type links to common section |
+| metapath.md "Use in Constraints" section | constraints.md #constraint-messages | Add `<message>` templates to the reference table |
+| glossary.md Constraint entry | constraints.md #constraint-messages | Update message templates bullet to link to section |
+| glossary.md Metapath entry | constraints.md #constraint-messages | Mention message templates as a Metapath use case |
+
+**Files to Update for Cross-References**:
+- `website/content/specification/syntax/constraints.md` - Primary changes
+- `website/content/specification/syntax/metapath.md` - Update "Use in Constraints" table
+- `website/content/specification/glossary.md` - Update Constraint and Metapath entries with links
+
 **Acceptance Criteria** (from issue #34):
 - [ ] All constraint type tables include `<message>` element
 - [ ] Documented semantics of how `<message>` works, including any differences from `expect` usage
+- [ ] All cross-references between constraints.md, metapath.md, and glossary.md are in place
 - [ ] Website documentation is complete and publishable
 
 ## Testing Strategy

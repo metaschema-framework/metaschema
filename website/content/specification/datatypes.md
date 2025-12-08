@@ -65,6 +65,8 @@ These features tend to be widely supported by implementations based on the [Perl
 
 ## Simple Data Types
 
+{{<callout>}}Before Metaschema 1.0.0, simple data types used both [camelCase](https://developer.mozilla.org/en-US/docs/Glossary/Camel_case) (i.e. `positiveInteger`; `dateTime`) and [kebab-case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case) style names. The camelCase names were deprecated prior to 1.0.0. Implementations of Metaschema versions 1.0.0 and newer MUST support [kebab-case style names](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case) (i.e. `positive-integer`; `date-time`). Implementations MAY choose to support camelCase style names for compatibility and warn if such names are used.{{</callout>}}
+
 These data types represent the basic data primitives used in Metaschema to support different types of data values.
 
 - **numeric values:** [decimal](#decimal), [integer](#integer), [non-negative-integer](#non-negative-integer), [positive-integer](#positive-integer)
@@ -154,7 +156,7 @@ In XML Schema this is represented as a restriction on the built-in type [date](h
 ```XML
 <xs:simpleType name="DateDatatype">
   <xs:restriction base="xs:date">
-    <xs:pattern value="(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|[+-][0-9]{2}:[0-9]{2})?" />
+    <xs:pattern value="(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))?" />
   </xs:restriction>
 </xs:simpleType>
 ```
@@ -164,7 +166,7 @@ In JSON Schema, this is represented as:
 ```JSON
 {
   "type": "string",
-  "pattern": "^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|[+-][0-9]{2}:[0-9]{2})?$"
+  "pattern": "^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))?$"
 }
 ```
 
@@ -186,7 +188,7 @@ In XML Schema this is represented as a restriction on the built-in type [date](h
 ```XML
 <xs:simpleType name="DateWithTimezoneDatatype">
   <xs:restriction base="DateDatatype">
-    <xs:pattern value="(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|[+-][0-9]{2}:[0-9]{2})" />
+    <xs:pattern value="(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))" />
   </xs:restriction>
 </xs:simpleType>
 ```
@@ -196,7 +198,7 @@ In JSON Schema, this is represented as:
 ```JSON
 {
   "type": "string",
-  "pattern": "^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|[+-][0-9]{2}:[0-9]{2})$"
+  "pattern": "^(((2000|2400|2800|(19|2[0-9](0[48]|[2468][048]|[13579][26])))-02-29)|(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))|(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))|(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30)))(Z|(-((0[0-9]|1[0-2]):00|0[39]:30)|\\+((0[0-9]|1[0-4]):00|(0[34569]|10):30|(0[58]|12):45)))$"
 }
 ```
 
@@ -342,10 +344,8 @@ In XML Schema this is represented as a restriction on the built in type [string]
 ```XML
 <xs:simpleType name="EmailAddressDatatype">
   <xs:restriction base="StringDatatype">
-    <xs:pattern value="\S.*@.*\S">
-      <xs:annotation>
-        <xs:documentation>Need a better pattern.</xs:documentation>
-      </xs:annotation>
+    <xs:pattern value=".+@.+">
+      <!-- TODO: Need a better pattern. -->
     </xs:pattern>
   </xs:restriction>
 </xs:simpleType>
@@ -355,9 +355,14 @@ In JSON Schema, this is represented as:
 
 ```JSON
 {
-  "type": "string",
-  "format": "email",
-  "pattern": "^.+@.+$"
+  "allOf": [
+    {"$ref": "#/definitions/StringDatatype"},
+    {
+      "type": "string",
+      "format": "email",
+      "pattern": "^.+@.+$"
+    }
+  ]
 }
 ```
 
@@ -369,7 +374,9 @@ In XML Schema this is represented as a restriction on the built in type [string]
 
 ```XML
 <xs:simpleType name="HostnameDatatype">
-  <xs:restriction base="StringDatatype"/>
+  <xs:restriction base="StringDatatype">
+    <!-- TODO: Need a good hostname pattern -->
+  </xs:restriction>
 </xs:simpleType>
 ```
 
@@ -379,9 +386,13 @@ In JSON Schema, this is represented as:
 
 ```JSON
 {
-  "type": "string",
-  "pattern": "^\\S(.*\\S)?$",
-  "format": "idn-hostname"
+  "allOf": [
+    {"$ref": "#/definitions/StringDatatype"},
+    {
+      "type": "string",
+      "format": "idn-hostname"
+    }
+  ]
 }
 ```
 
@@ -478,8 +489,13 @@ In JSON Schema, this is represented as:
 
 ```JSON
 {
-  "type": "integer",
-  "minimum": 0
+  "allOf": [
+    {"$ref": "#/definitions/IntegerDatatype"},
+    {
+      "type": "integer",
+      "minimum": 0
+    }
+  ]
 }
 ```
 
@@ -487,7 +503,7 @@ In JSON Schema, this is represented as:
 
 An integer value that is greater than `0`.
 
-In XML Schema this is represented as a restriction on the built-in type [positiveInteger](https://www.w3.org/TR/xmlschema11-2/#nonNegativeInteger) as follows:
+In XML Schema this is represented as a restriction on the built-in type [positiveInteger](https://www.w3.org/TR/xmlschema11-2/#positiveInteger) as follows:
 
 ```XML
 <xs:simpleType name="PositiveIntegerDatatype">
@@ -503,8 +519,13 @@ In JSON Schema, this is represented as:
 
 ```JSON
 {
-  "type": "integer",
-  "minimum": 1
+  "allOf": [
+    {"$ref": "#/definitions/IntegerDatatype"},
+    {
+      "type": "integer",
+      "minimum": 1
+    }
+  ]
 }
 ```
 

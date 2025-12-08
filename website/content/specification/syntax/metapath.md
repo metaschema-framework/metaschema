@@ -261,14 +261,6 @@ function-name(argument1, argument2, ...)
 | `not(boolean)` | Negates a boolean value |
 | `boolean(item)` | Converts an item to a boolean |
 
-### Aggregate Functions
-
-| Function | Description |
-|----------|-------------|
-| `count(sequence)` | Returns the count of items |
-| `sum(sequence)` | Returns the sum of numeric items |
-| `avg(sequence)` | Returns the average of numeric items |
-
 ## Differences from XPath 3.1
 
 While Metapath is based on XPath 3.1, there are notable differences:

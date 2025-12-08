@@ -252,7 +252,7 @@ Add Constraint definition to glossary.md that:
 
 **Content to Add**:
 1. Add `<message>` row to each constraint type's syntax table:
-   ```
+   ```markdown
    | `<message>` | [template](#constraint-messages) | 0 or 1 | *(no default)* |
    ```
 

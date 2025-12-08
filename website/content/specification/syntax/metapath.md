@@ -29,6 +29,42 @@ The Metaschema data model exposes the following node types:
 
 Unlike XPath's element/attribute distinction, Metaschema uses assembly/field/flag to represent the hierarchical structure of data. This abstraction allows Metapath expressions to work consistently across JSON, YAML, and XML representations of the same data.
 
+### Format-Agnostic Querying
+
+The same Metapath expression queries equivalent data regardless of format. For example, the expression `/catalog/metadata/title` selects the title field from:
+
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "catalog": {
+    "metadata": {
+      "title": "Example Catalog"
+    }
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+catalog:
+  metadata:
+    title: Example Catalog
+```
+{{% /tab %}}
+{{% tab %}}
+```xml
+<catalog>
+  <metadata>
+    <title>Example Catalog</title>
+  </metadata>
+</catalog>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+This format independence is a key feature of Metapath, enabling validation rules and queries to be defined once and applied to any supported serialization format.
+
 ### Node Identity
 
 Each node in a Metaschema document instance has a unique identity. Two nodes are identical if and only if they represent the same node in the document tree.

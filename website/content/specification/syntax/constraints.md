@@ -107,11 +107,31 @@ Declaring the `@deprecated` attribute communicates to content creators that all 
 
 The following example illustrates deprecating the flag named `flag-name` starting with the *information model* semantic version `1.1.0`.
 
-```xml {linenos=table,hl_lines=[3]}
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "flag",
+  "name": "flag-name",
+  "deprecated": "1.1.0"
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: flag
+name: flag-name
+deprecated: "1.1.0"
+```
+{{% /tab %}}
+{{% tab %}}
+```xml
 <define-flag
   name="flag-name"
   deprecated="1.1.0"/>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### `@name`
 
@@ -237,6 +257,56 @@ For example:
 
 Given the following fragment of a Metaschema module.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "assembly",
+  "name": "sibling",
+  "flags": [
+    {
+      "object-type": "flag",
+      "name": "name",
+      "required": "yes"
+    }
+  ],
+  "constraints": {
+    "lets": [
+      { "var": "parent", "expression": ".." },
+      { "var": "sibling-count", "expression": "count($parent/sibling)" }
+    ],
+    "rules": [
+      {
+        "object-type": "expect",
+        "target": ".",
+        "test": "$sibling-count = 3"
+      }
+    ]
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: assembly
+name: sibling
+flags:
+  - object-type: flag
+    name: name
+    required: "yes"
+constraints:
+  lets:
+    - var: parent
+      expression: ".."
+    - var: sibling-count
+      expression: "count($parent/sibling)"
+  rules:
+    - object-type: expect
+      target: "."
+      test: "$sibling-count = 3"
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <define-assembly name="sibling">
   <define-flag name="name" required="yes"/>
@@ -248,9 +318,50 @@ Given the following fragment of a Metaschema module.
   </constraint>
 </define-assembly>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-And the following document.
+And the following document instance.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "parent": [
+    {
+      "name": "p1",
+      "sibling": [
+        { "name": "a" },
+        { "name": "b" },
+        { "name": "c" }
+      ]
+    },
+    {
+      "name": "p2",
+      "sibling": [
+        { "name": "x" },
+        { "name": "y" }
+      ]
+    }
+  ]
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+parent:
+  - name: p1
+    sibling:
+      - name: a
+      - name: b
+      - name: c
+  - name: p2
+    sibling:
+      - name: x
+      - name: y
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <parent name="p1">
   <sibling name="a"/>
@@ -259,9 +370,11 @@ And the following document.
 </parent>
 <parent name="p2">
   <sibling name="x"/>
-  <sibling name="Y"/>
-</parent1>
+  <sibling name="y"/>
+</parent>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 The expect constraint would pass for each `sibling` in the `parent` named "p1", and would fail for each `sibling` in the `parent` named "p2".
 
@@ -281,11 +394,33 @@ A template starts with `{`, contains a Metapath expression, and ends with `}`. M
 
 **Example:**
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "expect",
+  "target": ".",
+  "test": "@min le @max",
+  "message": "The minimum value {@min} must be less than or equal to the maximum value {@max}."
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: expect
+target: "."
+test: "@min le @max"
+message: "The minimum value {@min} must be less than or equal to the maximum value {@max}."
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <expect target="." test="@min le @max">
   <message>The minimum value {@min} must be less than or equal to the maximum value {@max}.</message>
 </expect>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Message Evaluation
 
@@ -343,21 +478,74 @@ Within a given `<allowed-values>` constraint, an `<enum>` expresses an individua
 
 A Metaschema processor MAY use the text value of the `enum`'s XML element as documentation for a given allowed value enumeration. Below is an example.
 
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+```json
+{
+  "object-type": "flag",
+  "name": "form-factor",
+  "formal-name": "Computer Form Factor",
+  "description": "The type of computer in the example application's data model.",
+  "constraints": {
+    "rules": [
+      {
+        "object-type": "allowed-values",
+        "allow-other": "yes",
+        "enums": [
+          {
+            "value": "laptop",
+            "remark": "this text value documents the domain and information model's meaning of a laptop"
+          },
+          {
+            "value": "desktop",
+            "remark": "this text value documents the domain and information model's meaning of a desktop"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+object-type: flag
+name: form-factor
+formal-name: Computer Form Factor
+description: The type of computer in the example application's data model.
+constraints:
+  rules:
+    - object-type: allowed-values
+      allow-other: "yes"
+      enums:
+        - value: laptop
+          remark: >-
+            this text value documents the domain and
+            information model's meaning of a laptop
+        - value: desktop
+          remark: >-
+            this text value documents the domain and
+            information model's meaning of a desktop
+```
+{{% /tab %}}
+{{% tab %}}
 ```xml
 <define-flag name="form-factor">
-  <formal>Computer Form Factor</formal-name>
-    <description>The type of computer in the example application's data
-      model.</description>
-    <constraint>
-      <allowed-values allow-other="yes">
-        <enum value="laptop">this text value documents the domain and
-          information model's meaning of a laptop</enum>
-        <enum value="desktop">this text value documents the domain and
-          information model's meaning of a desktop</enum>
-      </allowed-values>
-    </constraint> ...  
+  <formal-name>Computer Form Factor</formal-name>
+  <description>The type of computer in the example application's data
+    model.</description>
+  <constraint>
+    <allowed-values allow-other="yes">
+      <enum value="laptop">this text value documents the domain and
+        information model's meaning of a laptop</enum>
+      <enum value="desktop">this text value documents the domain and
+        information model's meaning of a desktop</enum>
+    </allowed-values>
+  </constraint>
 </define-flag>
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 #### `allowed-values` Processing
 

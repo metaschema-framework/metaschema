@@ -6,12 +6,12 @@ weight: 30
 aliases:
 - /specification/syntax/
 custom_css:
-- /metaschema/css/element-map.css
+- /css/element-map.css
 ---
 
 # Metaschema Syntax
 
-The following is an approximate outline of the Metaschema module syntax. Each element and attribute links to the specific specification section describing the element. Attribute value choices are indicated where possible, with default values highlighted.
+The following is an approximate outline of the Metaschema module syntax in XML. YAML and JSON are also supported, but not illustrated here. Each element and attribute links to the specific specification section describing the element. Attribute value choices are indicated where possible, with default values highlighted.
 
 {{< rawhtml >}}
 <div class="highlight"><div class="chroma"><code class="language-xml" data-lang="xml">

@@ -383,7 +383,7 @@ Attributes:
 | Attribute | Data Type | Use      | Default Value |
 |:---       |:---       |:---      |:---           |
 | [`@deprecated`](#deprecated-version) | version ([`string`](/specification/datatypes/#string)) | optional | *(no default)* |
-| [`@in-xml`](#in-xml-1) | `WRAPPED`,`WITH_WRAPPER` or `UNWRAPPED` | optional | `WRAPPED` |
+| [`@in-xml`](#in-xml-1) | `WRAPPED`, `UNWRAPPED`, or `WITH_WRAPPER` (deprecated) | optional | `WRAPPED` |
 | [`@max-occurs`](#max-occurs) | [`positive-integer`](/specification/datatypes/#non-negative-integer) or `unbounded` | optional | `1` |
 | [`@min-occurs`](#min-occurs) | [`non-negative-integer`](/specification/datatypes/#non-negative-integer) | optional | `0` |
 | [`@ref`](#ref) | [`token`](/specification/datatypes/#token) | required | *(no default)* |
@@ -405,7 +405,21 @@ The [`@ref`](#ref) attribute MUST reference a top-level *field definition's* [`@
 
 #### `@in-xml`
 
-TODO: P2: describe this with examples
+The optional `@in-xml` attribute controls whether the field instance is represented as a wrapper element in XML, or if the field's value content appears directly within the parent element.
+
+When the `@in-xml` attribute is not provided, the value MUST default to `WRAPPED`.
+
+One of the following behaviors MUST be used based on the provided or default value.
+
+| Value | XML Behavior |
+|:--- |:--- |
+| `WRAPPED` | The field MUST be represented as a child element with a local name equal to the [effective name](#naming-and-use-name) of the instance. The field's value appears as the text content or child elements of this wrapper element. |
+| `UNWRAPPED` | The field's value content MUST appear directly within the parent element, without a wrapper element. This value is only applicable when the field has a [markup-multiline](/specification/datatypes/#markup-multiline) data type. |
+| `WITH_WRAPPER` | **Deprecated.** This value is equivalent to `WRAPPED` and SHOULD NOT be used. Use `WRAPPED` instead. |
+
+{{<callout>}}
+The `WITH_WRAPPER` value is deprecated and is retained only for backward compatibility with older Metaschema modules. New modules SHOULD use `WRAPPED` instead. Implementations MUST treat `WITH_WRAPPER` as equivalent to `WRAPPED`.
+{{</callout>}}
 
 ### `<define-field>` Instance
 

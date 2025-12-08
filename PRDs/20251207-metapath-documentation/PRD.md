@@ -27,6 +27,7 @@ The Metaschema specification documentation for Metapath expressions is incomplet
 4. Add a glossary entry for Metapath
 5. Ensure all Metapath-taking attributes consistently link to metapath.md
 6. Add a glossary entry for Constraint that explains how constraints use Metapath expressions
+7. Document `<message>` element support for all constraint types (resolves issue #34)
 
 ### Non-Goals
 
@@ -223,6 +224,50 @@ Add Constraint definition to glossary.md that:
 - Brief mention of constraint types (allowed-values, expect, matches, etc.)
 
 **Rationale**: The Constraint glossary entry provides context for understanding Metapath's primary use case in the Metaschema framework. By documenting constraints in the glossary and explicitly describing how they leverage Metapath, users gain a clearer understanding of the relationship between these two core concepts.
+
+### Phase 7: Document `<message>` Element for All Constraint Types (Issue #34)
+
+**Scope**: Complete the remaining documentation for issue #34 by adding `<message>` element documentation to constraint types that are missing it (the `expect` and `report` constraints already document `<message>`).
+
+**Related Issue**: [#34 - Support `message` syntax and semantics to all constraint types](https://github.com/metaschema-framework/metaschema/issues/34)
+
+**Files Modified**:
+- `website/content/specification/syntax/constraints.md`
+
+**Current State**:
+- `expect` - already documents `<message>` ✓
+- `report` - already documents `<message>` ✓
+- `allowed-values` - missing `<message>`
+- `has-cardinality` - missing `<message>`
+- `index` - missing `<message>`
+- `index-has-key` - missing `<message>` (inherits from `index`)
+- `is-unique` - missing `<message>` (inherits from `index`)
+- `matches` - missing `<message>`
+
+**Tables to Update** (add `<message>` row to each):
+- `allowed-values` constraint table
+- `has-cardinality` constraint table
+- `index` constraint table
+- `matches` constraint table
+
+**Content to Add**:
+1. Add `<message>` row to each constraint type's syntax table:
+   ```
+   | `<message>` | [template](#constraint-messages) | 0 or 1 | *(no default)* |
+   ```
+
+2. Add a dedicated "Constraint Messages" section (before individual constraint types) explaining:
+   - Common `<message>` syntax and behavior across all constraint types
+   - Metapath template expression syntax (`{expression}`)
+   - Evaluation focus for message templates (the failing target node)
+   - Any semantic differences between constraint types (if applicable)
+
+3. Update `expect` and `report` sections to reference the common "Constraint Messages" section rather than duplicating documentation
+
+**Acceptance Criteria** (from issue #34):
+- [ ] All constraint type tables include `<message>` element
+- [ ] Documented semantics of how `<message>` works, including any differences from `expect` usage
+- [ ] Website documentation is complete and publishable
 
 ## Testing Strategy
 

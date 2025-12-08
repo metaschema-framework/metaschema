@@ -26,6 +26,7 @@ The Metaschema specification documentation for Metapath expressions is incomplet
 3. Add a dedicated Metapath expressions section to constraints.md
 4. Add a glossary entry for Metapath
 5. Ensure all Metapath-taking attributes consistently link to metapath.md
+6. Add a glossary entry for Constraint that explains how constraints use Metapath expressions
 
 ### Non-Goals
 
@@ -41,7 +42,8 @@ The Metaschema specification documentation for Metapath expressions is incomplet
 | metapath.md line count | 15 | 150+ |
 | Undefined "special" usages | 12+ | 0 |
 | Metapath attributes with links | ~50% | 100% |
-| Glossary coverage | Missing | Complete |
+| Glossary: Metapath entry | Missing | Complete |
+| Glossary: Constraint entry | Missing | Complete |
 
 ## Background
 
@@ -126,9 +128,22 @@ Insert new section covering:
 - Evaluation focus summary table
 - Link to detailed constraint processing
 
-#### FR-4: Add Glossary Entry
+#### FR-4: Add Metapath Glossary Entry
 
 Add Metapath definition to glossary.md following existing format.
+
+#### FR-5: Add Constraint Glossary Entry
+
+Add Constraint definition to glossary.md that:
+
+1. **Defines constraints** as validation rules applied to Metaschema-based data instances
+2. **Explains Metapath integration** - how constraints use Metapath expressions for:
+   - `@target`: Selecting nodes to validate
+   - `@test`: Evaluating boolean conditions
+   - `@expression`: Binding variable values
+   - `<message>` templates: Generating dynamic error messages
+3. **Lists constraint types** with brief descriptions (allowed-values, expect, matches, has-cardinality, index, index-has-key, is-unique)
+4. **Cross-references** to both `/specification/syntax/metapath/` and `/specification/syntax/constraints/`
 
 ### Non-Functional Requirements
 
@@ -183,12 +198,31 @@ Add Metapath definition to glossary.md following existing format.
 **Files Modified**:
 - `website/content/specification/syntax/definitions.md`
 
-### Phase 5: Add Glossary Entry
+### Phase 5: Add Metapath Glossary Entry
 
 **Scope**: Add Metapath term definition
 
 **Files Modified**:
 - `website/content/specification/glossary.md`
+
+### Phase 6: Add Constraint Glossary Entry
+
+**Scope**: Add Constraint term definition that explains the relationship between constraints and Metapath expressions
+
+**Files Modified**:
+- `website/content/specification/glossary.md`
+
+**Content to Include**:
+- Definition of a constraint as a validation rule applied to Metaschema-based data
+- Explanation of how constraints use Metapath expressions for:
+  - Target selection (`@target`) - identifying nodes to validate
+  - Condition testing (`@test`) - evaluating boolean conditions
+  - Variable binding (`@expression` in `<let>`) - capturing values for reuse
+  - Message templates (`{expression}` syntax) - dynamic error messages
+- Cross-references to both metapath.md and constraints.md
+- Brief mention of constraint types (allowed-values, expect, matches, etc.)
+
+**Rationale**: The Constraint glossary entry provides context for understanding Metapath's primary use case in the Metaschema framework. By documenting constraints in the glossary and explicitly describing how they leverage Metapath, users gain a clearer understanding of the relationship between these two core concepts.
 
 ## Testing Strategy
 

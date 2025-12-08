@@ -25,6 +25,35 @@ An assembly has an optional model consisting of references to zero or more [*ass
 
 An *assembly definition* is a type of [*definition*](#definition) within a given [*Metaschema module*](#metaschema-module) used to represent the implementation of a complex [*information element*](#information-element) as an assembly.
 
+## Constraint
+
+A *constraint* is defined as follows:
+
+{{<callout>}}A validation rule declared within a [*Metaschema module*](#metaschema-module) that specifies conditions which data instances MUST satisfy to be considered valid.{{</callout>}}
+
+Constraints enable content validation beyond what format-specific schemas (XML Schema, JSON Schema) can express. They are declared within [*definitions*](#definition) and apply to the data instances that conform to those definitions.
+
+Constraints use [*Metapath*](#metapath) expressions extensively for:
+
+- **Target selection** (`@target`): Identifying which nodes the constraint applies to
+- **Condition testing** (`@test`): Evaluating boolean conditions that must be satisfied
+- **Variable binding** (`@expression` in `<let>`): Capturing values for reuse within the constraint
+- **Message templates** (`{expression}` syntax): Generating dynamic error messages when validation fails
+
+The following constraint types are supported:
+
+| Constraint Type | Purpose |
+|----------------|---------|
+| `allowed-values` | Restricts a value to an enumerated set of allowed values |
+| `expect` | Asserts that a boolean condition must evaluate to true |
+| `matches` | Validates that a value matches a regular expression or data type pattern |
+| `has-cardinality` | Enforces minimum and/or maximum occurrence counts |
+| `index` | Defines a named index for looking up nodes by key |
+| `index-has-key` | Validates that a value exists as a key in a defined index |
+| `is-unique` | Ensures values are unique within a specified scope |
+
+See [Constraints](/specification/syntax/constraints/) for complete documentation on declaring and using constraints.
+
 ## Data Model
 
 A *data model*, abbreviated as DM, is defined as follows:

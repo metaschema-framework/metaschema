@@ -386,7 +386,7 @@ All constraint types support an optional `<message>` child element that provides
 
 The `<message>` element value MUST be a [Metaschema string value](/specification/datatypes#string). The message MAY contain [Metapath](/specification/syntax/metapath) expression templates using the following syntax:
 
-```
+```text
 {metapath-expression}
 ```
 

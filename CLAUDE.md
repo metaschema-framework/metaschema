@@ -66,6 +66,14 @@ Contains test fixtures and worked examples. Files in this directory are example 
 
 ## Key Patterns
 
+### Specification Documentation
+
+When writing or updating specification documentation, follow the [Specification Writing Guide](website/SPECIFICATION-WRITING-GUIDE.md). Key requirements:
+
+- **Deprecated features**: Show only non-deprecated values in the syntax overview (`_index.md`), but document deprecated values with clear notices in detailed documentation pages
+- **RFC 2119 keywords**: Use MUST, SHOULD, MAY consistently in uppercase
+- **Schema synchronization**: Keep `schema/json/`, `schema/xml/`, and `website/content/specification/datatypes.md` in sync
+
 ### Datatype Definitions
 When adding or modifying datatypes, update three files in sync:
 1. `schema/json/metaschema-datatypes.json` - JSON Schema definition
@@ -80,4 +88,4 @@ Constraints are documented in `website/content/specification/syntax/constraints.
 - Add a new section with syntax table and examples
 
 ## Related Repositories
-- [metaschema-java](https://github.com/metaschema-framework/metaschema-java) - Java implementation with parsing, validation, and code generation
+- [metaschema-framework/metaschema-java](https://github.com/metaschema-framework/metaschema-java) - Java implementation with parsing, validation, and code generation

@@ -829,4 +829,350 @@ Processing errors occur when a defect in the constraint definition causes an uni
 
 ## External Constraints
 
-TBD
+*External constraints* provide a mechanism to define constraint rules that are applied to existing Metaschema module-based models without modifying the original module definitions. This enables validation rules to be managed separately from the base model definitions.
+
+The `<metaschema-meta-constraints>` root element defines constraint rules using Metapath-based context selection to target nodes within document instances.
+
+### `<metaschema-meta-constraints>`
+
+The `<metaschema-meta-constraints>` element defines constraint rules to be applied to an existing set of Metaschema module-based models.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| [`<import>`](#import-1) | (structured) | 0 to ∞ | *(no default)* |
+| [`<namespace-binding>`](#namespace-binding) | (structured) | 0 to ∞ | *(no default)* |
+| [`<definition-context>`](#definition-context) | (structured) | 0 or 1 | *(no default)* |
+| [`<context>`](#context) | (structured) | 1 to ∞ | *(no default)* |
+
+A `<metaschema-meta-constraints>` document MUST contain at least one `<context>` element.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<metaschema-meta-constraints
+    xmlns="http://csrc.nist.gov/ns/oscal/metaschema/1.0">
+    <context>
+        <metapath target="/catalog/metadata"/>
+        <constraints>
+            <expect test="exists(title)">
+                <message>Metadata must have a title.</message>
+            </expect>
+        </constraints>
+    </context>
+</metaschema-meta-constraints>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "metaschema-meta-constraints": {
+    "contexts": [
+      {
+        "metapaths": [{ "target": "/catalog/metadata" }],
+        "constraints": {
+          "expect": [
+            {
+              "test": "exists(title)",
+              "message": "Metadata must have a title."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+metaschema-meta-constraints:
+  contexts:
+    - metapaths:
+        - target: /catalog/metadata
+      constraints:
+        expect:
+          - test: exists(title)
+            message: Metadata must have a title.
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### `<import>` {#import-1}
+
+The `<import>` element declares a set of Metaschema constraints from an out-of-line resource to import, supporting composition of constraint sets.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| `@href` | [`uri-reference`](/specification/datatypes/#uri-reference) | required | *(no default)* |
+
+The `@href` attribute MUST contain a relative or absolute URI for retrieving an out-of-line Metaschema constraint definition.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<import href="./additional-constraints.xml"/>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "imports": [
+    { "href": "./additional-constraints.json" }
+  ]
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+imports:
+  - href: ./additional-constraints.yaml
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### `<namespace-binding>`
+
+The `<namespace-binding>` element assigns a Metapath namespace to a prefix for use in [Metapath expressions](/specification/syntax/metapath/) within lexical qualified names.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| `@uri` | [`uri`](/specification/datatypes/#uri) | required | *(no default)* |
+| `@prefix` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
+
+The `@uri` attribute MUST contain the namespace URI to bind to the prefix.
+
+The `@prefix` attribute MUST contain the prefix that is bound to the namespace.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<namespace-binding prefix="oscal" uri="http://csrc.nist.gov/ns/oscal/1.0"/>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "namespace-bindings": [
+    {
+      "prefix": "oscal",
+      "uri": "http://csrc.nist.gov/ns/oscal/1.0"
+    }
+  ]
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+namespace-bindings:
+  - prefix: oscal
+    uri: http://csrc.nist.gov/ns/oscal/1.0
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### `<definition-context>`
+
+The `<definition-context>` element defines constraints that apply to a specific definition identified by name and namespace.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| `@name` | [`token`](/specification/datatypes/#token) | required | *(no default)* |
+| `@namespace` | [`uri`](/specification/datatypes/#uri) | required | *(no default)* |
+| `<constraints>` | (structured) | required | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
+
+The `@name` attribute MUST contain the name of the target definition.
+
+The `@namespace` attribute MUST contain the namespace URI of the Metaschema module containing the target definition.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<definition-context name="catalog"
+    namespace="http://csrc.nist.gov/ns/oscal/1.0">
+    <constraints>
+        <expect test="exists(metadata)">
+            <message>A catalog must have metadata.</message>
+        </expect>
+    </constraints>
+</definition-context>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "definition-context": {
+    "name": "catalog",
+    "namespace": "http://csrc.nist.gov/ns/oscal/1.0",
+    "constraints": {
+      "expect": [
+        {
+          "test": "exists(metadata)",
+          "message": "A catalog must have metadata."
+        }
+      ]
+    }
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+definition-context:
+  name: catalog
+  namespace: http://csrc.nist.gov/ns/oscal/1.0
+  constraints:
+    expect:
+      - test: exists(metadata)
+        message: A catalog must have metadata.
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### `<context>`
+
+The `<context>` element defines a Metapath-based context for applying constraints to nodes selected by one or more Metapath expressions.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| [`<metapath>`](#metapath) | (structured) | 1 to ∞ | *(no default)* |
+| `<constraints>` | (structured) | 0 or 1 | *(no default)* |
+| `<context>` | (structured) | 0 to ∞ | *(no default)* |
+| [`<remarks>`](#remarks) | (structured) | 0 or 1 | *(no default)* |
+
+A `<context>` element MUST contain at least one `<metapath>` child element.
+
+The `<context>` element MAY be nested to create hierarchical constraint scopes. When nested, the child context's Metapath expressions are evaluated relative to the parent context's selected nodes.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<context>
+    <metapath target="/METASCHEMA"/>
+    <constraints>
+        <expect id="module-version-required" level="WARNING"
+            target=".[not(@abstract) or @abstract='no']"
+            test="schema-version">
+            <message>A top-level module should have a schema version.</message>
+        </expect>
+    </constraints>
+    <context>
+        <metapath target="./define-assembly"/>
+        <constraints>
+            <expect test="exists(formal-name)"/>
+        </constraints>
+    </context>
+</context>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "contexts": [
+    {
+      "metapaths": [{ "target": "/METASCHEMA" }],
+      "constraints": {
+        "expect": [
+          {
+            "id": "module-version-required",
+            "level": "WARNING",
+            "target": ".[not(@abstract) or @abstract='no']",
+            "test": "schema-version",
+            "message": "A top-level module should have a schema version."
+          }
+        ]
+      },
+      "contexts": [
+        {
+          "metapaths": [{ "target": "./define-assembly" }],
+          "constraints": {
+            "expect": [{ "test": "exists(formal-name)" }]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+contexts:
+  - metapaths:
+      - target: /METASCHEMA
+    constraints:
+      expect:
+        - id: module-version-required
+          level: WARNING
+          target: ".[not(@abstract) or @abstract='no']"
+          test: schema-version
+          message: A top-level module should have a schema version.
+    contexts:
+      - metapaths:
+          - target: ./define-assembly
+        constraints:
+          expect:
+            - test: exists(formal-name)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### `<metapath>`
+
+The `<metapath>` element specifies a [Metapath expression](/specification/syntax/metapath/) identifying the model node(s) that the constraints will be applied to.
+
+| Data | Data Type | Use | Default Value |
+|:--- |:--- |:--- |:--- |
+| `@target` | [metapath](/specification/syntax/metapath) | required | *(no default)* |
+
+The `@target` attribute MUST contain a valid Metapath expression.
+
+Multiple `<metapath>` elements within a single `<context>` allow constraints to apply to multiple node selections.
+
+{{< tabs XML JSON YAML >}}
+{{% tab %}}
+```xml
+<context>
+    <metapath target="/METASCHEMA"/>
+    <metapath target="/metaschema-meta-constraints"/>
+    <constraints>
+        <!-- Constraints apply to both root elements -->
+    </constraints>
+</context>
+```
+{{% /tab %}}
+{{% tab %}}
+```json
+{
+  "metapaths": [
+    { "target": "/METASCHEMA" },
+    { "target": "/metaschema-meta-constraints" }
+  ],
+  "constraints": {}
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+metapaths:
+  - target: /METASCHEMA
+  - target: /metaschema-meta-constraints
+constraints: {}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### External Constraint Processing
+
+When processing external constraints, a Metaschema processor MUST:
+
+1. Resolve all `<import>` references and load the imported constraint definitions.
+2. Resolve namespace bindings from `<namespace-binding>` elements.
+3. Process `<definition-context>` constraints, if present, by matching the definition by name and namespace.
+4. For each `<context>` element:
+   - Evaluate the `<metapath>` expressions to identify target nodes.
+   - Apply the constraints defined within the context to the identified nodes.
+   - Process nested `<context>` elements recursively, with inner context Metapath expressions evaluated relative to the outer context's selected nodes.
+
+External constraints MUST be applied after internal constraints according to the [declaration order](#constraint-processing) rules defined earlier in this specification.

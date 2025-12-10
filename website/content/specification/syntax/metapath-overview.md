@@ -387,7 +387,7 @@ Uses XSD (XML Schema Definition) types and the XDM type hierarchy, including ato
 Uses [Metaschema data types](/specification/datatypes/), which include:
 
 **Simple types:**
-- `string`, `token`, `uri`, `uri-reference`, `uuid`
+- `string`, `token`, `qname`, `uri`, `uri-reference`, `uuid`
 - `decimal`, `integer`, `non-negative-integer`, `positive-integer`
 - `boolean`
 - `date`, `date-time`, `date-with-timezone`, `date-time-with-timezone`

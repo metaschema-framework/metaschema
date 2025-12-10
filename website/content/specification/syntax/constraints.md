@@ -19,6 +19,7 @@ The following constraint types are allowed for `<define-flag>` definitions.
 - [`<expect>`](#expect-constraints)
 - [`<index-has-key>`](#index-has-key-constraints)
 - [`<matches>`](#matches-constraints)
+- [`<report>`](#report-constraints)
 
 For each of these constraint types, use of the `@target` attribute is prohibited. This is because a flag constraint may only target the flag, since a flag has no child nodes.
 
@@ -31,6 +32,7 @@ The following constraint types are allowed for `<define-field>` definitions.
 - [`<expect>`](#expect-constraints)
 - [`<index-has-key>`](#index-has-key-constraints)
 - [`<matches>`](#matches-constraints)
+- [`<report>`](#report-constraints)
 
 ## `<define-assembly>` constraints
 
@@ -44,6 +46,7 @@ The following constraint types are allowed for `<define-assembly>` definitions.
 - [`<index-has-key>`](#index-has-key-constraints)
 - [`<is-unique>`](#is-unique-constraints)
 - [`<matches>`](#matches-constraints)
+- [`<report>`](#report-constraints)
 
 ## Common Constraint Data
 
@@ -618,7 +621,7 @@ One of the following requirements MUST apply when processing a value's *targetin
 
 ### `expect` Constraints
 
-The `<expect>` constraint is a type of Metaschema constraint that restricts field or flag value(s) based on the evaluation of a `@test` Metapath expression.
+The `<expect>` constraint is a type of Metaschema constraint that restricts field or flag value(s) based on the evaluation of a `@test` Metapath expression. See also the [`<report>`](#report-constraints) constraint, which is the semantic inverse of `<expect>`. For a comparison of these two constraint types, see [`expect` vs `report` Comparison](#expect-vs-report-comparison).
 
 The syntax of `<expect>` consists of the following:
 
@@ -780,6 +783,77 @@ If a `@regex` is provided, each resulting node's value MUST match the pattern sp
 When evaluating node(s) matching the `@target`, the node(s) pass the constraint when matching all requirements of `@datatype`, if defined, and `@regex`, if defined. 
 
 If the node(s) do not match any of these requirements, then the node(s) MUST be considered to not pass the constraint.
+
+### `report` Constraints
+
+The `<report>` constraint is a type of Metaschema constraint that reports information about field or flag value(s) based on the evaluation of a `@test` Metapath expression. This constraint is semantically the inverse of the [`<expect>`](#expect-constraints) constraint.
+
+While `<expect>` constraints are used to assert requirements that *must* be met (test returns `true` = pass), `<report>` constraints are used to identify conditions that *should be reported* when they occur (test returns `true` = report). This allows constraint authors to express positive conditions directly, without needing to invert the logic.
+
+The syntax of `<report>` consists of the following:
+
+| Data | Data Type | Use      | Default Value |
+|:--- |:--- |:--- |:--- |
+| [`@id`](#id) | [`token`](/specification/datatypes/#token) | optional | *(no default)* |
+| [`@level`](#level) | `DEBUG`,`INFORMATIONAL`, `WARNING`, `ERROR`, or `CRITICAL` | optional | `ERROR` |
+| [`@target`](#target) | special | *(varies)* | *(no default)* |
+| `@test` | special | required | *(no default)* |
+| [`<formal-name>`](#formal-name) | [`string`](/specification/datatypes/#string) | 0 or 1 | *(no default)* |
+| [`<description>`](#description) | [`markup-line`](/specification/datatypes/#markup-line) | 0 or 1 | *(no default)* |
+| [`<prop>`](#prop) | special | 0 to ∞ | *(no default)* |
+| `<message>` | special | 0 or 1 | *(no default)* |
+| [`<remarks>`](#remarks) | special | 0 or 1 | *(no default)* |
+
+The `@target` attribute of a `<report>` constraint is a [Metapath expression](/specification/syntax/metapath) that specifies the node(s) in a document instance whose value is evaluated by the constraint.
+
+A `@target` is REQUIRED for report constraints associated with a field and assembly. A `@target` MUST NOT be provided for a report constraint associated with a flag, since such a constraint can only target the flag's value. In flag use cases the `@target` MUST be considered `.`, referring to the flag node.
+
+The `@test` attribute of a `<report>` constraint specifies the condition to be evaluated against each value node resulting from evaluating the `@target`. This expression MUST evaluate to [a Metaschema boolean value](/specification/datatypes#boolean) `true` or `false`.
+
+When the `@test` expression evaluates to `true` for a target value node, then the condition has been met and MUST be reported.
+
+When the `@test` expression evaluates to `false` for a target value node, then the condition has not been met and no reporting is required.
+
+A constraint may have an OPTIONAL [`@level`](#level) attribute and/or an OPTIONAL child `<message>` element to indicate severity and documentation explaining the reported condition.
+
+If defined, the `<message>` value MUST be a [Metaschema string value](/specification/datatypes#string). It MAY contain a Metapath expression templates that starts with `{`, contains a Metapath expression, and ends with `}`. When evaluating a template Metapath expression, the context of the Metapath [evaluation focus](#constraint-processing) MUST be the reported value node.
+
+#### `expect` vs `report` Comparison
+
+The following table illustrates the semantic difference between `<expect>` and `<report>` constraints:
+
+| Constraint | Test Result | Outcome |
+|:--- |:--- |:--- |
+| `<expect>` | `true` | Constraint passes (no violation) |
+| `<expect>` | `false` | Constraint fails (violation reported) |
+| `<report>` | `true` | Condition met (information reported) |
+| `<report>` | `false` | Condition not met (nothing reported) |
+
+For example, to report when a deprecated field is used:
+
+```xml
+<define-field name="legacy-field">
+  <constraint>
+    <report test="exists(.)" level="WARNING">
+      <message>The 'legacy-field' is deprecated and will be removed in a future version.</message>
+    </report>
+  </constraint>
+</define-field>
+```
+
+The equivalent using `<expect>` would require inverting the logic:
+
+```xml
+<define-field name="legacy-field">
+  <constraint>
+    <expect test="not(exists(.))" level="WARNING">
+      <message>The 'legacy-field' is deprecated and will be removed in a future version.</message>
+    </expect>
+  </constraint>
+</define-field>
+```
+
+The `<report>` constraint allows the condition to be expressed more naturally and clearly.
 
 ## Constraint Processing
 

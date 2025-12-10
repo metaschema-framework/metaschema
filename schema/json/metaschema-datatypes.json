@@ -112,6 +112,16 @@
         }
       ]
     },
+    "QNameDatatype": {
+      "description": "A qualified name as defined by XML Schema Part 2: Datatypes Second Edition, consisting of an optional namespace prefix and a local name separated by a colon.",
+      "allOf": [
+        {"$ref": "#/definitions/StringDatatype"},
+        {
+          "type": "string",
+          "pattern": "^((\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*:)?(\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*$"
+        }
+      ]
+    },
     "StringDatatype": {
       "description": "A non-empty string with leading and trailing whitespace disallowed. Whitespace is: U+9, U+10, U+32 or [ \n\t]+",
       "type": "string",

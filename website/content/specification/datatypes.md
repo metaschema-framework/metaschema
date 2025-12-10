@@ -72,7 +72,7 @@ These data types represent the basic data primitives used in Metaschema to suppo
 - **numeric values:** [decimal](#decimal), [integer](#integer), [non-negative-integer](#non-negative-integer), [positive-integer](#positive-integer)
 - **temporal values:** [date](#date), [date-with-timezone](#date-with-timezone), [date-time](#date-time), [date-time-with-timezone](#date-time-with-timezone), [day-time-duration](#day-time-duration), [year-month-duration](#year-month-duration)
 - **binary values:** [base64](#base64), [boolean](#boolean)
-- **character-based values:** [email-address](#email-address), [hostname](#hostname), [ip-v4-address](#ip-v4-address), [ip-v6-address](#ip-v6-address), [string](#string), [token](#token), [uri](#uri), [uri-reference](#uri-reference), [uuid](#uuid)
+- **character-based values:** [email-address](#email-address), [hostname](#hostname), [ip-v4-address](#ip-v4-address), [ip-v6-address](#ip-v6-address), [qname](#qname), [string](#string), [token](#token), [uri](#uri), [uri-reference](#uri-reference), [uuid](#uuid)
 
 Details of these data types follow.
 
@@ -524,6 +524,57 @@ In JSON Schema, this is represented as:
     {
       "type": "integer",
       "minimum": 1
+    }
+  ]
+}
+```
+
+### qname
+
+A qualified name (QName) as defined by [XML Schema Part 2: Datatypes Second Edition](https://www.w3.org/TR/xmlschema11-2/#QName) and the [Namespaces in XML](https://www.w3.org/TR/xml-names/) specification.
+
+A QName consists of an optional namespace prefix and a local name, separated by a colon. Both the prefix and the local name are [NCNames](https://www.w3.org/TR/xmlschema11-2/#NCName) (non-colonized names).
+
+The syntax is:
+
+```
+QName ::= PrefixedName | UnprefixedName
+PrefixedName ::= Prefix ':' LocalPart
+UnprefixedName ::= LocalPart
+Prefix ::= NCName
+LocalPart ::= NCName
+```
+
+For example:
+
+```
+xs:string
+oscal:catalog
+localName
+_underscore-prefix:local_name
+```
+
+The namespace prefix is used to associate the qualified name with a namespace URI through a namespace declaration in scope. The interpretation of a QName is context-dependent, as the prefix must be resolved to a namespace URI using the applicable namespace bindings.
+
+In XML Schema this is represented as a restriction on [StringDatatype](#string) as follows:
+
+```XML
+<xs:simpleType name="QNameDatatype">
+  <xs:restriction base="StringDatatype">
+    <xs:pattern value="((\p{L}|_)(\p{L}|\p{N}|[.\-_])*:)?(\p{L}|_)(\p{L}|\p{N}|[.\-_])*"/>
+  </xs:restriction>
+</xs:simpleType>
+```
+
+In JSON Schema, this is represented as:
+
+```JSON
+{
+  "allOf": [
+    {"$ref": "#/definitions/StringDatatype"},
+    {
+      "type": "string",
+      "pattern": "^((\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*:)?(\\p{L}|_)(\\p{L}|\\p{N}|[.\\-_])*$"
     }
   ]
 }

@@ -23,7 +23,7 @@
                 "enum": ["valid", "invalid"]
               },
               "value": {
-                "description": "A real number expressed using a whole and optional fractional part separated by a period. No leading '+', and no exponential notation are allowed.",
+                "description": "A real number expressed using a whole and optional fractional part separated by a period, with optional exponential notation. No leading '+' is allowed.",
                 "type": "number"
               }
             },

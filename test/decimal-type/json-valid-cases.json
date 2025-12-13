@@ -58,8 +58,8 @@
         "value": -2.5e-10
       },
       {
-        "id": "json-leading-zero-note",
-        "description": "Leading zeros (01.23) - Actually INVALID JSON syntax, see json-invalid-cases.json",
+        "id": "json-decimal-no-leading-zero",
+        "description": "Decimal without unnecessary leading zeros (1.23 is valid; 01.23 is invalid JSON syntax)",
         "expected": "valid",
         "value": 1.23
       }

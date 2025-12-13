@@ -26,6 +26,11 @@ on:
         required: false
         default: true
         type: boolean
+
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   schedule-validate-repo-markdown-links:
     uses: ./.github/workflows/workflow-validate-repo-markdown.yml

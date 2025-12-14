@@ -1,0 +1,68 @@
+{
+  "$schema": "decimal-test.json",
+  "_comment": "Valid decimal test cases for JSON validation. All values SHOULD pass JSON Schema validation with type: number",
+  "decimal-tests": {
+    "test-cases": [
+      {
+        "id": "json-int-positive",
+        "description": "Positive integer (e.g., 12)",
+        "expected": "valid",
+        "value": 12
+      },
+      {
+        "id": "json-int-negative",
+        "description": "Negative integer",
+        "expected": "valid",
+        "value": -42
+      },
+      {
+        "id": "json-int-zero",
+        "description": "Zero",
+        "expected": "valid",
+        "value": 0
+      },
+      {
+        "id": "json-dec-positive",
+        "description": "Positive decimal (e.g., 12.34)",
+        "expected": "valid",
+        "value": 12.34
+      },
+      {
+        "id": "json-dec-negative",
+        "description": "Negative decimal",
+        "expected": "valid",
+        "value": -12.34
+      },
+      {
+        "id": "json-dec-small",
+        "description": "Small decimal",
+        "expected": "valid",
+        "value": 0.001
+      },
+      {
+        "id": "json-exp-lower",
+        "description": "Exponential notation lowercase (e.g., 1e3) - Valid in JSON",
+        "expected": "valid",
+        "value": 1e3
+      },
+      {
+        "id": "json-exp-upper-plus",
+        "description": "Exponential notation uppercase with plus (e.g., 1E+4) - Valid in JSON",
+        "expected": "valid",
+        "value": 1E+4
+      },
+      {
+        "id": "json-exp-negative",
+        "description": "Exponential notation negative (e.g., -2.5e-10) - Valid in JSON",
+        "expected": "valid",
+        "value": -2.5e-10
+      },
+      {
+        "id": "json-decimal-no-leading-zero",
+        "description": "Decimal without unnecessary leading zeros (1.23 is valid; 01.23 is invalid JSON syntax)",
+        "expected": "valid",
+        "value": 1.23
+      }
+    ]
+  }
+}

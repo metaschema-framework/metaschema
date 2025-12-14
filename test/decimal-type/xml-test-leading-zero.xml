@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decimal-tests xmlns="http://csrc.nist.gov/ns/metaschema/test/decimal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://csrc.nist.gov/ns/metaschema/test/decimal decimal-test.xsd">
+    <test-case id="xml-leading-zero" description="Leading zeros (e.g., 01.23)" expected="invalid">
+        <value>01.23</value>
+    </test-case>
+</decimal-tests>

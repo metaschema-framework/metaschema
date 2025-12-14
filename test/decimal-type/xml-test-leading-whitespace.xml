@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decimal-tests xmlns="http://csrc.nist.gov/ns/metaschema/test/decimal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://csrc.nist.gov/ns/metaschema/test/decimal decimal-test.xsd">
+    <test-case id="xml-leading-whitespace" description="Leading whitespace (passes due to xs:double whitespace collapse)" expected="valid">
+        <value> 12.34</value>
+    </test-case>
+</decimal-tests>

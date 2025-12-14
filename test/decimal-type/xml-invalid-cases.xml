@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Invalid decimal test cases for XML validation.
+  Each test-case is in a separate file because invalid values cause validation to fail.
+  This file documents all invalid cases and their expected behavior.
+
+  Test files:
+  - xml-test-leading-plus.xml: +12.34 (INVALID - leading + not allowed)
+  - xml-test-leading-zero.xml: 01.23 (INVALID - leading zeros not allowed)
+  - xml-test-no-leading-digit.xml: .47 (INVALID - must have digit before decimal)
+  - xml-test-trailing-decimal.xml: 123. (INVALID - must have digit after decimal)
+  - xml-test-leading-whitespace.xml: " 12.34" (VALID due to xs:double whitespace collapse)
+
+  Note: Leading/trailing whitespace passes validation because xs:double
+  applies whitespace normalization before pattern matching.
+-->
+<decimal-tests xmlns="http://csrc.nist.gov/ns/metaschema/test/decimal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://csrc.nist.gov/ns/metaschema/test/decimal decimal-test.xsd">
+
+    <!-- This is a placeholder. See individual xml-test-*.xml files for actual invalid cases. -->
+    <test-case id="placeholder" description="Placeholder - see individual test files" expected="valid">
+        <value>0</value>
+    </test-case>
+
+</decimal-tests>

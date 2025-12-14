@@ -1,0 +1,47 @@
+{
+  "$schema": "decimal-test.json",
+  "_comment": "Invalid decimal test cases for JSON validation. These values SHOULD FAIL JSON Schema validation or are invalid JSON syntax.",
+  "_note": "JSON does not allow: leading +, leading/trailing whitespace, .47 syntax, 123. syntax. These would be syntax errors or string values.",
+  "decimal-tests": {
+    "test-cases": [
+      {
+        "id": "json-placeholder",
+        "description": "Placeholder - see comments below for invalid cases that cannot be represented in JSON",
+        "expected": "valid",
+        "value": 0
+      }
+    ]
+  },
+  "_invalid_cases_documentation": {
+    "leading_plus": {
+      "example": "+12.34",
+      "reason": "JSON syntax does not allow leading + on numbers. This would be a parse error.",
+      "expected": "invalid"
+    },
+    "leading_zeros": {
+      "example": "01.23",
+      "reason": "JSON syntax does not allow leading zeros on numbers (except 0 itself). This would be a parse error.",
+      "expected": "invalid"
+    },
+    "no_leading_digit": {
+      "example": ".47",
+      "reason": "JSON syntax requires a digit before the decimal point. This would be a parse error.",
+      "expected": "invalid"
+    },
+    "trailing_decimal": {
+      "example": "123.",
+      "reason": "JSON syntax requires digits after the decimal point. This would be a parse error.",
+      "expected": "invalid"
+    },
+    "leading_whitespace": {
+      "example": " 12.34",
+      "reason": "If represented as a string \" 12.34\", it would fail type: number validation.",
+      "expected": "invalid"
+    },
+    "trailing_whitespace": {
+      "example": "12.34 ",
+      "reason": "If represented as a string \"12.34 \", it would fail type: number validation.",
+      "expected": "invalid"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "decimal-test.json",
+  "decimal-tests": {
+    "test-cases": [
+      {
+        "id": "json-string-with-whitespace",
+        "description": "String value with whitespace should fail type: number",
+        "expected": "invalid",
+        "value": " 12.34 "
+      }
+    ]
+  }
+}

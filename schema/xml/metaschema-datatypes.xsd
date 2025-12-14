@@ -68,17 +68,15 @@
 
 	<xs:simpleType name="DecimalDatatype">
 		<xs:annotation>
-			<xs:documentation>A real number expressed using a whole and optional fractional part
-				separated by a period.</xs:documentation>
+			<xs:documentation>
+			A real number expressed using a whole and optional fractional part
+			separated by a period, with optional exponential notation.
+			No leading '+' is allowed. Leading zeros are not allowed except
+			for the integer 0 itself or numbers less than 1 (e.g., 0.5).
+			</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:decimal">
-			<xs:pattern value="\S(.*\S)?">
-				<xs:annotation>
-					<xs:documentation>This pattern ensures that leading and trailing whitespace is
-						disallowed. This helps to even the user experience between implementations
-						related to whitespace.</xs:documentation>
-				</xs:annotation>
-			</xs:pattern>
+		<xs:restriction base="xs:double">
+			<xs:pattern value="-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?"/>
 		</xs:restriction>
 	</xs:simpleType>
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Valid decimal test cases for XML validation.
+  All values in this file SHOULD pass XML Schema validation with:
+  - base type: xs:double
+  - pattern: -?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][+-]?[0-9]+)?
+-->
+<decimal-tests xmlns="http://csrc.nist.gov/ns/metaschema/test/decimal"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://csrc.nist.gov/ns/metaschema/test/decimal decimal-test.xsd">
+
+    <!-- Integers: Valid -->
+    <test-case id="xml-int-positive" description="Positive integer (e.g., 12)" expected="valid">
+        <value>12</value>
+    </test-case>
+    <test-case id="xml-int-negative" description="Negative integer" expected="valid">
+        <value>-42</value>
+    </test-case>
+    <test-case id="xml-int-zero" description="Zero" expected="valid">
+        <value>0</value>
+    </test-case>
+
+    <!-- Decimals: Valid -->
+    <test-case id="xml-dec-positive" description="Positive decimal (e.g., 12.34)" expected="valid">
+        <value>12.34</value>
+    </test-case>
+    <test-case id="xml-dec-negative" description="Negative decimal" expected="valid">
+        <value>-12.34</value>
+    </test-case>
+    <test-case id="xml-dec-small" description="Small decimal (e.g., 0.5)" expected="valid">
+        <value>0.001</value>
+    </test-case>
+    <test-case id="xml-dec-zero-point" description="Zero with decimal" expected="valid">
+        <value>0.0</value>
+    </test-case>
+
+    <!-- Exponential notation: Valid -->
+    <test-case id="xml-exp-lower" description="Exponential notation lowercase (e.g., 1e3)" expected="valid">
+        <value>1e3</value>
+    </test-case>
+    <test-case id="xml-exp-upper" description="Exponential notation uppercase (e.g., 1E3)" expected="valid">
+        <value>1E3</value>
+    </test-case>
+    <test-case id="xml-exp-plus" description="Exponential notation with plus (e.g., 1e+3)" expected="valid">
+        <value>1e+3</value>
+    </test-case>
+    <test-case id="xml-exp-minus" description="Exponential notation with minus (e.g., 1e-3)" expected="valid">
+        <value>1e-3</value>
+    </test-case>
+    <test-case id="xml-exp-decimal" description="Exponential with decimal (e.g., -2.5e-10)" expected="valid">
+        <value>-2.5e-10</value>
+    </test-case>
+
+</decimal-tests>

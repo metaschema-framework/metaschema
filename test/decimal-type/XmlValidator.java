@@ -4,6 +4,8 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
 
 public class XmlValidator {
     public static void main(String[] args) {
@@ -29,12 +31,31 @@ public class XmlValidator {
 
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+            // Harden against XXE / SSRF-style external resolution
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            try {
+                factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+                factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            } catch (IllegalArgumentException | SAXNotRecognizedException | SAXNotSupportedException ex) {
+                // Some JAXP implementations don't support these properties
+                System.err.println("Warning: could not set external access restrictions: " + ex.getMessage());
+            }
+
             Schema schema = factory.newSchema(schemaFile);
             Validator validator = schema.newValidator();
+
+            try {
+                validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+                validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            } catch (IllegalArgumentException ex) {
+                System.err.println("Warning: could not set validator external access restrictions: " + ex.getMessage());
+            }
+
             validator.validate(new StreamSource(xmlFile));
             System.out.println(xmlPath + " is VALID");
         } catch (Exception e) {
-            System.out.println(xmlPath + " is INVALID: " + e.getMessage());
+            System.err.println(xmlPath + " is INVALID: " + e.getMessage());
             System.exit(1);
         }
     }

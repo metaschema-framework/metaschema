@@ -46,9 +46,20 @@ Both JSON and XML ignore/normalize whitespace around numeric values, so leading/
 
 ## Running Validation Tests
 
-### XML Validation (using xmllint)
+### XML Validation
+
+#### Using xmllint
 ```bash
 xmllint --schema decimal-test.xsd xml-valid-cases.xml --noout
+```
+
+#### Using the Java XmlValidator (via Maven)
+```bash
+# Compile the validator
+mvn compile
+
+# Run validation on a specific XML file
+mvn exec:java -Dexec.args="decimal-test.xsd xml-valid-cases.xml"
 ```
 
 ### JSON Validation (using ajv-cli)

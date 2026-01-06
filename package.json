@@ -9,7 +9,7 @@
         "hugo-bin": "^0.149.2",
         "postcss": "^8.5.6",
         "postcss-cli": "^11.0.1",
-        "sass": "^1.96.0",
+        "sass": "^1.97.2",
         "yaml-convert": "^1.0.x"
     },
     "overrides": {

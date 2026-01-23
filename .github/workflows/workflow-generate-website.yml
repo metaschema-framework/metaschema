@@ -48,14 +48,14 @@ jobs:
     - id: checkout_latest_workflow
       name: Checkout Latest
       if: (github.event_name == 'workflow_dispatch' && github.event.inputs.commit_resources == 'true') || (github.event_name == 'push' && inputs.commit_resources == true)
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         persist-credentials: false
         submodules: recursive
     # use this for overything else (i.e., pull requests) where publication is not needed
     - name: Checkout Latest
       if: steps.checkout_latest_workflow.conclusion == 'skipped'
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       with:
         submodules: recursive
     - name: Setup Swap Space

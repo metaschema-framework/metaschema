@@ -26,6 +26,7 @@ Within Metaschema-based models, all constructs are optional unless marked otherw
 | Flag with designated data type | Attribute with lexical constraints per type | String property with lexical constraints per type, or typed property such as `number` or URI (per type) | 
 | Field `as-type='simple-markup'`, no flags permitted | An element permitting mixed content inline | String property or map with string property, parsable as markdown (line only) |
 | Field `as='complex-markup'`, flag(s) permitted | An element permitting mixed content inline | Object property with `RICHTEXT` String property or object with string property, parsable as markdown (full blocks) |
+| [`<any>`](/specification/syntax/instances/#any) in assembly model | Child elements from foreign namespaces (`xs:any namespace="##other"`) | Additional object properties not declared in the model (`additionalProperties: true`) |
 
 
 ## XML Representational Form
@@ -67,6 +68,19 @@ In XML, a field is represented in two possible ways:
 
    This form is only allowed when a field has no child flags.
 
+### `<any>` Instance
+
+When an assembly definition declares [`<any/>`](/specification/syntax/instances/#any) in its model, the XML representation permits child elements from foreign namespaces after all declared model instance elements.
+
+In a generated XML Schema, this is represented as:
+
+```xml
+<xs:any namespace="##other" processContents="lax"
+       minOccurs="0" maxOccurs="unbounded"/>
+```
+
+The `namespace="##other"` restriction limits unmodeled elements to namespaces other than the assembly's target namespace. The `processContents="lax"` setting means validation of unmodeled elements is attempted only if a schema for the element's namespace is available.
+
 ## JSON Representational Form
 
 ### Flag Instance
@@ -79,6 +93,22 @@ In JSON a flag instance is represented as an [object member](https://datatracker
 }
 ```
 
+### `<any>` Instance
+
+When an assembly definition declares [`<any/>`](/specification/syntax/instances/#any) in its model, the JSON representation permits additional properties on the assembly's object beyond those declared in the model.
+
+In a generated JSON Schema, this is represented by setting `additionalProperties` to `true` on the assembly's object schema:
+
+```json
+{
+  "type": "object",
+  "properties": { ... },
+  "additionalProperties": true
+}
+```
+
+This allows any property name and value to appear alongside the declared properties.
+
 ## YAML Representational Form
 
 ### Flag Instance
@@ -88,4 +118,8 @@ The YAML representation is similar to JSON, where a [tagged value](https://yaml.
 ```yaml
 flag-name: flag value
 ```
+
+### `<any>` Instance
+
+The YAML representation of [`<any/>`](/specification/syntax/instances/#any) is identical to the [JSON representation](#any-instance-1), since YAML is a superset of JSON. Additional mapping keys on the assembly's mapping represent unmodeled content.
 

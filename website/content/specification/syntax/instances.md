@@ -475,4 +475,109 @@ Permits the mutually exclusive use of a non-empty set of [named model instances]
 
 ### `<any>`
 
-TODO: P2: describe this with examples
+The `<any>` element declares that an assembly's model accepts additional content beyond what is described by the assembly's explicitly defined model instances. This is an extensibility mechanism that allows an assembly to accommodate unmodeled content — content whose structure is not described by the Metaschema module.
+
+This is analogous to [`xs:any`](https://www.w3.org/TR/xmlschema11-1/#Wildcards) in XML Schema or [`additionalProperties`](https://json-schema.org/understanding-json-schema/reference/object#additionalproperties) in JSON Schema.
+
+The `<any>` element has no attributes or child elements. It is an empty element that acts as a marker within the assembly's `<model>`.
+
+```xml
+<define-assembly name="extensible-record">
+  <formal-name>Extensible Record</formal-name>
+  <description>A record that accepts additional unmodeled content.</description>
+  <model>
+    <field ref="title" min-occurs="1"/>
+    <field ref="description"/>
+    <any/>
+  </model>
+</define-assembly>
+```
+
+#### Placement in the Model
+
+The `<any>` element MUST appear at most once in a `<model>`, and MUST appear after all [named model instances](#named-model-instances) and [`<choice>`](#choice-selections) elements.
+
+#### Semantics
+
+When `<any>` is declared in an assembly's model:
+
+- The assembly MUST accept content that does not correspond to any of its declared model instances.
+- In XML, this means child elements from foreign namespaces (i.e., namespaces other than the assembly's own namespace) MUST be accepted after all declared model elements.
+- In JSON and YAML, this means object properties whose names do not correspond to any declared model instance MUST be accepted.
+- A Metaschema-aware processor MUST capture unmodeled content during parsing and MUST reproduce it during serialization, preserving round-trip fidelity.
+- Constraint validation MUST NOT apply to unmodeled content.
+- Metapath expressions MUST NOT traverse into unmodeled content.
+
+When `<any>` is not declared, a Metaschema-aware processor SHOULD report unrecognized content through its problem-handling mechanism.
+
+#### XML Representation
+
+In XML, when an assembly with `<any>` is serialized, the unmodeled content appears as child elements after all declared model instance elements:
+
+```xml
+<extensible-record>
+  <title>My Record</title>
+  <description>An example.</description>
+  <!-- Unmodeled content below -->
+  <ext:custom-data xmlns:ext="http://example.com/extensions">
+    <ext:value>additional information</ext:value>
+  </ext:custom-data>
+</extensible-record>
+```
+
+#### JSON and YAML Representation
+
+In JSON and YAML, unmodeled content appears as additional properties on the assembly's object:
+
+{{< tabs JSON YAML >}}
+{{% tab %}}
+```json
+{
+  "extensible-record": {
+    "title": "My Record",
+    "description": "An example.",
+    "custom-data": {
+      "value": "additional information"
+    }
+  }
+}
+```
+{{% /tab %}}
+{{% tab %}}
+```yaml
+extensible-record:
+  title: My Record
+  description: An example.
+  custom-data:
+    value: additional information
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Schema Generation
+
+When generating schemas from a Metaschema module containing `<any>`:
+
+- **XML Schema:** The generated schema MUST include an `xs:any` wildcard declaration after the declared element declarations within the assembly's type definition:
+
+  ```xml
+  <xs:any namespace="##other" processContents="lax"
+         minOccurs="0" maxOccurs="unbounded"/>
+  ```
+
+  The `namespace="##other"` attribute restricts unmodeled elements to namespaces other than the assembly's target namespace. The `processContents="lax"` attribute indicates that validation of unmodeled elements is attempted only if a schema for the element's namespace is available.
+
+- **JSON Schema:** The generated schema MUST set `additionalProperties` to `true` on the assembly's object schema:
+
+  ```json
+  {
+    "type": "object",
+    "additionalProperties": true
+  }
+  ```
+
+  This permits additional properties beyond those explicitly declared in the `properties` keyword.
+
+{{<callout>}}
+The `<any>` element is intended for use cases where an assembly needs to accommodate extension content whose structure is not known at module design time. Use it sparingly — prefer explicit model declarations whenever the content structure is known. Overuse of `<any>` reduces the value of schema validation and limits tooling support for the affected content.
+{{</callout>}}

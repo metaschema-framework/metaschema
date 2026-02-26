@@ -5,7 +5,7 @@
         "@fullhuman/postcss-purgecss": "^8.0.0",
         "ajv-cli": "^5.0.x",
         "ajv-formats": "^3.0.x",
-        "autoprefixer": "^10.4.24",
+        "autoprefixer": "^10.4.27",
         "hugo-bin": "^0.149.2",
         "postcss": "^8.5.6",
         "postcss-cli": "^11.0.1",

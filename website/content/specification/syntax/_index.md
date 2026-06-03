@@ -11,8 +11,234 @@ custom_css:
 
 # Metaschema Syntax
 
-The following is an approximate outline of the Metaschema module syntax in XML. YAML and JSON are also supported, but not illustrated here. Each element and attribute links to the specific specification section describing the element. Attribute value choices are indicated where possible, with default values highlighted.
+The following is an approximate outline of the Metaschema module syntax. A Metaschema module can be authored in XML, JSON, or YAML, and the three tabs below show the equivalent structure in each format. Each name links to the specific specification section describing it. Value choices are indicated where possible, with default values highlighted.
 
+The JSON and YAML outlines follow the Metaschema JSON binding of the module model. The most notable differences from XML are that the `METASCHEMA` root has no wrapping object (its flags and fields are top-level properties), grouped constructs (such as imports, definitions, flags, model instances, and props) become arrays, and a `object-type` property is used to distinguish the members of a choice (for example to tell an inline `define-assembly` from an `assembly` reference within `model`).
+
+{{< tabs JSON YAML XML >}}
+{{% tab %}}
+{{< rawhtml >}}
+<div class="highlight"><div class="chroma"><code class="language-json" data-lang="json">
+<div class="element">
+  <span class="p">{</span>
+  <div class="element">
+    <span class="c">// ############# //</span><br/>
+    <span class="c">// Module Header //</span><br/>
+    <span class="c">// ############# //</span>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#abstract-modules">abstract</a>"</span>: <span class="s">"yes|no"</span>,<span class="c"> (default: no)</span></div>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#schema-name">schema-name</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</div>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#schema-version">schema-version</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</div>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#short-name">short-name</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</div>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#xml-namespace">namespace</a>"</span>: <a href="/specification/datatypes/#uri">uri</a>,</div>
+    <div class="cl"><span class="nt">"<a href="/specification/syntax/module/#json-base-uri">json-base-uri</a>"</span>: <a href="/specification/datatypes/#uri">uri</a>,</div>
+    <div class="cl"><em><span class="nt">"<a href="/specification/syntax/module/#remarks">remarks</a>"</span>: <a href="/specification/datatypes/#markup-multiline">markup-multiline</a>,</em></div>
+    <div class="element">
+      <span class="c">// ############## //</span><br/>
+      <span class="c">// Module Imports //</span><br/>
+      <span class="c">// ############## //</span>
+      <div class="cl"><em><span class="nt">"<a href="/specification/syntax/module/#import">imports</a>"</span>: [ {</em></div>
+      <div class="attribute"><em><span class="nt">"<a href="/specification/datatypes/#uri-reference">href</a>"</span>: <a href="/specification/datatypes/#uri-reference">uri-reference</a></em></div>
+      <div class="cl"><em>} ],</em></div>
+    </div>
+    <div class="element">
+      <span class="c">// ########################################## //</span><br/>
+      <span class="c">// Definitions (assembly, field, and flag)    //</span><br/>
+      <span class="c">// each member sets "object-type" accordingly //</span><br/>
+      <span class="c">// ########################################## //</span>
+      <div class="cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#top-level-definitions">definitions</a>"</span>: [</em></div>
+      <!-- define-assembly -->
+      <div class="element">
+        <span class="c">// Top-Level define-assembly</span>
+        <div class="cl"><span class="p">{</span> <span class="nt">"object-type"</span>: <span class="s">"<a href="/specification/syntax/definitions/#top-level-define-assembly">assembly</a>"</span>,</div>
+        <div class="cl"><span class="nt">"<a href="/specification/syntax/definitions/#name">name</a>"</span>: <span class="s">"<a href="/specification/datatypes/#token">token</a>"</span>,</div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#deprecated-version">deprecated</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</em></div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#scope">scope</a>"</span>: <span class="s">"global|local"</span>,<span class="c"> (default: global)</span></em></div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#formal-name">formal-name</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</em></div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#description">description</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</em></div>
+        <div class="element">
+          <div class="cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#prop">props</a>"</span>: [ {</em></div>
+          <div class="attribute"><em><span class="nt">"name"</span>: <a href="/specification/datatypes/#token">token</a>, <span class="nt">"value"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+          <div class="attribute"><em><span class="nt">"namespace"</span>: <a href="/specification/datatypes/#uri">uri</a><span class="c"> (default: http://csrc.nist.gov/ns/oscal/metaschema/1.0)</span></em></div>
+          <div class="cl"><em>} ],</em></div>
+        </div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#naming-and-use-name">use-name</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#root-name">root-name</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+        <div class="element">
+          <div class="cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#json-key">json-key</a>"</span>: { <span class="nt">"flag-ref"</span>: <a href="/specification/datatypes/#token">token</a> },</em></div>
+        </div>
+        <div class="element">
+          <span class="c">// Flag instances; "object-type" is "flag-ref" for a</span><br/>
+          <span class="c">// reference or "flag" for an inline definition.</span>
+          <div class="cl"><em><span class="nt">"<a href="/specification/syntax/instances/#flag-instance">flags</a>"</span>: [ {</em></div>
+          <div class="attribute"><em><span class="nt">"object-type"</span>: <span class="s">"flag-ref"</span>,</em></div>
+          <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#ref">ref</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+          <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#required">required</a>"</span>: <span class="s">"yes|no"</span><span class="c"> (default: no)</span></em></div>
+          <div class="cl"><em>} ],</em></div>
+        </div>
+        <div class="element">
+          <div class="cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#model">model</a>"</span>: {</em></div>
+          <div class="element">
+            <span class="c">// Model instances; "object-type" is one of</span><br/>
+            <span class="c">// "assembly-ref", "assembly", "field-ref", "field".</span>
+            <div class="cl"><em><span class="nt">"<a href="/specification/syntax/instances/#assembly-instance">instances</a>"</span>: [ {</em></div>
+            <div class="attribute"><em><span class="nt">"object-type"</span>: <span class="s">"assembly-ref"</span>,</em></div>
+            <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#ref">ref</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+            <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#max-occurs">min-occurs</a>"</span>: <a href="/specification/datatypes/#non-negative-integer">non-negative-integer</a>,<span class="c"> (default: 0)</span></em></div>
+            <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#max-occurs">max-occurs</a>"</span>: <span class="s">"<a href="/specification/datatypes/#positive-integer">positive-integer</a>|unbounded"</span><span class="c"> (default: 1)</span></em></div>
+            <div class="element">
+              <div class="cl"><em><span class="nt">"<a href="/specification/syntax/instances/#group-as">group-as</a>"</span>: {</em></div>
+              <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#name">name</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+              <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#in-json">in-json</a>"</span>: <span class="s">"<a href="/specification/syntax/instances/#in-jsonarray">ARRAY</a>|<a href="/specification/syntax/instances/#in-jsonsingleton_or_array">SINGLETON_OR_ARRAY</a>|<a href="/specification/syntax/instances/#in-jsonby_key">BY_KEY</a>"</span>,<span class="c"> (default: SINGLETON_OR_ARRAY)</span></em></div>
+              <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/instances/#in-xml">in-xml</a>"</span>: <span class="s">"<a href="/specification/syntax/instances/#in-xmlgrouped">GROUPED</a>|<a href="/specification/syntax/instances/#in-xmlungrouped">UNGROUPED</a>"</span><span class="c"> (default: UNGROUPED)</span></em></div>
+              <div class="cl"><em>}</em></div>
+            </div>
+            <div class="cl"><em>}, ... ],</em><span class="c"> (also: field-ref, field, choice, choice-group, any)</span></div>
+          </div>
+          <div class="cl"><em>},</em></div>
+        </div>
+        <div class="element cl nt"><em>"<a href="/specification/syntax/constraints/#define-assembly-constraints">constraint</a>": { ... },</em></div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#remarks">remarks</a>"</span>: <a href="/specification/datatypes/#markup-multiline">markup-multiline</a>,</em></div>
+        <div class="element cl nt"><em>"<a href="/specification/syntax/definitions/#example">examples</a>": [ ... ]</em></div>
+        <div class="cl">},</div>
+      </div>
+      <!-- define-field -->
+      <div class="element">
+        <span class="c">// Top-Level define-field ("object-type": "field")</span>
+        <div class="cl"><span class="p">{</span> <span class="nt">"object-type"</span>: <span class="s">"<a href="/specification/syntax/definitions/#top-level-define-field">field</a>"</span>,</div>
+        <div class="cl"><span class="nt">"<a href="/specification/syntax/definitions/#name">name</a>"</span>: <span class="s">"<a href="/specification/datatypes/#token">token</a>"</span>,</div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#as-type">as-type</a>"</span>: <a href="/specification/datatypes/#token">token</a>,<span class="c"> (default: string)</span></em></div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#default">default</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</em></div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#collapsible">collapsible</a>"</span>: <span class="s">"yes|no"</span>,<span class="c"> (default: no)</span></em></div>
+        <div class="element cl"><em><span class="nt">"<a href="/specification/syntax/definitions/#json-value-key">json-value-key</a>"</span>: <a href="/specification/datatypes/#token">token</a>,</em></div>
+        <div class="cl">...</div>
+        <div class="cl">},</div>
+      </div>
+      <!-- define-flag -->
+      <div class="element">
+        <span class="c">// Top-Level define-flag ("object-type": "flag")</span>
+        <div class="cl"><span class="p">{</span> <span class="nt">"object-type"</span>: <span class="s">"<a href="/specification/syntax/definitions/#top-level-define-flag">flag</a>"</span>,</div>
+        <div class="cl"><span class="nt">"<a href="/specification/syntax/definitions/#name">name</a>"</span>: <span class="s">"<a href="/specification/datatypes/#token">token</a>"</span>,</div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#as-type">as-type</a>"</span>: <a href="/specification/datatypes/#token">token</a>,<span class="c"> (default: string)</span></em></div>
+        <div class="attribute"><em><span class="nt">"<a href="/specification/syntax/definitions/#default">default</a>"</span>: <a href="/specification/datatypes/#string">string</a>,</em></div>
+        <div class="cl">...</div>
+        <div class="cl">}</div>
+      </div>
+      <div class="cl"><em>]</em></div>
+    </div>
+  </div>
+  <span class="p">}</span>
+</div>
+</code></div></div>
+{{< /rawhtml >}}
+{{% /tab %}}
+{{% tab %}}
+{{< rawhtml >}}
+<div class="highlight"><div class="chroma"><code class="language-yaml" data-lang="yaml">
+<div class="element">
+  <span class="c">--- </span>
+  <div class="element">
+    <span class="c"># ############# #</span><br/>
+    <span class="c"># Module Header #</span><br/>
+    <span class="c"># ############# #</span>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#abstract-modules">abstract</a></span>: <span class="s">"yes|no"</span><span class="c">  # default: no</span></div>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#schema-name">schema-name</a></span>: <a href="/specification/datatypes/#string">string</a></div>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#schema-version">schema-version</a></span>: <a href="/specification/datatypes/#string">string</a></div>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#short-name">short-name</a></span>: <a href="/specification/datatypes/#string">string</a></div>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#xml-namespace">namespace</a></span>: <a href="/specification/datatypes/#uri">uri</a></div>
+    <div class="cl"><span class="nt"><a href="/specification/syntax/module/#json-base-uri">json-base-uri</a></span>: <a href="/specification/datatypes/#uri">uri</a></div>
+    <div class="cl"><em><span class="nt"><a href="/specification/syntax/module/#remarks">remarks</a></span>: <a href="/specification/datatypes/#markup-multiline">markup-multiline</a></em></div>
+    <div class="element">
+      <span class="c"># ############## #</span><br/>
+      <span class="c"># Module Imports #</span><br/>
+      <span class="c"># ############## #</span>
+      <div class="cl"><em><span class="nt"><a href="/specification/syntax/module/#import">imports</a></span>:</em></div>
+      <div class="attribute"><em>- <span class="nt"><a href="/specification/datatypes/#uri-reference">href</a></span>: <a href="/specification/datatypes/#uri-reference">uri-reference</a></em></div>
+    </div>
+    <div class="element">
+      <span class="c"># ########################################## #</span><br/>
+      <span class="c"># Definitions (assembly, field, and flag)    #</span><br/>
+      <span class="c"># each member sets object-type accordingly   #</span><br/>
+      <span class="c"># ########################################## #</span>
+      <div class="cl"><em><span class="nt"><a href="/specification/syntax/definitions/#top-level-definitions">definitions</a></span>:</em></div>
+      <!-- define-assembly -->
+      <div class="element">
+        <span class="c"># Top-Level define-assembly</span>
+        <div class="cl">- <span class="nt">object-type</span>: <span class="s"><a href="/specification/syntax/definitions/#top-level-define-assembly">assembly</a></span></div>
+        <div class="cl"><span class="nt"><a href="/specification/syntax/definitions/#name">name</a></span>: <span class="s"><a href="/specification/datatypes/#token">token</a></span></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#deprecated-version">deprecated</a></span>: <a href="/specification/datatypes/#string">string</a></em></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#scope">scope</a></span>: <span class="s">"global|local"</span><span class="c">  # default: global</span></em></div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#formal-name">formal-name</a></span>: <a href="/specification/datatypes/#string">string</a></em></div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#description">description</a></span>: <a href="/specification/datatypes/#string">string</a></em></div>
+        <div class="element">
+          <div class="cl"><em><span class="nt"><a href="/specification/syntax/definitions/#prop">props</a></span>:</em></div>
+          <div class="attribute"><em>- <span class="nt">name</span>: <a href="/specification/datatypes/#token">token</a></em></div>
+          <div class="attribute"><em>&nbsp;&nbsp;<span class="nt">value</span>: <a href="/specification/datatypes/#token">token</a></em></div>
+          <div class="attribute"><em>&nbsp;&nbsp;<span class="nt">namespace</span>: <a href="/specification/datatypes/#uri">uri</a><span class="c">  # default: http://csrc.nist.gov/ns/oscal/metaschema/1.0</span></em></div>
+        </div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#naming-and-use-name">use-name</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#root-name">root-name</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+        <div class="element">
+          <div class="cl"><em><span class="nt"><a href="/specification/syntax/definitions/#json-key">json-key</a></span>:</em></div>
+          <div class="attribute"><em>&nbsp;&nbsp;<span class="nt">flag-ref</span>: <a href="/specification/datatypes/#token">token</a></em></div>
+        </div>
+        <div class="element">
+          <span class="c"># Flag instances; object-type is flag-ref for a</span><br/>
+          <span class="c"># reference or flag for an inline definition.</span>
+          <div class="cl"><em><span class="nt"><a href="/specification/syntax/instances/#flag-instance">flags</a></span>:</em></div>
+          <div class="attribute"><em>- <span class="nt">object-type</span>: <span class="s">flag-ref</span></em></div>
+          <div class="attribute"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#ref">ref</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+          <div class="attribute"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#required">required</a></span>: <span class="s">"yes|no"</span><span class="c">  # default: no</span></em></div>
+        </div>
+        <div class="element">
+          <div class="cl"><em><span class="nt"><a href="/specification/syntax/definitions/#model">model</a></span>:</em></div>
+          <div class="element">
+            <span class="c"># Model instances; object-type is one of</span><br/>
+            <span class="c"># assembly-ref, assembly, field-ref, field.</span>
+            <div class="cl"><em><span class="nt"><a href="/specification/syntax/instances/#assembly-instance">instances</a></span>:</em></div>
+            <div class="attribute"><em>- <span class="nt">object-type</span>: <span class="s">assembly-ref</span></em></div>
+            <div class="attribute"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#ref">ref</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+            <div class="attribute"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#max-occurs">min-occurs</a></span>: <a href="/specification/datatypes/#non-negative-integer">non-negative-integer</a><span class="c">  # default: 0</span></em></div>
+            <div class="attribute"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#max-occurs">max-occurs</a></span>: <span class="s">"<a href="/specification/datatypes/#positive-integer">positive-integer</a>|unbounded"</span><span class="c">  # default: 1</span></em></div>
+            <div class="element">
+              <div class="cl"><em>&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#group-as">group-as</a></span>:</em></div>
+              <div class="attribute"><em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#name">name</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+              <div class="attribute"><em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#in-json">in-json</a></span>: <span class="s">"<a href="/specification/syntax/instances/#in-jsonarray">ARRAY</a>|<a href="/specification/syntax/instances/#in-jsonsingleton_or_array">SINGLETON_OR_ARRAY</a>|<a href="/specification/syntax/instances/#in-jsonby_key">BY_KEY</a>"</span><span class="c">  # default: SINGLETON_OR_ARRAY</span></em></div>
+              <div class="attribute"><em>&nbsp;&nbsp;&nbsp;&nbsp;<span class="nt"><a href="/specification/syntax/instances/#in-xml">in-xml</a></span>: <span class="s">"<a href="/specification/syntax/instances/#in-xmlgrouped">GROUPED</a>|<a href="/specification/syntax/instances/#in-xmlungrouped">UNGROUPED</a>"</span><span class="c">  # default: UNGROUPED</span></em></div>
+            </div>
+            <div class="cl"><em>  # also: field-ref, field, choice, choice-group, any</em></div>
+          </div>
+        </div>
+        <div class="element cl nt"><em><a href="/specification/syntax/constraints/#define-assembly-constraints">constraint</a>: { ... }</em></div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#remarks">remarks</a></span>: <a href="/specification/datatypes/#markup-multiline">markup-multiline</a></em></div>
+        <div class="element cl nt"><em><a href="/specification/syntax/definitions/#example">examples</a>: [ ... ]</em></div>
+      </div>
+      <!-- define-field -->
+      <div class="element">
+        <span class="c"># Top-Level define-field (object-type: field)</span>
+        <div class="cl">- <span class="nt">object-type</span>: <span class="s"><a href="/specification/syntax/definitions/#top-level-define-field">field</a></span></div>
+        <div class="cl"><span class="nt"><a href="/specification/syntax/definitions/#name">name</a></span>: <span class="s"><a href="/specification/datatypes/#token">token</a></span></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#as-type">as-type</a></span>: <a href="/specification/datatypes/#token">token</a><span class="c">  # default: string</span></em></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#default">default</a></span>: <a href="/specification/datatypes/#string">string</a></em></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#collapsible">collapsible</a></span>: <span class="s">"yes|no"</span><span class="c">  # default: no</span></em></div>
+        <div class="element cl"><em><span class="nt"><a href="/specification/syntax/definitions/#json-value-key">json-value-key</a></span>: <a href="/specification/datatypes/#token">token</a></em></div>
+        <div class="cl">...</div>
+      </div>
+      <!-- define-flag -->
+      <div class="element">
+        <span class="c"># Top-Level define-flag (object-type: flag)</span>
+        <div class="cl">- <span class="nt">object-type</span>: <span class="s"><a href="/specification/syntax/definitions/#top-level-define-flag">flag</a></span></div>
+        <div class="cl"><span class="nt"><a href="/specification/syntax/definitions/#name">name</a></span>: <span class="s"><a href="/specification/datatypes/#token">token</a></span></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#as-type">as-type</a></span>: <a href="/specification/datatypes/#token">token</a><span class="c">  # default: string</span></em></div>
+        <div class="attribute"><em><span class="nt"><a href="/specification/syntax/definitions/#default">default</a></span>: <a href="/specification/datatypes/#string">string</a></em></div>
+        <div class="cl">...</div>
+      </div>
+    </div>
+  </div>
+</div>
+</code></div></div>
+{{< /rawhtml >}}
+{{% /tab %}}
+{{% tab %}}
 {{< rawhtml >}}
 <div class="highlight"><div class="chroma"><code class="language-xml" data-lang="xml">
 <div class="element">
@@ -351,3 +577,5 @@ The following is an approximate outline of the Metaschema module syntax in XML. 
 </div>
 </code></div></div>
 {{< /rawhtml >}}
+{{% /tab %}}
+{{< /tabs >}}
